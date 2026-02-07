@@ -1,0 +1,13 @@
+module main
+
+source "src"
+
+import std
+import page
+import html_cbi
+import css_cbi
+import js_cbi
+import react_cbi
+import solid_cbi
+import preact_cbi
+import md_cbi
