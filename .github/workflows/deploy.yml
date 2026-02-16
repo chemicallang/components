@@ -1,0 +1,53 @@
+# .github/workflows/deploy.yml
+name: Publish Components Demos to GitHub Pages
+
+permissions:
+  contents: read    # for checkout
+  pages: write      # to publish to GitHub Pages
+  id-token: write   # required by configure-pages
+
+on:
+  push:
+    branches:
+      - main       # or your default branch
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+
+    environment:
+      name: github-pages
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Chemical
+        uses: chemicallang/install@v1.1
+        with:
+          version: 'latest'
+          variant: 'tcc'
+
+      - name: Build components generator
+        shell: bash
+        run: chemical chemical.mod -o components.exe
+
+      - name: Generate demo site
+        shell: bash
+        run: ./components.exe
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./output
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
