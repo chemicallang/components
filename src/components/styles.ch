@@ -1,0 +1,22 @@
+func GlobalStyles(page : &mut HtmlPage) {
+    #css {
+        body {
+            margin: 0; line-height: 1.6;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background-color: #050505; color: #a1a1a1;
+            overflow-x: hidden;
+        }
+        * { box-sizing: border-box; }
+        h1, h2, h3 { color: #fff; font-weight: 800; letter-spacing: -0.02em; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    }
+    #html {
+        <style>{"""
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+                100% { transform: translateY(0px); }
+            }
+        """}</style>
+    }
+}
