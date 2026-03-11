@@ -7,7 +7,7 @@ public func main() : int {
     // 2. Components Page
     var components = HtmlPage()
     ComponentsPage(components)
-    components.writeToDirectory("output", "components")
+    components.writeToDirectory("output", "components", "", "chx-default dark")
     // printf("%s\n", components.toString().data());
 
     // 3. Integration Page
