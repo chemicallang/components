@@ -12,7 +12,7 @@ public func main() : int {
 
     // 3. Integration Page
     var integration = HtmlPage()
-    IntegrationPage(components)
+    IntegrationPage(integration)
     integration.writeToDirectory("output", "integration")
     // printf("%s\n", integration.toString().data());
     
