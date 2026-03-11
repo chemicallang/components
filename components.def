@@ -1,6 +1,0 @@
-LIBRARY components.exe
-
-EXPORTS
-__bt_exit
-__bt_init
-tcc_backtrace
