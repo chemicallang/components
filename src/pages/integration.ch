@@ -38,6 +38,15 @@
     )
 }
 
+#universal UniversalCounterCore(props) {
+    state count = 0
+    return (
+        <button onClick={() => count += 1} className={props.className}>
+            Count: {count}
+        </button>
+    )
+}
+
 #universal UniversalCounter(props) {
     state count = 0
     return (
@@ -46,6 +55,33 @@
             <button onClick={() => count += 1} className={props.className}>
                 Count: {count}
             </button>
+        </div>
+    )
+}
+
+#react ReactUniversalCounter(props) {
+    return (
+        <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <h3 style={{ color: '#61dafb', marginBottom: '1.5rem' }}>Universal in React</h3>
+            <UniversalCounterCore className={props.className} />
+        </div>
+    )
+}
+
+#preact PreactUniversalCounter(props) {
+    return (
+        <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <h3 style={"color: #673ab8; margin-bottom: 1.5rem"}>Universal in Preact</h3>
+            <UniversalCounterCore className={props.className} />
+        </div>
+    )
+}
+
+#solid SolidUniversalCounter(props) {
+    return (
+        <div style={{ 'text-align': 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', 'border-radius': '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <h3 style={"color: #2c4f7c; margin-bottom: 1.5rem"}>Solid</h3>
+            <UniversalCounterCore className={props.className} />
         </div>
     )
 }
@@ -81,7 +117,7 @@ func IntegrationPage(page : &mut HtmlPage) {
         <div class="container">
             <div class="page-header">
                 <h1>Framework Integration</h1>
-                <p>You can use multiple frameworks in chemical simultaneously. Use the framework that fits your needs.s</p>
+                <p>You can use multiple frameworks in chemical simultaneously. Use the framework that fits your needs.</p>
             </div>
 
             <div class="comp-showcase">
@@ -98,6 +134,24 @@ func IntegrationPage(page : &mut HtmlPage) {
                     <UniversalCounter className={btnStyle} />
                 </div>
             </div>
+
+            <div style="max-width:800px;">
+                <h1>Universal Integration</h1>
+                <p>You can use universal components in any of the other frameworks, easing development of ui component libraries. Universal components emit least amount of JS, support SSR + hydration.</p>
+            </div>
+
+            <div class="comp-showcase">
+                <div class="comp-item">
+                    <ReactUniversalCounter className={btnStyle} />
+                </div>
+                <div class="comp-item">
+                    <PreactUniversalCounter className={btnStyle} />
+                </div>
+                <div class="comp-item">
+                    <SolidUniversalCounter className={btnStyle} />
+                </div>
+            </div>
+
         </div>
     }
     SocialFooter(page)
