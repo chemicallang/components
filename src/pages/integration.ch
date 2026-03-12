@@ -52,9 +52,7 @@
     return (
         <div style={{ 'text-align': 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', 'border-radius': '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h3 style={"color: #2c4f7c; margin-bottom: 1.5rem"}>Universal</h3>
-            <button onClick={() => count += 1} className={props.className}>
-                Count: {count}
-            </button>
+            <UniversalCounterCore className={props.className} />
         </div>
     )
 }
