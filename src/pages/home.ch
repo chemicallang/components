@@ -1,6 +1,8 @@
 func HomePage(page : &mut HtmlPage) {
-    page.defaultPrepare()
+
     page.appendTitle("Chemical - The Future of Web Programming")
+    page.defaultPrepare()
+    page.injectDefaultComponentsTheme()
     GlobalStyles(page)
     GlassHeader(page, "home")
 
@@ -67,4 +69,5 @@ func HomePage(page : &mut HtmlPage) {
         </div>
     }
     SocialFooter(page)
-}s
+    SetupThemeScript(page)
+}

@@ -91,6 +91,7 @@ func IntegrationPage(page : &mut HtmlPage) {
     page.defaultReactSetup()
     page.defaultSolidSetup()
     page.defaultUniversalSetup();
+    page.injectDefaultComponentsTheme()
     GlobalStyles(page)
     GlassHeader(page, "integration")
 
@@ -153,4 +154,5 @@ func IntegrationPage(page : &mut HtmlPage) {
         </div>
     }
     SocialFooter(page)
+    SetupThemeScript(page)
 }

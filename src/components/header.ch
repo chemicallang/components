@@ -42,9 +42,28 @@ func GlassHeader(page : &mut HtmlPage, active : *char) {
                     <a href="integration.html" class={if(strcmp(active, "integration") == 0) "active" else ""}>Integration</a>
                     <a href="components.html" class={if(strcmp(active, "components") == 0) "active" else ""}>Components</a>
                     <a href="markdown.html" class={if(strcmp(active, "markdown") == 0) "active" else ""}>Markdown</a>
-                    <a href="layout.html" class={if(strcmp(active, "layout") == 0) "active" else ""}>Dashboard</a>
                 </div>
             </div>
         </nav>
+    }
+}
+
+func SetupThemeScript(page : &mut HtmlPage) {
+    #html {
+        <script>{"""
+            (function() {
+                var stored = localStorage.getItem('chx-theme') || 'dark';
+                document.body.classList.add('chx-default', stored);
+                var toggle = document.getElementById('theme-toggle');
+                if(toggle) {
+                    toggle.addEventListener('click', function() {
+                        var next = document.body.classList.contains('dark') ? 'light' : 'dark';
+                        document.body.classList.remove('dark', 'light');
+                        document.body.classList.add(next);
+                        localStorage.setItem('chx-theme', next);
+                    });
+                }
+            })();
+        """}</script>
     }
 }

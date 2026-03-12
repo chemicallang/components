@@ -25,8 +25,9 @@ Experience the beauty of **native speed** combined with **web flexibility**.
 }
 
 func MarkdownPage(page : &mut HtmlPage) {
-    page.defaultPrepare()
     page.appendTitle("Static Markdown - Chemical")
+    page.defaultPrepare()
+    page.injectDefaultComponentsTheme()
     GlobalStyles(page)
     GlassHeader(page, "markdown")
 
@@ -52,4 +53,5 @@ func MarkdownPage(page : &mut HtmlPage) {
         </div>
     }
     SocialFooter(page)
+    SetupThemeScript(page)
 }
