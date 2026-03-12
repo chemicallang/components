@@ -15,7 +15,7 @@ This section is powered by the `#md` compiled macro. Unlike other solutions, thi
 ```chemical
 func main() {
     // This is native code
-    const version = "2.0.0-gold";
+    const version = "v0.0.32";
     println("Chemical version: {version}");
 }
 ```
@@ -34,15 +34,34 @@ func MarkdownPage(page : &mut HtmlPage) {
     #css {
         .md-wrapper { padding: 12rem 0 4rem; }
         .md-box {
-            background: #0d0d0f; border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 40px; padding: 6rem;
-            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
+            background: var(--chx-surface);
+            border: var(--chx-border-width) solid var(--chx-border);
+            border-radius: var(--chx-radius);
+            padding: 6rem;
+            box-shadow: var(--chx-shadow-sm);
         }
         /* Markdown Theme Overrides */
-        .md h1 { font-size: 3.5rem; margin-top: 0; color: #fff; }
-        .md p { font-size: 1.25rem; color: #888; }
-        .md code { background: #1a1a1c; color: #00d4ff; padding: 0.2rem 0.6rem; border-radius: 8px; }
-        .md pre { background: #1a1a1c; padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .md h1 {
+            font-size: 3.5rem;
+            margin-top: 0;
+            color: var(--chx-text-main);
+        }
+        .md p {
+            font-size: 1.25rem;
+            color: var(--chx-text-muted);
+        }
+        .md code {
+            background: var(--chx-bg);
+            color: var(--chx-text-main);
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+        }
+        .md pre {
+            background: var(--chx-bg);
+            padding: 2rem;
+            border-radius: var(--chx-radius);
+            border: var(--chx-border-width) solid var(--chx-border);
+        }
     }
 
     #html {

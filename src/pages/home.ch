@@ -16,7 +16,6 @@ func HomePage(page : &mut HtmlPage) {
         }
         .hero h1 {
             font-size: 5rem; line-height: 1.1; margin-bottom: 2rem; max-width: 800px;
-            background: linear-gradient(135deg, #fff 0%, #888 100%);
         }
         .hero p { font-size: 1.5rem; color: #888; max-width: 600px; margin-bottom: 4rem; }
         .cta-group { display: flex; gap: 1.5rem; }
