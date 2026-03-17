@@ -46,8 +46,6 @@ func ComponentsPage(page : &mut HtmlPage) {
                 </div>
             </div>
 
-            <!--
-
             <Divider />
 
             <div class="section">
@@ -171,8 +169,6 @@ func ComponentsPage(page : &mut HtmlPage) {
                     <Switch checked={true}>Auto-hydrate</Switch>
                 </div>
             </div>
-
-            -->
 
         </div>
     }
