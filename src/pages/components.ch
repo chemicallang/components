@@ -1,3 +1,7 @@
+#universal ClickableButton(props) {
+    return <ButtonPrimary onClick={() => { alert("you clicked"); }}>Clickable</ButtonPrimary>
+}
+
 func ComponentsPage(page : &mut HtmlPage) {
     page.appendTitle("Components - Chemical")
     page.defaultPrepare()
@@ -37,6 +41,7 @@ func ComponentsPage(page : &mut HtmlPage) {
                 <div class="section-title">Buttons</div>
                 <div class="demo-row">
                     <ButtonPrimary>Primary</ButtonPrimary>
+                    <ClickableButton />
                     <Button>Default</Button>
                     <ButtonOutline>Outline</ButtonOutline>
                     <ButtonGhost>Ghost</ButtonGhost>
