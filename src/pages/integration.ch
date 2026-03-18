@@ -41,7 +41,7 @@
 #universal UniversalCounterCore(props) {
     state count = 0
     return (
-        <button onClick={() => count += 1} className={props.className}>
+        <button onClick={() => count += 1} class={props.class}>
             Count: {count}
         </button>
     )
@@ -52,7 +52,7 @@
     return (
         <div style={{ 'text-align': 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', 'border-radius': '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h3 style={"color: #2c4f7c; margin-bottom: 1.5rem"}>Universal</h3>
-            <UniversalCounterCore className={props.className} />
+            <UniversalCounterCore class={props.class} />
         </div>
     )
 }
@@ -61,7 +61,7 @@
     return (
         <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h3 style={{ color: '#61dafb', marginBottom: '1.5rem' }}>Universal in React</h3>
-            <UniversalCounterCore className={props.className} />
+            <UniversalCounterCore class={props.class} />
         </div>
     )
 }
@@ -70,7 +70,7 @@
     return (
         <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h3 style={"color: #673ab8; margin-bottom: 1.5rem"}>Universal in Preact</h3>
-            <UniversalCounterCore className={props.className} />
+            <UniversalCounterCore class={props.class} />
         </div>
     )
 }
@@ -79,7 +79,7 @@
     return (
         <div style={{ 'text-align': 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', 'border-radius': '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h3 style={"color: #2c4f7c; margin-bottom: 1.5rem"}>Solid</h3>
-            <UniversalCounterCore className={props.className} />
+            <UniversalCounterCore class={props.class} />
         </div>
     )
 }
@@ -130,7 +130,7 @@ func IntegrationPage(page : &mut HtmlPage) {
                     <SolidCounter className={btnStyle} />
                 </div>
                 <div class="comp-item">
-                    <UniversalCounter className={btnStyle} />
+                    <UniversalCounter class={btnStyle} />
                 </div>
             </div>
 
@@ -141,13 +141,13 @@ func IntegrationPage(page : &mut HtmlPage) {
 
             <div class="comp-showcase">
                 <div class="comp-item">
-                    <ReactUniversalCounter className={btnStyle} />
+                    <ReactUniversalCounter class={btnStyle} />
                 </div>
                 <div class="comp-item">
-                    <PreactUniversalCounter className={btnStyle} />
+                    <PreactUniversalCounter class={btnStyle} />
                 </div>
                 <div class="comp-item">
-                    <SolidUniversalCounter className={btnStyle} />
+                    <SolidUniversalCounter class={btnStyle} />
                 </div>
             </div>
 
