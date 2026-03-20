@@ -1,5 +1,6 @@
 #universal ClickableButton(props) {
-    return <ButtonPrimary onClick={() => { alert("you clicked"); }}>Clickable</ButtonPrimary>
+    var lambda = () => { alert("you clicked") }
+    return <ButtonPrimary onClick={lambda}>Clickable</ButtonPrimary>
 }
 
 func ComponentsPage(page : &mut HtmlPage) {
