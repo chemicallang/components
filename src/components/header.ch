@@ -41,6 +41,7 @@ func GlassHeader(page : &mut HtmlPage, active : *char) {
                     <a href="index.html" class={if(strcmp(active, "home") == 0) "active" else ""}>Home</a>
                     <a href="integration.html" class={if(strcmp(active, "integration") == 0) "active" else ""}>Integration</a>
                     <a href="components.html" class={if(strcmp(active, "components") == 0) "active" else ""}>Components</a>
+                    <a href="demo.html" class={if(strcmp(active, "demo") == 0) "active" else ""}>Demo</a>
                     <a href="markdown.html" class={if(strcmp(active, "markdown") == 0) "active" else ""}>Markdown</a>
                 </div>
             </div>

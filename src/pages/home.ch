@@ -47,7 +47,7 @@ func HomePage(page : &mut HtmlPage) {
             <h1>The only language you will ever need.</h1>
             <p>A native, hyper-extensible programming language built for the next generation of performance-critical software.</p>
             <div class="cta-group">
-                <a href="components.html" class="btn-primary">Explore Demos</a>
+                <a href="demo.html" class="btn-primary">Explore Demos</a>
                 <a href="#" class="btn-secondary">View Source</a>
             </div>
 
