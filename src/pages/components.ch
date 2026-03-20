@@ -9,14 +9,35 @@
         <div class="demo-row">
             <ButtonPrimary onClick={() => open = true} style={open ? "display:none;" : ""}>Open dialog</ButtonPrimary>
         </div>
-        <Dialog open={open} style={open ? "" : "display:none;"}>
-            <H3>Interactive Dialog</H3>
-            <Text style="margin-top:0.75rem;">This dialog is now controlled by universal state and can be closed without losing SSR readiness.</Text>
-            <div class="demo-row" style="margin-top:1rem;">
-                <ButtonPrimary onClick={() => open = false}>Confirm</ButtonPrimary>
-                <ButtonGhost onClick={() => open = false}>Close</ButtonGhost>
-            </div>
+        <Dialog style={open ? "" : "display:none;"}>
+            <DialogBackdrop onClick={() => open = false}></DialogBackdrop>
+            <DialogContent>
+                <DialogHeader>
+                    <H3>Interactive Dialog</H3>
+                    <IconButton onClick={() => open = false}><Icon>x</Icon></IconButton>
+                </DialogHeader>
+                <Text style="margin-top:0.75rem;">This dialog is centered with a backdrop layer and can be dismissed through its controls.</Text>
+                <DialogActions>
+                    <ButtonPrimary onClick={() => open = false}>Confirm</ButtonPrimary>
+                    <ButtonGhost onClick={() => open = false}>Close</ButtonGhost>
+                </DialogActions>
+            </DialogContent>
         </Dialog>
+    </div>
+}
+
+#universal ToggleShowcase(props) {
+    state enabled = true
+    state autoHydrate = true
+    state density = 0
+    return <div class="demo-stack">
+        <div class="demo-row">
+            <Checkbox checked={enabled} onClick={() => enabled = !enabled}>Enable SSR</Checkbox>
+            <Switch checked={autoHydrate} onClick={() => autoHydrate = !autoHydrate}>Auto-hydrate</Switch>
+            <Radio checked={density == 0} name="density" onClick={() => density = 0}>Comfortable</Radio>
+            <Radio checked={density == 1} name="density" onClick={() => density = 1}>Compact</Radio>
+        </div>
+        <Caption>SSR: {enabled ? "enabled" : "disabled"} | Hydration: {autoHydrate ? "automatic" : "manual"} | Density: {density == 0 ? "comfortable" : "compact"}</Caption>
     </div>
 }
 
@@ -63,6 +84,7 @@ func ComponentsPage(page : &mut HtmlPage) {
         .input-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         .pill-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
         .subtle { color: var(--chx-text-muted); font-size: 0.95rem; }
+        .mobile-preview { width: 100%; max-width: 420px; margin-top: 1rem; padding: 1rem; border: 1px dashed var(--chx-border); border-radius: 24px; background: linear-gradient(180deg, rgba(59, 130, 246, 0.05), transparent 60%), var(--chx-surface); }
     }
 
     #html {
@@ -83,9 +105,11 @@ func ComponentsPage(page : &mut HtmlPage) {
                     <Button>Default</Button>
                     <ButtonOutline>Outline</ButtonOutline>
                     <ButtonGhost>Ghost</ButtonGhost>
+                    <ButtonSuccess>Success</ButtonSuccess>
                     <ButtonDanger>Danger</ButtonDanger>
                     <ButtonSm>Small</ButtonSm>
                     <ButtonLg>Large</ButtonLg>
+                    <IconButton><Icon>+</Icon></IconButton>
                 </div>
             </div>
 
@@ -110,6 +134,34 @@ func ComponentsPage(page : &mut HtmlPage) {
                 <div class="demo-stack" style="margin-top:1rem;">
                     <div class="subtle">Text area</div>
                     <TextArea placeholder="Leave a note..."></TextArea>
+                </div>
+                <div class="input-row" style="margin-top:1rem;">
+                    <Field>
+                        <FieldLabel>Project name</FieldLabel>
+                        <InputLg placeholder="Universal components" />
+                        <FieldHint>Large field for primary content entry.</FieldHint>
+                    </Field>
+                    <Field>
+                        <FieldLabel>Search package</FieldLabel>
+                        <InputSm placeholder="button, input, dialog..." />
+                        <FieldHint>Compact field for dense toolbars and inspectors.</FieldHint>
+                    </Field>
+                </div>
+                <div class="input-row" style="margin-top:1rem;">
+                    <InputFilled placeholder="Filled field" />
+                    <InputGhost placeholder="Ghost field" />
+                </div>
+                <div class="input-row" style="margin-top:1rem;">
+                    <InputSuccess value="Valid input" />
+                    <InputError value="Needs attention" />
+                </div>
+                <div class="input-row" style="margin-top:1rem;">
+                    <InputDisabled value="Disabled preview" />
+                    <Select>
+                        <option>Outline field</option>
+                        <option>Success state</option>
+                        <option>Disabled</option>
+                    </Select>
                 </div>
             </div>
 
@@ -201,7 +253,9 @@ func ComponentsPage(page : &mut HtmlPage) {
                     <Avatar>CH</Avatar>
                     <AvatarSm>CU</AvatarSm>
                     <AvatarLg>UI</AvatarLg>
-                    <Kbd>⌘K</Kbd>
+                    <IconButton><Icon>+</Icon></IconButton>
+                    <Fab><Icon>+</Icon>New</Fab>
+                    <Kbd>cmd+k</Kbd>
                 </div>
             </div>
 
@@ -209,12 +263,7 @@ func ComponentsPage(page : &mut HtmlPage) {
 
             <div class="section">
                 <div class="section-title">Toggles</div>
-                <div class="demo-row">
-                    <Checkbox checked={true}>Enable SSR</Checkbox>
-                    <Switch checked={true}>Auto-hydrate</Switch>
-                    <Radio checked={true} name="density">Comfortable</Radio>
-                    <Radio checked={false} name="density">Compact</Radio>
-                </div>
+                <ToggleShowcase />
             </div>
 
             <Divider />
@@ -224,7 +273,12 @@ func ComponentsPage(page : &mut HtmlPage) {
                 <div class="demo-stack">
                     <H2>Build Interfaces With SSR-First Primitives</H2>
                     <Lead>These typography and navigation primitives ship directly from the universal components package.</Lead>
-                    <Text>Use <CodeText>&lt;CodeText&gt;</CodeText> for inline labels and <Link href="#">Link</Link> for accent-driven navigation.</Text>
+                    <Text>A presentational typography set, navigation links, and icon primitives are available in the same package.</Text>
+                    <div class="demo-row">
+                        <CodeText>&lt;CodeText&gt;</CodeText>
+                        <Link href="#">Link</Link>
+                        <Kbd>cmd+k</Kbd>
+                    </div>
                     <div class="demo-row">
                         <Icon>?</Icon>
                         <Icon>i</Icon>
@@ -265,6 +319,46 @@ func ComponentsPage(page : &mut HtmlPage) {
             <Divider />
 
             <div class="section">
+                <div class="section-title">Stats, Empty States, Mobile</div>
+                <div class="demo-grid">
+                    <StatCard>
+                        <Caption>Requests</Caption>
+                        <H2>18.4k</H2>
+                        <ChipSuccess>+12%</ChipSuccess>
+                    </StatCard>
+                    <EmptyState>
+                        <H3>No deployments yet</H3>
+                        <Text>Create a pipeline to start preview builds and production releases.</Text>
+                        <ButtonPrimary>Create deployment</ButtonPrimary>
+                    </EmptyState>
+                    <div class="mobile-preview">
+                        <Caption>Bottom Bar</Caption>
+                        <BottomBar style="margin-top:0.75rem;">
+                            <IconButton><Icon>H</Icon></IconButton>
+                            <IconButton><Icon>S</Icon></IconButton>
+                            <Fab><Icon>+</Icon>New</Fab>
+                            <IconButton><Icon>P</Icon></IconButton>
+                            <IconButton><Icon>U</Icon></IconButton>
+                        </BottomBar>
+                    </div>
+                </div>
+            </div>
+
+            <Divider />
+
+            <div class="section">
+                <div class="section-title">Mobile Actions</div>
+                <div class="demo-row">
+                    <IconButton><Icon>+</Icon></IconButton>
+                    <IconButton><Icon>i</Icon></IconButton>
+                    <Fab><Icon>+</Icon>Create</Fab>
+                    <Fab><Icon>?</Icon>Help</Fab>
+                </div>
+            </div>
+
+            <Divider />
+
+            <div class="section">
                 <div class="section-title">Feedback</div>
                 <div class="demo-stack">
                     <div class="demo-row">
@@ -283,10 +377,8 @@ func ComponentsPage(page : &mut HtmlPage) {
             <div class="section">
                 <div class="section-title">Accordion, Tabs, Pagination</div>
                 <div class="demo-stack">
-                    <Accordion open={true}>
-                        <AccordionSummary>How does SSR-first hydration help here?</AccordionSummary>
-                        <AccordionPanel>Markup ships complete on first response, then universal bindings attach without rebuilding the whole subtree.</AccordionPanel>
-                    </Accordion>
+                    <AccordionItem open={true} title="How does SSR-first hydration help here?" subtitle="Click anywhere on the summary row to toggle the details.">Markup ships complete on first response, then universal bindings attach without rebuilding the whole subtree.</AccordionItem>
+                    <AccordionItem title="Can these primitives power mobile-compatible web apps?" subtitle="Floating actions and bottom navigation are part of the library now.">Yes. The component set now includes compact actions, icon buttons, floating action buttons, and a bottom bar pattern.</AccordionItem>
                     <TabsShowcase />
                     <Pagination>
                         <PageItem href="#">Prev</PageItem>
@@ -304,7 +396,8 @@ func ComponentsPage(page : &mut HtmlPage) {
                 <div class="section-title">Table and List</div>
                 <div class="demo-grid">
                     <Paper>
-                        <Table>
+                        <Caption>Table</Caption>
+                        <Table style="margin-top:0.75rem;">
                             <thead>
                                 <tr>
                                     <TableHeadCell>Package</TableHeadCell>
@@ -315,22 +408,23 @@ func ComponentsPage(page : &mut HtmlPage) {
                             <tbody>
                                 <tr>
                                     <TableCell>Buttons</TableCell>
-                                    <TableCell><BadgeSuccess>Ready</BadgeSuccess></TableCell>
+                                    <TableCell>Ready</TableCell>
                                     <TableCell>Yes</TableCell>
                                 </tr>
                                 <tr>
                                     <TableCell>Toggles</TableCell>
-                                    <TableCell><BadgeAccent>Updated</BadgeAccent></TableCell>
+                                    <TableCell>Updated</TableCell>
                                     <TableCell>Yes</TableCell>
                                 </tr>
                             </tbody>
                         </Table>
                     </Paper>
                     <Paper>
-                        <List>
+                        <Caption>List</Caption>
+                        <List style="margin-top:0.75rem;">
                             <ListItem>Universal components render HTML first.</ListItem>
-                            <ListItem>Hydration now preserves SSR markup.</ListItem>
-                            <ListItem>Variant styling is no longer lost to CSS emission order.</ListItem>
+                            <ListItem>Hydration preserves SSR markup instead of rebuilding the tree.</ListItem>
+                            <ListItem>Interactive demos now cover toggles, tabs, and dialogs.</ListItem>
                         </List>
                     </Paper>
                 </div>
