@@ -2,13 +2,15 @@ func GlassHeader(page : &mut HtmlPage, active : *char) {
     #css {
         .header {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            padding: 1.25rem 0;
             background: rgba(10, 10, 12, 0.7);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            height : 64px;
+            padding : 0 2rem;
         }
         .header-content {
             display: flex; justify-content: space-between; align-items: center;
+            height : 100%;
         }
         .logo {
             font-size: 1.25rem; font-weight: 900; color: #fff; text-decoration: none;

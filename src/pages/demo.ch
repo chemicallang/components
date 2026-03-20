@@ -84,6 +84,27 @@ func InjectDemoThemes(page : &mut HtmlPage) {
     """)
 }
 
+func GlobalStyles2(page : &mut HtmlPage) {
+    #css {
+        body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+        * { box-sizing: border-box; }
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
+        .container { margin: 0 auto; }
+    }
+    #html {
+        <style>{"""
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+                100% { transform: translateY(0px); }
+            }
+        """}</style>
+    }
+}
+
 func DemoPage(page : &mut HtmlPage) {
     page.appendTitle("Demo - Chemical Components")
     page.defaultPrepare()
@@ -230,12 +251,12 @@ func DemoStudioPage(page : &mut HtmlPage) {
     page.defaultUniversalSetup()
     page.injectDefaultComponentsTheme()
     InjectDemoThemes(page)
-    GlobalStyles(page)
+    GlobalStyles2(page)
     GlassHeader(page, "demo")
 
     #css {
-        .site-page { padding: 10rem 0 4rem; }
-        .site-shell { background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-page { margin-left : 0; margin-right : 0; width : 100%; }
+        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 2rem; }
         .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 1.4rem; align-items: center; }
         .hero-copy { display: grid; gap: 1rem; }
@@ -305,12 +326,12 @@ func DemoClinicPage(page : &mut HtmlPage) {
     page.defaultUniversalSetup()
     page.injectDefaultComponentsTheme()
     InjectDemoThemes(page)
-    GlobalStyles(page)
+    GlobalStyles2(page)
     GlassHeader(page, "demo")
 
     #css {
-        .site-page { padding: 10rem 0 4rem; }
-        .site-shell { background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-page { margin-left : 0; margin-right : 0; width : 100%; }
+        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.4rem; }
         .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 1rem; }
         .hero-copy h1 { margin: 0; font-size: 3.2rem; letter-spacing: -0.04em; }
@@ -367,12 +388,12 @@ func DemoShopPage(page : &mut HtmlPage) {
     page.defaultUniversalSetup()
     page.injectDefaultComponentsTheme()
     InjectDemoThemes(page)
-    GlobalStyles(page)
+    GlobalStyles2(page)
     GlassHeader(page, "demo")
 
     #css {
-        .site-page { padding: 10rem 0 4rem; }
-        .site-shell { background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-page { margin-left : 0; margin-right : 0; width : 100%; }
+        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.5rem; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.2rem; align-items: center; }
@@ -465,12 +486,12 @@ func DemoRetreatPage(page : &mut HtmlPage) {
     page.defaultUniversalSetup()
     page.injectDefaultComponentsTheme()
     InjectDemoThemes(page)
-    GlobalStyles(page)
+    GlobalStyles2(page)
     GlassHeader(page, "demo")
 
     #css {
-        .site-page { padding: 10rem 0 4rem; }
-        .site-shell { background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-page { margin-left : 0; margin-right : 0; width : 100%; }
+        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.5rem; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
         .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 1.2rem; align-items: stretch; }
