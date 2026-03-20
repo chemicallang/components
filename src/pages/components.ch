@@ -158,7 +158,9 @@ func ComponentsPage(page : &mut HtmlPage) {
                     <BadgeSuccess>Success</BadgeSuccess>
                     <BadgeError>Error</BadgeError>
                     <Chip>Edge</Chip>
-                    <Chip>Core</Chip>
+                    <ChipAccent>Accent</ChipAccent>
+                    <ChipSuccess>Success</ChipSuccess>
+                    <ChipError>Error</ChipError>
                     <Avatar>CH</Avatar>
                     <AvatarSm>CU</AvatarSm>
                     <AvatarLg>UI</AvatarLg>
@@ -173,6 +175,141 @@ func ComponentsPage(page : &mut HtmlPage) {
                 <div class="demo-row">
                     <Checkbox checked={true}>Enable SSR</Checkbox>
                     <Switch checked={true}>Auto-hydrate</Switch>
+                    <Radio checked={true} name="density">Comfortable</Radio>
+                    <Radio checked={false} name="density">Compact</Radio>
+                </div>
+            </div>
+
+            <Divider />
+
+            <div class="section">
+                <div class="section-title">Typography, Links, Icons</div>
+                <div class="demo-stack">
+                    <H2>Build Interfaces With SSR-First Primitives</H2>
+                    <Lead>These typography and navigation primitives ship directly from the universal components package.</Lead>
+                    <Text>Use <CodeText>&lt;CodeText&gt;</CodeText> for inline labels and <Link href="#">Link</Link> for accent-driven navigation.</Text>
+                    <div class="demo-row">
+                        <Icon>?</Icon>
+                        <Icon>i</Icon>
+                        <Caption>Small helper copy for supporting metadata.</Caption>
+                    </div>
+                </div>
+            </div>
+
+            <Divider />
+
+            <div class="section">
+                <div class="section-title">Paper, App Bar, Drawer, Menu</div>
+                <div class="demo-grid">
+                    <Paper>
+                        <AppBar>
+                            <H3>Workspace</H3>
+                            <ButtonSm>Publish</ButtonSm>
+                        </AppBar>
+                        <Text style="margin-top:1rem;">Reusable surfaces now cover document-like shells and navigation containers.</Text>
+                    </Paper>
+                    <Drawer>
+                        <H3>Drawer</H3>
+                        <Text>Use drawers for grouped navigation or settings clusters.</Text>
+                        <Menu>
+                            <MenuItem href="#">Profile</MenuItem>
+                            <MenuItem href="#">Billing</MenuItem>
+                            <MenuItem href="#">API Keys</MenuItem>
+                        </Menu>
+                    </Drawer>
+                    <Popover>
+                        <Caption>Popover</Caption>
+                        <Text>Static SSR-friendly shell for compact contextual content.</Text>
+                        <Tooltip>Tooltip copy can also be rendered inline.</Tooltip>
+                    </Popover>
+                </div>
+            </div>
+
+            <Divider />
+
+            <div class="section">
+                <div class="section-title">Feedback</div>
+                <div class="demo-stack">
+                    <div class="demo-row">
+                        <Snackbar>
+                            <BadgeSuccess>Saved</BadgeSuccess>
+                            <span>Changes were written to disk.</span>
+                        </Snackbar>
+                        <Progress value="68"></Progress>
+                    </div>
+                    <Dialog open={true}>
+                        <H3>Dialog Shell</H3>
+                        <Text style="margin-top:0.75rem;">This is a server-rendered dialog surface. We can layer richer open and close behavior later.</Text>
+                        <div class="demo-row" style="margin-top:1rem;">
+                            <ButtonPrimary>Confirm</ButtonPrimary>
+                            <ButtonGhost>Cancel</ButtonGhost>
+                        </div>
+                    </Dialog>
+                </div>
+            </div>
+
+            <Divider />
+
+            <div class="section">
+                <div class="section-title">Accordion, Tabs, Pagination</div>
+                <div class="demo-stack">
+                    <Accordion open={true}>
+                        <AccordionSummary>How does SSR-first hydration help here?</AccordionSummary>
+                        <AccordionPanel>Markup ships complete on first response, then universal bindings attach without rebuilding the whole subtree.</AccordionPanel>
+                    </Accordion>
+                    <Tabs>
+                        <TabList>
+                            <TabActive>Overview</TabActive>
+                            <Tab>Tokens</Tab>
+                            <Tab>Usage</Tab>
+                        </TabList>
+                        <TabPanel>Tab primitives are available as SSR-safe shells and can gain richer active-state behavior later.</TabPanel>
+                    </Tabs>
+                    <Pagination>
+                        <PageItem href="#">Prev</PageItem>
+                        <PageItemActive href="#">1</PageItemActive>
+                        <PageItem href="#">2</PageItem>
+                        <PageItem href="#">3</PageItem>
+                        <PageItem href="#">Next</PageItem>
+                    </Pagination>
+                </div>
+            </div>
+
+            <Divider />
+
+            <div class="section">
+                <div class="section-title">Table and List</div>
+                <div class="demo-grid">
+                    <Paper>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <TableHeadCell>Package</TableHeadCell>
+                                    <TableHeadCell>Status</TableHeadCell>
+                                    <TableHeadCell>SSR</TableHeadCell>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <TableCell>Buttons</TableCell>
+                                    <TableCell><BadgeSuccess>Ready</BadgeSuccess></TableCell>
+                                    <TableCell>Yes</TableCell>
+                                </tr>
+                                <tr>
+                                    <TableCell>Toggles</TableCell>
+                                    <TableCell><BadgeAccent>Updated</BadgeAccent></TableCell>
+                                    <TableCell>Yes</TableCell>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Paper>
+                    <Paper>
+                        <List>
+                            <ListItem>Universal components render HTML first.</ListItem>
+                            <ListItem>Hydration now preserves SSR markup.</ListItem>
+                            <ListItem>Variant styling is no longer lost to CSS emission order.</ListItem>
+                        </List>
+                    </Paper>
                 </div>
             </div>
 
