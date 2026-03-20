@@ -3,6 +3,43 @@
     return <ButtonPrimary onClick={lambda}>Clickable</ButtonPrimary>
 }
 
+#universal DialogShowcase(props) {
+    state open = true
+    return <div class="demo-stack">
+        <div class="demo-row">
+            <ButtonPrimary onClick={() => open = true} style={open ? "display:none;" : ""}>Open dialog</ButtonPrimary>
+        </div>
+        <Dialog open={open} style={open ? "" : "display:none;"}>
+            <H3>Interactive Dialog</H3>
+            <Text style="margin-top:0.75rem;">This dialog is now controlled by universal state and can be closed without losing SSR readiness.</Text>
+            <div class="demo-row" style="margin-top:1rem;">
+                <ButtonPrimary onClick={() => open = false}>Confirm</ButtonPrimary>
+                <ButtonGhost onClick={() => open = false}>Close</ButtonGhost>
+            </div>
+        </Dialog>
+    </div>
+}
+
+#universal TabsShowcase(props) {
+    state active = 0
+    return <Tabs>
+        <TabList>
+            <Tab onClick={() => active = 0} style={ active == 0 ? "background:var(--chx-primary);color:var(--chx-primary-fg);" : ""}>Overview</Tab>
+            <Tab onClick={() => active = 1} style={ active == 1 ? "background:var(--chx-primary);color:var(--chx-primary-fg);" : ""}>Tokens</Tab>
+            <Tab onClick={() => active = 2} style={ active == 2 ? "background:var(--chx-primary);color:var(--chx-primary-fg);" : ""}>Usage</Tab>
+        </TabList>
+        <TabPanel style={active == 0 ? "" : "display:none;"}>
+            Overview tab content is interactive and swaps instantly on click.
+        </TabPanel>
+        <TabPanel style={active == 1 ? "" : "display:none;"}>
+            Tokens tab content proves stateful tab switching works under hydration.
+        </TabPanel>
+        <TabPanel style={active == 2 ? "" : "display:none;"}>
+            Usage tab content gives the demo page a real click-driven component example.
+        </TabPanel>
+    </Tabs>
+}
+
 func ComponentsPage(page : &mut HtmlPage) {
     page.appendTitle("Components - Chemical")
     page.defaultPrepare()
@@ -237,14 +274,7 @@ func ComponentsPage(page : &mut HtmlPage) {
                         </Snackbar>
                         <Progress value="68"></Progress>
                     </div>
-                    <Dialog open={true}>
-                        <H3>Dialog Shell</H3>
-                        <Text style="margin-top:0.75rem;">This is a server-rendered dialog surface. We can layer richer open and close behavior later.</Text>
-                        <div class="demo-row" style="margin-top:1rem;">
-                            <ButtonPrimary>Confirm</ButtonPrimary>
-                            <ButtonGhost>Cancel</ButtonGhost>
-                        </div>
-                    </Dialog>
+                    <DialogShowcase />
                 </div>
             </div>
 
@@ -257,14 +287,7 @@ func ComponentsPage(page : &mut HtmlPage) {
                         <AccordionSummary>How does SSR-first hydration help here?</AccordionSummary>
                         <AccordionPanel>Markup ships complete on first response, then universal bindings attach without rebuilding the whole subtree.</AccordionPanel>
                     </Accordion>
-                    <Tabs>
-                        <TabList>
-                            <TabActive>Overview</TabActive>
-                            <Tab>Tokens</Tab>
-                            <Tab>Usage</Tab>
-                        </TabList>
-                        <TabPanel>Tab primitives are available as SSR-safe shells and can gain richer active-state behavior later.</TabPanel>
-                    </Tabs>
+                    <TabsShowcase />
                     <Pagination>
                         <PageItem href="#">Prev</PageItem>
                         <PageItemActive href="#">1</PageItemActive>
