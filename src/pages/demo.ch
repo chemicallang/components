@@ -130,7 +130,7 @@ func DemoPage(page : &mut HtmlPage) {
         .demo-link { display: inline-flex; align-items: center; justify-content: center; padding: 0.78rem 1.05rem; border-radius: 999px; text-decoration: none; font-weight: 700; border: 1px solid var(--chx-border); color: var(--chx-text-main); background: var(--chx-surface-2); }
         .demo-link.primary { background: var(--chx-primary); color: var(--chx-primary-fg); border-color: transparent; }
         .demo-preview { border-radius: 24px; overflow: hidden; border: 1px solid var(--chx-border); min-height: 310px; }
-        .theme-shell { background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; min-height: 100%; }
+        .theme-shell { background: var(--chx-bg); color: var(--chx-text-main); font-family: var(--chx-font); min-height: 100%; }
         .mini-shell { padding: 1rem; display: grid; gap: 0.9rem; min-height: 100%; }
         .mini-hero { display: grid; gap: 0.75rem; }
         .mini-hero h4 { margin: 0; font-size: 1.35rem; letter-spacing: -0.03em; }
@@ -252,7 +252,7 @@ func DemoStudioPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: radial-gradient(circle at top right, rgba(255, 122, 89, 0.12), transparent 22%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: radial-gradient(circle at top right, rgba(255, 122, 89, 0.12), transparent 22%), var(--chx-bg); color: var(--chx-text-main); font-family: var(--chx-font); border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 2rem; }
         .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 1.4rem; align-items: center; }
         .hero-copy { display: grid; gap: 1rem; }
@@ -331,7 +331,7 @@ func DemoClinicPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: linear-gradient(180deg, rgba(20, 184, 166, 0.08), transparent 22%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: linear-gradient(180deg, rgba(20, 184, 166, 0.08), transparent 22%), var(--chx-bg); color: var(--chx-text-main); font-family: var(--chx-font); border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.4rem; }
         .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 1rem; }
         .hero-copy h1 { margin: 0; font-size: 3.2rem; letter-spacing: -0.04em; }
@@ -398,7 +398,7 @@ func DemoShopPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: radial-gradient(circle at top left, rgba(217, 119, 6, 0.12), transparent 24%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: radial-gradient(circle at top left, rgba(217, 119, 6, 0.12), transparent 24%), var(--chx-bg); color: var(--chx-text-main); font-family: var(--chx-font); border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.5rem; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.2rem; align-items: center; }
@@ -501,7 +501,7 @@ func DemoRetreatPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: linear-gradient(180deg, rgba(14, 165, 233, 0.10), transparent 24%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: linear-gradient(180deg, rgba(14, 165, 233, 0.10), transparent 24%), var(--chx-bg); color: var(--chx-text-main); font-family: var(--chx-font); border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.5rem; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
         .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 1.2rem; align-items: stretch; }
