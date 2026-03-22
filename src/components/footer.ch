@@ -74,12 +74,11 @@ func demo_site_footer_styles(page : &mut HtmlPage) : *char {
             color: var(--chx-text-muted);
             font-size: 0.92rem;
         }
-    }
-    page.append_css_view("""
         @media (max-width: 960px) {
-            .demo-site-footer-head, .demo-site-footer-meta { grid-template-columns: 1fr; display: grid; }
+            .demo-site-footer-head { grid-template-columns: 1fr; display: grid; }
+            .demo-site-footer-meta { grid-template-columns: 1fr; display: grid; }
         }
-    """);
+    }
     return "";
 }
 

@@ -138,16 +138,12 @@ func DemoPage(page : &mut HtmlPage) {
         .mini-row { display: flex; gap: 0.7rem; flex-wrap: wrap; }
         .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         .demo-note { margin-top: 3rem; }
+        @media (max-width: 960px) {
+            .demo-hero { grid-template-columns: 1fr; }
+            .demo-grid { grid-template-columns: 1fr; }
+            .demo-metrics { grid-template-columns: 1fr; }
+        }
     }
-
-// TODO: support global classes in the top level media query
-page.append_css_view("""
-    @media (max-width: 960px) {
-        .demo-hero { grid-template-columns: 1fr; }
-        .demo-grid { grid-template-columns: 1fr; }
-        .demo-metrics { grid-template-columns: 1fr; }
-    }
-""")
 
     #html {
         <div class="container demo-page">
@@ -276,14 +272,11 @@ func DemoStudioPage(page : &mut HtmlPage) {
         .quote-panel { padding: 1.4rem; border-radius: 24px; border: 1px solid rgba(37, 22, 70, 0.14); background: rgba(255, 247, 237, 0.72); }
         .quote-panel blockquote { margin: 0; font-size: 1.35rem; line-height: 1.2; font-weight: 700; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
+        @media (max-width: 960px) {
+            .hero-grid, .section-grid, .project-grid, .quote-strip { grid-template-columns: 1fr; }
+            .hero-copy h1 { font-size: 3.2rem; }
+        }
     }
-
-page.append_css_view("""
-    @media (max-width: 960px) {
-        .hero-grid, .section-grid, .project-grid, .quote-strip { grid-template-columns: 1fr; }
-        .hero-copy h1 { font-size: 3.2rem; }
-    }
-""")
 
     #html {
         <div class="container site-page">
@@ -348,13 +341,10 @@ func DemoClinicPage(page : &mut HtmlPage) {
         .care-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
         .care-pill { padding: 0.9rem 1rem; border-radius: 18px; border: 1px solid var(--chx-border); background: rgba(255, 255, 255, 0.62); }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
+        @media (max-width: 960px) {
+            .hero-grid, .stats-grid, .content-grid, .care-strip { grid-template-columns: 1fr; }
+        }
     }
-
-page.append_css_view("""
-    @media (max-width: 960px) {
-        .hero-grid, .stats-grid, .content-grid, .care-strip { grid-template-columns: 1fr; }
-    }
-""")
 
     #html {
         <div class="container site-page">
@@ -425,14 +415,11 @@ func DemoShopPage(page : &mut HtmlPage) {
         .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .shelf-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
         .shelf-card { min-height: 140px; padding: 1rem; border-radius: 20px; border: 1px solid var(--chx-border); background: linear-gradient(180deg, rgba(255,255,255,0.58), rgba(239,232,217,0.92)); display: grid; align-content: end; }
+        @media (max-width: 960px) {
+            .hero-grid, .catalog-grid, .story-grid, .shelf-strip { grid-template-columns: 1fr; }
+            .hero-copy h1 { font-size: 3rem; }
+        }
     }
-
-page.append_css_view("""
-    @media (max-width: 960px) {
-        .hero-grid, .catalog-grid, .story-grid, .shelf-strip { grid-template-columns: 1fr; }
-        .hero-copy h1 { font-size: 3rem; }
-    }
-""")
 
     #html {
         <div class="container site-page">
@@ -529,14 +516,11 @@ func DemoRetreatPage(page : &mut HtmlPage) {
         .itinerary-item { padding: 0.95rem 1rem; border-radius: 18px; border: 1px solid var(--chx-border); background: rgba(255,255,255,0.5); }
         .amenity-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
         .amenity-card { padding: 1rem; border-radius: 20px; border: 1px solid var(--chx-border); background: rgba(255,255,255,0.52); }
+        @media (max-width: 960px) {
+            .hero-grid, .stats-grid, .plan-grid, .amenity-strip { grid-template-columns: 1fr; }
+            .hero-copy h1 { font-size: 3rem; }
+        }
     }
-
-page.append_css_view("""
-    @media (max-width: 960px) {
-        .hero-grid, .stats-grid, .plan-grid, .amenity-strip { grid-template-columns: 1fr; }
-        .hero-copy h1 { font-size: 3rem; }
-    }
-""")
 
     #html {
         <div class="container site-page">
