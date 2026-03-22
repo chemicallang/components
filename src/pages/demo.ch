@@ -266,27 +266,7 @@ func DemoPage(page : &mut HtmlPage) {
                             <div><ChipSuccess>App</ChipSuccess><h3>TaskFlow Mobile</h3><p>A phone-first todo app with working completion state, quick filters, and an app shell that should not feel like the website demos.</p></div>
                             <BadgeSuccess>demo-todo.html</BadgeSuccess>
                         </div>
-                        <Paper>
-                            <Caption>Why it matters</Caption>
-                            <List style="margin-top:0.8rem;">
-                                <ListItem>Exercises compact task density instead of hero sections.</ListItem>
-                                <ListItem>Shows components inside a mobile app shell with tabs and bottom navigation.</ListItem>
-                                <ListItem>Provides a functional interaction demo without storage or backend code.</ListItem>
-                            </List>
-                        </Paper>
                         <div class="demo-links"><a href="demo-todo.html" class="demo-link primary">Open app</a></div>
-                    </div>
-                    <div class="demo-preview phone-preview demo-focus theme-shell">
-                        <div class="mini-phone-shell">
-                            <div class="mini-phone-top"><ChipAccent>Today</ChipAccent><BadgeSuccess>3 left</BadgeSuccess></div>
-                            <div class="mini-phone-card"><Caption>Focus block</Caption><H3>Ship demo app</H3><Text>Finish responsive states and test interactions.</Text></div>
-                            <div class="mini-task-list">
-                                <div class="mini-task"><Caption>09:30</Caption><Text>Review parser changes</Text></div>
-                                <div class="mini-task"><Caption>11:00</Caption><Text>Polish mobile shell</Text></div>
-                                <div class="mini-task"><Caption>14:00</Caption><Text>Mark QA checklist done</Text></div>
-                            </div>
-                            <BottomBar><IconButton><Icon>H</Icon></IconButton><IconButton><Icon>L</Icon></IconButton><Fab><Icon>+</Icon>New</Fab><IconButton><Icon>S</Icon></IconButton><IconButton><Icon>U</Icon></IconButton></BottomBar>
-                        </div>
                     </div>
                 </div>
             </div>
