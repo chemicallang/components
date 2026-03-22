@@ -82,6 +82,27 @@ func InjectDemoThemes(page : &mut HtmlPage) {
         --chx-shadow: 0 18px 40px rgba(23, 50, 70, 0.10);
         --chx-shadow-lg: 0 28px 60px rgba(23, 50, 70, 0.14);
     """)
+
+    page.injectComponentsThemeScope(".demo-focus", """
+        --chx-font: 'Plus Jakarta Sans', system-ui, sans-serif;
+        --chx-primary: #7c3aed;
+        --chx-primary-hover: #6d28d9;
+        --chx-primary-fg: #faf5ff;
+        --chx-bg: #0b1020;
+        --chx-surface: #121932;
+        --chx-surface-2: #18213f;
+        --chx-border: #2b3560;
+        --chx-border-strong: #4c5a93;
+        --chx-text-main: #eef2ff;
+        --chx-text-muted: #9aa6d1;
+        --chx-accent: #22c55e;
+        --chx-error: #f87171;
+        --chx-success: #34d399;
+        --chx-ring: rgba(124, 58, 237, 0.18);
+        --chx-shadow-sm: 0 10px 24px rgba(3, 7, 18, 0.32);
+        --chx-shadow: 0 18px 40px rgba(3, 7, 18, 0.42);
+        --chx-shadow-lg: 0 28px 68px rgba(3, 7, 18, 0.54);
+    """)
 }
 
 func GlobalStyles2(page : &mut HtmlPage) {
@@ -123,6 +144,7 @@ func DemoPage(page : &mut HtmlPage) {
         .demo-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
         .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
         .demo-card { display: grid; gap: 1rem; padding: 1.2rem; border: 1px solid var(--chx-border); border-radius: 28px; background: var(--chx-surface); box-shadow: var(--chx-shadow-sm); }
+        .demo-card.app-card { grid-template-columns: 0.95fr 0.65fr; align-items: stretch; }
         .demo-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
         .demo-card-head h3 { margin: 0.4rem 0 0 0; font-size: 1.5rem; }
         .demo-card-head p { margin: 0.55rem 0 0 0; color: var(--chx-text-muted); }
@@ -130,6 +152,7 @@ func DemoPage(page : &mut HtmlPage) {
         .demo-link { display: inline-flex; align-items: center; justify-content: center; padding: 0.78rem 1.05rem; border-radius: 999px; text-decoration: none; font-weight: 700; border: 1px solid var(--chx-border); color: var(--chx-text-main); background: var(--chx-surface-2); }
         .demo-link.primary { background: var(--chx-primary); color: var(--chx-primary-fg); border-color: transparent; }
         .demo-preview { border-radius: 24px; overflow: hidden; border: 1px solid var(--chx-border); min-height: 310px; }
+        .demo-preview.phone-preview { min-height: 420px; max-width: 280px; justify-self: end; border-radius: 34px; box-shadow: 0 22px 50px rgba(2, 8, 20, 0.28); }
         .theme-shell { background: var(--chx-bg); color: var(--chx-text-main); font-family: var(--chx-font); min-height: 100%; }
         .mini-shell { padding: 1rem; display: grid; gap: 0.9rem; min-height: 100%; }
         .mini-hero { display: grid; gap: 0.75rem; }
@@ -137,11 +160,18 @@ func DemoPage(page : &mut HtmlPage) {
         .mini-hero p { margin: 0; color: var(--chx-text-muted); font-size: 0.92rem; }
         .mini-row { display: flex; gap: 0.7rem; flex-wrap: wrap; }
         .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+        .mini-phone-shell { padding: 1rem; display: grid; gap: 0.9rem; min-height: 100%; background: radial-gradient(circle at top, rgba(124, 58, 237, 0.22), transparent 28%), var(--chx-bg); }
+        .mini-phone-top { display: flex; justify-content: space-between; align-items: center; }
+        .mini-phone-card { padding: 0.9rem; border-radius: 18px; border: 1px solid var(--chx-border); background: rgba(255,255,255,0.04); }
+        .mini-task-list { display: grid; gap: 0.6rem; }
+        .mini-task { padding: 0.8rem; border-radius: 16px; border: 1px solid var(--chx-border); background: var(--chx-surface); }
         .demo-note { margin-top: 3rem; }
         @media (max-width: 960px) {
             .demo-hero { grid-template-columns: 1fr; }
             .demo-grid { grid-template-columns: 1fr; }
             .demo-metrics { grid-template-columns: 1fr; }
+            .demo-card.app-card { grid-template-columns: 1fr; }
+            .demo-preview.phone-preview { justify-self: start; max-width: {"none"}; width: 100%; }
         }
     }
 
@@ -153,9 +183,9 @@ func DemoPage(page : &mut HtmlPage) {
                     <h1>Component-built websites with scoped themes.</h1>
                     <p>The Demo section turns the library into full website surfaces. Each site uses the same shared components, but themes are scoped per wrapper so we can test visual range without cloning the component set.</p>
                     <div class="demo-metrics">
-                        <StatCard><Caption>Sites</Caption><H2>4</H2><ChipSuccess>New</ChipSuccess></StatCard>
-                        <StatCard><Caption>Theme scopes</Caption><H2>4</H2><ChipAccent>Scoped</ChipAccent></StatCard>
-                        <StatCard><Caption>Purpose</Caption><H2>Real usage</H2><Chip>Gap finding</Chip></StatCard>
+                        <StatCard><Caption>Surfaces</Caption><H2>5</H2><ChipSuccess>New</ChipSuccess></StatCard>
+                        <StatCard><Caption>Theme scopes</Caption><H2>5</H2><ChipAccent>Scoped</ChipAccent></StatCard>
+                        <StatCard><Caption>Range</Caption><H2>Web + app</H2><Chip>Usage test</Chip></StatCard>
                     </div>
                 </div>
                 <Paper>
@@ -228,6 +258,36 @@ func DemoPage(page : &mut HtmlPage) {
                         </div>
                     </div>
                     <div class="demo-links"><a href="demo-retreat.html" class="demo-link primary">Open site</a></div>
+                </div>
+
+                <div class="demo-card app-card">
+                    <div style="display:grid;gap:1rem;">
+                        <div class="demo-card-head">
+                            <div><ChipSuccess>App</ChipSuccess><h3>TaskFlow Mobile</h3><p>A phone-first todo app with working completion state, quick filters, and an app shell that should not feel like the website demos.</p></div>
+                            <BadgeSuccess>demo-todo.html</BadgeSuccess>
+                        </div>
+                        <Paper>
+                            <Caption>Why it matters</Caption>
+                            <List style="margin-top:0.8rem;">
+                                <ListItem>Exercises compact task density instead of hero sections.</ListItem>
+                                <ListItem>Shows components inside a mobile app shell with tabs and bottom navigation.</ListItem>
+                                <ListItem>Provides a functional interaction demo without storage or backend code.</ListItem>
+                            </List>
+                        </Paper>
+                        <div class="demo-links"><a href="demo-todo.html" class="demo-link primary">Open app</a></div>
+                    </div>
+                    <div class="demo-preview phone-preview demo-focus theme-shell">
+                        <div class="mini-phone-shell">
+                            <div class="mini-phone-top"><ChipAccent>Today</ChipAccent><BadgeSuccess>3 left</BadgeSuccess></div>
+                            <div class="mini-phone-card"><Caption>Focus block</Caption><H3>Ship demo app</H3><Text>Finish responsive states and test interactions.</Text></div>
+                            <div class="mini-task-list">
+                                <div class="mini-task"><Caption>09:30</Caption><Text>Review parser changes</Text></div>
+                                <div class="mini-task"><Caption>11:00</Caption><Text>Polish mobile shell</Text></div>
+                                <div class="mini-task"><Caption>14:00</Caption><Text>Mark QA checklist done</Text></div>
+                            </div>
+                            <BottomBar><IconButton><Icon>H</Icon></IconButton><IconButton><Icon>L</Icon></IconButton><Fab><Icon>+</Icon>New</Fab><IconButton><Icon>S</Icon></IconButton><IconButton><Icon>U</Icon></IconButton></BottomBar>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -576,5 +636,205 @@ func DemoRetreatPage(page : &mut HtmlPage) {
             </div>
         </div>
     }
+    SetupThemeScript(page)
+}
+
+#universal TodoCard(props) {
+    return <Card class="todo-item-card" style={props.visible ? "" : "display:none;"}>
+        <CardBody>
+            <div class="todo-item-head">
+                <Checkbox checked={props.done} onClick={props.onToggle}>{props.title}</Checkbox>
+                <BadgeAccent style={props.badgeTone == "accent" ? "" : "display:none;"}>{props.badgeLabel}</BadgeAccent>
+                <BadgeSuccess style={props.badgeTone == "success" ? "" : "display:none;"}>{props.badgeLabel}</BadgeSuccess>
+                <ChipAccent style={props.badgeTone == "chipAccent" ? "" : "display:none;"}>{props.badgeLabel}</ChipAccent>
+                <Chip style={props.badgeTone == "plain" ? "" : "display:none;"}>{props.badgeLabel}</Chip>
+            </div>
+            <Caption style={props.caption == "" ? "display:none;" : props.done ? "text-decoration:line-through;opacity:0.5;" : ""}>{props.caption}</Caption>
+            <Text style={props.done ? "text-decoration:line-through;opacity:0.5;" : ""}>{props.note}</Text>
+        </CardBody>
+    </Card>
+}
+
+#universal TodoAppShowcase(props) {
+    state active = 0
+    state draft = ""
+    state todos = [
+        { title : "Ship the new app demo", caption : "Prototype", note : "Finish the mobile shell, filters, and stateful todo toggles.", badgeLabel : "High", badgeTone : "accent", done : false, today : true, visible : true },
+        { title : "Write product release notes", caption : "Writing", note : "Summarize the new component demos and visual direction.", badgeLabel : "14:00", badgeTone : "chipAccent", done : false, today : true, visible : true },
+        { title : "Review parser fixes", caption : "Engineering", note : "Verify the css_cbi changes cover gradients, calc, and media blocks.", badgeLabel : "Done", badgeTone : "success", done : true, today : false, visible : true },
+        { title : "Prep user interview", caption : "Research", note : "Outline the three questions for the onboarding call.", badgeLabel : "16:30", badgeTone : "plain", done : false, today : true, visible : true },
+        { title : "Archive old screenshots", caption : "Cleanup", note : "Move outdated files into the sprint archive before handoff.", badgeLabel : "Done", badgeTone : "success", done : true, today : false, visible : true },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "chipAccent", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "chipAccent", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "chipAccent", done : false, today : true, visible : false }
+    ]
+    var toggleTodo = (index) => {
+        todos[index].done = !todos[index].done
+        todos[index].badgeLabel = todos[index].done ? "Done" : (todos[index].badgeTone == "success" ? "Queued" : todos[index].badgeLabel)
+        if(todos[index].badgeTone == "success" && !todos[index].done) {
+            todos[index].badgeTone = "chipAccent"
+        } else if(todos[index].done && todos[index].badgeLabel == "Done") {
+            todos[index].badgeTone = "success"
+        }
+        todos = todos
+    }
+    var addTask = () => {
+        if(draft == "") {
+            return
+        }
+        if(!todos[5].visible) {
+            todos[5].title = draft
+            todos[5].caption = "Quick capture"
+            todos[5].note = "Created inside the mobile demo with no backend or storage."
+            todos[5].badgeLabel = "Added"
+            todos[5].badgeTone = "chipAccent"
+            todos[5].done = false
+            todos[5].today = true
+            todos[5].visible = true
+            draft = ""
+            todos = todos
+            return
+        }
+        if(!todos[6].visible) {
+            todos[6].title = draft
+            todos[6].caption = "Quick capture"
+            todos[6].note = "Created inside the mobile demo with no backend or storage."
+            todos[6].badgeLabel = "Added"
+            todos[6].badgeTone = "chipAccent"
+            todos[6].done = false
+            todos[6].today = true
+            todos[6].visible = true
+            draft = ""
+            todos = todos
+            return
+        }
+        if(!todos[7].visible) {
+            todos[7].title = draft
+            todos[7].caption = "Quick capture"
+            todos[7].note = "Created inside the mobile demo with no backend or storage."
+            todos[7].badgeLabel = "Added"
+            todos[7].badgeTone = "chipAccent"
+            todos[7].done = false
+            todos[7].today = true
+            todos[7].visible = true
+            draft = ""
+            todos = todos
+        }
+    }
+
+    return <div class="todo-stack">
+        <Paper class="todo-summary-card">
+            <Caption>Focus sprint</Caption>
+            <H2 style="margin-top:0.35rem;">{todos.filter((todo) => todo.visible && !todo.done).length} tasks left</H2>
+            <Text>Everything here is in-memory only, but you can add tasks and flip completion state to test the app shell.</Text>
+            <Progress value={todos.filter((todo) => todo.visible && todo.done).length * 100 / todos.filter((todo) => todo.visible).length} style="margin-top:1rem;"></Progress>
+        </Paper>
+
+        <Paper class="todo-capture-card">
+            <Caption>Quick capture</Caption>
+            <div class="todo-capture-row">
+                <InputFilled placeholder="Add a new task..." value={draft} onInput={(event) => draft = event.target.value} />
+                <ButtonPrimary onClick={addTask}>Add</ButtonPrimary>
+            </div>
+            <Text style="margin-top:0.65rem;">Three extra in-memory slots are available so the demo stays functional without storage.</Text>
+        </Paper>
+
+        <Tabs>
+            <TabList>
+                <Tab onClick={() => active = 0} style={active == 0 ? "background:var(--chx-primary);color:var(--chx-primary-fg);" : ""}>All</Tab>
+                <Tab onClick={() => active = 1} style={active == 1 ? "background:var(--chx-primary);color:var(--chx-primary-fg);" : ""}>Today</Tab>
+                <Tab onClick={() => active = 2} style={active == 2 ? "background:var(--chx-primary);color:var(--chx-primary-fg);" : ""}>Done</Tab>
+            </TabList>
+            <TabPanel style={active == 0 ? "" : "display:none;"}>
+                <div class="todo-list">
+                    <TodoCard visible={todos[0].visible} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} badgeTone={todos[0].badgeTone} onToggle={() => toggleTodo(0)} />
+                    <TodoCard visible={todos[1].visible} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} badgeTone={todos[1].badgeTone} onToggle={() => toggleTodo(1)} />
+                    <TodoCard visible={todos[2].visible} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} badgeTone={todos[2].badgeTone} onToggle={() => toggleTodo(2)} />
+                    <TodoCard visible={todos[3].visible} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} badgeTone={todos[3].badgeTone} onToggle={() => toggleTodo(3)} />
+                    <TodoCard visible={todos[4].visible} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} badgeTone={todos[4].badgeTone} onToggle={() => toggleTodo(4)} />
+                    <TodoCard visible={todos[5].visible} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} badgeTone={todos[5].badgeTone} onToggle={() => toggleTodo(5)} />
+                    <TodoCard visible={todos[6].visible} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} badgeTone={todos[6].badgeTone} onToggle={() => toggleTodo(6)} />
+                    <TodoCard visible={todos[7].visible} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} badgeTone={todos[7].badgeTone} onToggle={() => toggleTodo(7)} />
+                </div>
+            </TabPanel>
+            <TabPanel style={active == 1 ? "" : "display:none;"}>
+                <div class="todo-list">
+                    <TodoCard visible={todos[0].visible && todos[0].today && !todos[0].done} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} badgeTone={todos[0].badgeTone} onToggle={() => toggleTodo(0)} />
+                    <TodoCard visible={todos[1].visible && todos[1].today && !todos[1].done} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} badgeTone={todos[1].badgeTone} onToggle={() => toggleTodo(1)} />
+                    <TodoCard visible={todos[2].visible && todos[2].today && !todos[2].done} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} badgeTone={todos[2].badgeTone} onToggle={() => toggleTodo(2)} />
+                    <TodoCard visible={todos[3].visible && todos[3].today && !todos[3].done} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} badgeTone={todos[3].badgeTone} onToggle={() => toggleTodo(3)} />
+                    <TodoCard visible={todos[4].visible && todos[4].today && !todos[4].done} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} badgeTone={todos[4].badgeTone} onToggle={() => toggleTodo(4)} />
+                    <TodoCard visible={todos[5].visible && todos[5].today && !todos[5].done} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} badgeTone={todos[5].badgeTone} onToggle={() => toggleTodo(5)} />
+                    <TodoCard visible={todos[6].visible && todos[6].today && !todos[6].done} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} badgeTone={todos[6].badgeTone} onToggle={() => toggleTodo(6)} />
+                    <TodoCard visible={todos[7].visible && todos[7].today && !todos[7].done} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} badgeTone={todos[7].badgeTone} onToggle={() => toggleTodo(7)} />
+                </div>
+            </TabPanel>
+            <TabPanel style={active == 2 ? "" : "display:none;"}>
+                <div class="todo-list">
+                    <TodoCard visible={todos[0].visible && todos[0].done} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} badgeTone={todos[0].badgeTone} onToggle={() => toggleTodo(0)} />
+                    <TodoCard visible={todos[1].visible && todos[1].done} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} badgeTone={todos[1].badgeTone} onToggle={() => toggleTodo(1)} />
+                    <TodoCard visible={todos[2].visible && todos[2].done} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} badgeTone={todos[2].badgeTone} onToggle={() => toggleTodo(2)} />
+                    <TodoCard visible={todos[3].visible && todos[3].done} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} badgeTone={todos[3].badgeTone} onToggle={() => toggleTodo(3)} />
+                    <TodoCard visible={todos[4].visible && todos[4].done} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} badgeTone={todos[4].badgeTone} onToggle={() => toggleTodo(4)} />
+                    <TodoCard visible={todos[5].visible && todos[5].done} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} badgeTone={todos[5].badgeTone} onToggle={() => toggleTodo(5)} />
+                    <TodoCard visible={todos[6].visible && todos[6].done} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} badgeTone={todos[6].badgeTone} onToggle={() => toggleTodo(6)} />
+                    <TodoCard visible={todos[7].visible && todos[7].done} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} badgeTone={todos[7].badgeTone} onToggle={() => toggleTodo(7)} />
+                </div>
+            </TabPanel>
+        </Tabs>
+    </div>
+}
+
+func DemoTodoPage(page : &mut HtmlPage) {
+    page.appendTitle("TaskFlow Mobile Demo - Chemical")
+    page.defaultPrepare()
+    page.defaultUniversalSetup()
+    page.injectDefaultComponentsTheme()
+    InjectDemoThemes(page)
+    GlobalStyles2(page)
+    GlassHeader(page, "demo")
+
+    #css {
+        .todo-page { width: 100%; display: flex; justify-content: center; padding: 6.5rem 0 2rem; }
+        .todo-phone-shell { width: 100%; max-width: 390px; min-height: {"calc(100vh - 8rem)"}; background: radial-gradient(circle at top, rgba(124, 58, 237, 0.24), transparent 24%), var(--chx-bg); color: var(--chx-text-main); font-family: var(--chx-font); border: 1px solid var(--chx-border); border-radius: 36px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .todo-phone-inner { padding: 1rem; display: grid; gap: 1rem; }
+        .todo-topbar { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; }
+        .todo-hero { display: grid; gap: 0.8rem; padding: 1.2rem; border-radius: 26px; background: linear-gradient(160deg, rgba(124, 58, 237, 0.34), rgba(34, 197, 94, 0.16)); border: 1px solid rgba(154, 166, 209, 0.18); }
+        .todo-hero h1 { margin: 0; font-size: 2.2rem; line-height: 0.94; letter-spacing: -0.05em; }
+        .todo-hero p { margin: 0; color: #d8def7; }
+        .todo-action-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .todo-stack { display: grid; gap: 1rem; }
+        .todo-summary-card { display: grid; gap: 0.4rem; }
+        .todo-capture-card { display: grid; gap: 0.55rem; }
+        .todo-capture-row { display: grid; grid-template-columns: 1fr auto; gap: 0.75rem; align-items: center; }
+        .todo-list { display: grid; gap: 0.8rem; margin-top: 1rem; }
+        .todo-item-card { border-radius: 22px; background: var(--chx-surface); }
+        .todo-item-head { display: flex; justify-content: space-between; align-items: start; gap: 0.75rem; }
+        .todo-bottom { position: sticky; bottom: 0; background: linear-gradient(180deg, rgba(11, 16, 32, 0), rgba(11, 16, 32, 0.92) 18%, rgba(11, 16, 32, 0.98)); padding-top: 0.6rem; }
+    }
+
+    #html {
+        <div class="todo-page">
+            <div class="todo-phone-shell demo-focus">
+                <div class="todo-phone-inner">
+                    <div class="todo-topbar">
+                        <a href="demo.html" class="back-link">Back to Demo</a>
+                        <BadgeAccent>TaskFlow</BadgeAccent>
+                    </div>
+                    <div class="todo-hero">
+                        <div class="todo-action-row"><ChipAccent>Focus mode</ChipAccent><ChipSuccess>In memory</ChipSuccess></div>
+                        <h1>Your day, trimmed to the essentials.</h1>
+                        <p>TaskFlow is a compact todo app demo that uses the same component set, but in a phone UI instead of a landing page shell.</p>
+                        <div class="todo-action-row"><ButtonPrimary>New task</ButtonPrimary><ButtonGhost>Share list</ButtonGhost></div>
+                    </div>
+                    <TodoAppShowcase />
+                    <div class="todo-bottom">
+                        <BottomBar><IconButton><Icon>H</Icon></IconButton><IconButton><Icon>L</Icon></IconButton><Fab><Icon>+</Icon>New</Fab><IconButton><Icon>S</Icon></IconButton><IconButton><Icon>U</Icon></IconButton></BottomBar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
     SetupThemeScript(page)
 }

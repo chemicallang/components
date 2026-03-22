@@ -40,8 +40,13 @@ public func main() : int {
     var demoRetreat = HtmlPage()
     DemoRetreatPage(demoRetreat)
     demoRetreat.writeToDirectory("output", "demo-retreat", "", "chx-default dark")
+
+    // 9. Demo Todo App Page
+    var demoTodo = HtmlPage()
+    DemoTodoPage(demoTodo)
+    demoTodo.writeToDirectory("output", "demo-todo", "", "chx-default dark")
     
-    // 9. Markdown Page
+    // 10. Markdown Page
     var mdP = HtmlPage()
     MarkdownPage(mdP)
     mdP.writeToDirectory("output", "markdown", "", "chx-default dark")
