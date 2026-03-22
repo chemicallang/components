@@ -620,17 +620,17 @@ func DemoRetreatPage(page : &mut HtmlPage) {
 }
 
 #universal TodoCard(props) {
-    return <Card class="todo-item-card" style={props.visible ? "" : "display:none;"}>
+    return <Card class="todo-item-card" style={props.cardStyle}>
         <CardBody>
             <div class="todo-item-head">
                 <Checkbox checked={props.done} onClick={props.onToggle}>{props.title}</Checkbox>
-                <BadgeAccent style={props.badgeTone == "accent" ? "" : "display:none;"}>{props.badgeLabel}</BadgeAccent>
-                <BadgeSuccess style={props.badgeTone == "success" ? "" : "display:none;"}>{props.badgeLabel}</BadgeSuccess>
-                <ChipAccent style={props.badgeTone == "chipAccent" ? "" : "display:none;"}>{props.badgeLabel}</ChipAccent>
-                <Chip style={props.badgeTone == "plain" ? "" : "display:none;"}>{props.badgeLabel}</Chip>
+                <BadgeAccent style={props.accentStyle}>{props.badgeLabel}</BadgeAccent>
+                <BadgeSuccess style={props.successStyle}>{props.badgeLabel}</BadgeSuccess>
+                <ChipAccent style={props.chipAccentStyle}>{props.badgeLabel}</ChipAccent>
+                <Chip style={props.plainStyle}>{props.badgeLabel}</Chip>
             </div>
-            <Caption style={props.caption == "" ? "display:none;" : props.done ? "text-decoration:line-through;opacity:0.5;" : ""}>{props.caption}</Caption>
-            <Text style={props.done ? "text-decoration:line-through;opacity:0.5;" : ""}>{props.note}</Text>
+            <Caption style={props.captionStyle}>{props.caption}</Caption>
+            <Text style={props.noteStyle}>{props.note}</Text>
         </CardBody>
     </Card>
 }
@@ -640,84 +640,71 @@ func DemoRetreatPage(page : &mut HtmlPage) {
     state draft = ""
     state todos = [
         { title : "Ship the new app demo", caption : "Prototype", note : "Finish the mobile shell, filters, and stateful todo toggles.", badgeLabel : "High", badgeTone : "accent", done : false, today : true, visible : true },
-        { title : "Write product release notes", caption : "Writing", note : "Summarize the new component demos and visual direction.", badgeLabel : "14:00", badgeTone : "chipAccent", done : false, today : true, visible : true },
+        { title : "Write product release notes", caption : "Writing", note : "Summarize the new component demos and visual direction.", badgeLabel : "Today", badgeTone : "chipAccent", done : false, today : true, visible : true },
         { title : "Review parser fixes", caption : "Engineering", note : "Verify the css_cbi changes cover gradients, calc, and media blocks.", badgeLabel : "Done", badgeTone : "success", done : true, today : false, visible : true },
-        { title : "Prep user interview", caption : "Research", note : "Outline the three questions for the onboarding call.", badgeLabel : "16:30", badgeTone : "plain", done : false, today : true, visible : true },
+        { title : "Prep user interview", caption : "Research", note : "Outline the three questions for the onboarding call.", badgeLabel : "Today", badgeTone : "chipAccent", done : false, today : true, visible : true },
         { title : "Archive old screenshots", caption : "Cleanup", note : "Move outdated files into the sprint archive before handoff.", badgeLabel : "Done", badgeTone : "success", done : true, today : false, visible : true },
-        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "chipAccent", done : false, today : true, visible : false },
-        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "chipAccent", done : false, today : true, visible : false },
-        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "chipAccent", done : false, today : true, visible : false }
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false },
+        { title : "", caption : "", note : "", badgeLabel : "", badgeTone : "plain", done : false, today : true, visible : false }
     ]
     var toggleTodo = (index) => {
-        todos[index].done = !todos[index].done
-        todos[index].badgeLabel = todos[index].done ? "Done" : (todos[index].badgeTone == "success" ? "Queued" : todos[index].badgeLabel)
-        if(todos[index].badgeTone == "success" && !todos[index].done) {
-            todos[index].badgeTone = "chipAccent"
-        } else if(todos[index].done && todos[index].badgeLabel == "Done") {
-            todos[index].badgeTone = "success"
+        if(!todos[index].visible) {
+            return
         }
-        todos = todos
+        var next = todos.concat([])
+        next[index].done = !next[index].done
+        if(next[index].done) {
+            next[index].badgeLabel = "Done"
+            next[index].badgeTone = "success"
+        } else if(next[index].today) {
+            next[index].badgeLabel = "Today"
+            next[index].badgeTone = "chipAccent"
+        } else {
+            next[index].badgeLabel = "Backlog"
+            next[index].badgeTone = "plain"
+        }
+        todos = next
     }
     var addTask = () => {
         if(draft == "") {
             return
         }
-        if(!todos[5].visible) {
-            todos[5].title = draft
-            todos[5].caption = "Quick capture"
-            todos[5].note = "Created inside the mobile demo with no backend or storage."
-            todos[5].badgeLabel = "Added"
-            todos[5].badgeTone = "chipAccent"
-            todos[5].done = false
-            todos[5].today = true
-            todos[5].visible = true
-            draft = ""
-            todos = todos
+        var slot = todos.findIndex((todo) => !todo.visible)
+        if(slot == -1) {
             return
         }
-        if(!todos[6].visible) {
-            todos[6].title = draft
-            todos[6].caption = "Quick capture"
-            todos[6].note = "Created inside the mobile demo with no backend or storage."
-            todos[6].badgeLabel = "Added"
-            todos[6].badgeTone = "chipAccent"
-            todos[6].done = false
-            todos[6].today = true
-            todos[6].visible = true
-            draft = ""
-            todos = todos
-            return
-        }
-        if(!todos[7].visible) {
-            todos[7].title = draft
-            todos[7].caption = "Quick capture"
-            todos[7].note = "Created inside the mobile demo with no backend or storage."
-            todos[7].badgeLabel = "Added"
-            todos[7].badgeTone = "chipAccent"
-            todos[7].done = false
-            todos[7].today = true
-            todos[7].visible = true
-            draft = ""
-            todos = todos
-        }
+        var next = todos.concat([])
+        next[slot] = { title : draft, caption : "Quick capture", note : "Added in the demo app.", badgeLabel : "Today", badgeTone : "chipAccent", done : false, today : true, visible : true }
+        todos = next
+        draft = ""
     }
 
     return <div class="todo-stack">
-        <Paper class="todo-summary-card">
-            <Caption>Focus sprint</Caption>
-            <H2 style="margin-top:0.35rem;">{todos.filter((todo) => todo.visible && !todo.done).length} tasks left</H2>
-            <Text>Everything here is in-memory only, but you can add tasks and flip completion state to test the app shell.</Text>
-            <Progress value={todos.filter((todo) => todo.visible && todo.done).length * 100 / todos.filter((todo) => todo.visible).length} style="margin-top:1rem;"></Progress>
-        </Paper>
-
-        <Paper class="todo-capture-card">
-            <Caption>Quick capture</Caption>
-            <div class="todo-capture-row">
-                <InputFilled placeholder="Add a new task..." value={draft} onInput={(event) => draft = event.target.value} />
-                <ButtonPrimary onClick={addTask}>Add</ButtonPrimary>
+        <div class="todo-toolbar">
+            <div>
+                <Caption>Inbox</Caption>
+                <H3 style="margin-top:0.3rem;">{todos.filter((todo) => todo.visible && !todo.done).length} left</H3>
             </div>
-            <Text style="margin-top:0.65rem;">Three extra in-memory slots are available so the demo stays functional without storage.</Text>
-        </Paper>
+            <ChipAccent>{active == 2 ? "Done" : active == 1 ? "Today" : "All"}</ChipAccent>
+        </div>
+
+        <Card class="todo-capture-card">
+            <CardBody>
+                <div class="todo-capture-row">
+                    <InputFilled placeholder="Add a new task..." value={draft} onInput={(event) => draft = event.target.value} />
+                    <ButtonPrimary onClick={addTask}>Add</ButtonPrimary>
+                </div>
+            </CardBody>
+        </Card>
 
         <Tabs>
             <TabList>
@@ -727,38 +714,52 @@ func DemoRetreatPage(page : &mut HtmlPage) {
             </TabList>
             <TabPanel style={active == 0 ? "" : "display:none;"}>
                 <div class="todo-list">
-                    <TodoCard visible={todos[0].visible} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} badgeTone={todos[0].badgeTone} onToggle={() => toggleTodo(0)} />
-                    <TodoCard visible={todos[1].visible} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} badgeTone={todos[1].badgeTone} onToggle={() => toggleTodo(1)} />
-                    <TodoCard visible={todos[2].visible} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} badgeTone={todos[2].badgeTone} onToggle={() => toggleTodo(2)} />
-                    <TodoCard visible={todos[3].visible} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} badgeTone={todos[3].badgeTone} onToggle={() => toggleTodo(3)} />
-                    <TodoCard visible={todos[4].visible} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} badgeTone={todos[4].badgeTone} onToggle={() => toggleTodo(4)} />
-                    <TodoCard visible={todos[5].visible} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} badgeTone={todos[5].badgeTone} onToggle={() => toggleTodo(5)} />
-                    <TodoCard visible={todos[6].visible} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} badgeTone={todos[6].badgeTone} onToggle={() => toggleTodo(6)} />
-                    <TodoCard visible={todos[7].visible} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} badgeTone={todos[7].badgeTone} onToggle={() => toggleTodo(7)} />
+                    <TodoCard cardStyle={todos[0].visible ? "" : "display:none;"} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} accentStyle={todos[0].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[0].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[0].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[0].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[0].caption == "" ? "display:none;" : (todos[0].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[0].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(0)} />
+                    <TodoCard cardStyle={todos[1].visible ? "" : "display:none;"} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} accentStyle={todos[1].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[1].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[1].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[1].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[1].caption == "" ? "display:none;" : (todos[1].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[1].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(1)} />
+                    <TodoCard cardStyle={todos[2].visible ? "" : "display:none;"} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} accentStyle={todos[2].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[2].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[2].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[2].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[2].caption == "" ? "display:none;" : (todos[2].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[2].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(2)} />
+                    <TodoCard cardStyle={todos[3].visible ? "" : "display:none;"} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} accentStyle={todos[3].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[3].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[3].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[3].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[3].caption == "" ? "display:none;" : (todos[3].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[3].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(3)} />
+                    <TodoCard cardStyle={todos[4].visible ? "" : "display:none;"} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} accentStyle={todos[4].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[4].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[4].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[4].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[4].caption == "" ? "display:none;" : (todos[4].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[4].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(4)} />
+                    <TodoCard cardStyle={todos[5].visible ? "" : "display:none;"} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} accentStyle={todos[5].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[5].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[5].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[5].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[5].caption == "" ? "display:none;" : (todos[5].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[5].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(5)} />
+                    <TodoCard cardStyle={todos[6].visible ? "" : "display:none;"} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} accentStyle={todos[6].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[6].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[6].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[6].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[6].caption == "" ? "display:none;" : (todos[6].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[6].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(6)} />
+                    <TodoCard cardStyle={todos[7].visible ? "" : "display:none;"} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} accentStyle={todos[7].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[7].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[7].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[7].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[7].caption == "" ? "display:none;" : (todos[7].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[7].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(7)} />
+                    <TodoCard cardStyle={todos[8].visible ? "" : "display:none;"} done={todos[8].done} title={todos[8].title} caption={todos[8].caption} note={todos[8].note} badgeLabel={todos[8].badgeLabel} accentStyle={todos[8].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[8].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[8].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[8].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[8].caption == "" ? "display:none;" : (todos[8].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[8].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(8)} />
+                    <TodoCard cardStyle={todos[9].visible ? "" : "display:none;"} done={todos[9].done} title={todos[9].title} caption={todos[9].caption} note={todos[9].note} badgeLabel={todos[9].badgeLabel} accentStyle={todos[9].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[9].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[9].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[9].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[9].caption == "" ? "display:none;" : (todos[9].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[9].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(9)} />
+                    <TodoCard cardStyle={todos[10].visible ? "" : "display:none;"} done={todos[10].done} title={todos[10].title} caption={todos[10].caption} note={todos[10].note} badgeLabel={todos[10].badgeLabel} accentStyle={todos[10].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[10].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[10].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[10].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[10].caption == "" ? "display:none;" : (todos[10].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[10].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(10)} />
+                    <TodoCard cardStyle={todos[11].visible ? "" : "display:none;"} done={todos[11].done} title={todos[11].title} caption={todos[11].caption} note={todos[11].note} badgeLabel={todos[11].badgeLabel} accentStyle={todos[11].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[11].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[11].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[11].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[11].caption == "" ? "display:none;" : (todos[11].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[11].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(11)} />
+                    <TodoCard cardStyle={todos[12].visible ? "" : "display:none;"} done={todos[12].done} title={todos[12].title} caption={todos[12].caption} note={todos[12].note} badgeLabel={todos[12].badgeLabel} accentStyle={todos[12].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[12].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[12].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[12].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[12].caption == "" ? "display:none;" : (todos[12].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[12].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(12)} />
+                    <TodoCard cardStyle={todos[13].visible ? "" : "display:none;"} done={todos[13].done} title={todos[13].title} caption={todos[13].caption} note={todos[13].note} badgeLabel={todos[13].badgeLabel} accentStyle={todos[13].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[13].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[13].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[13].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[13].caption == "" ? "display:none;" : (todos[13].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[13].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(13)} />
+                    <TodoCard cardStyle={todos[14].visible ? "" : "display:none;"} done={todos[14].done} title={todos[14].title} caption={todos[14].caption} note={todos[14].note} badgeLabel={todos[14].badgeLabel} accentStyle={todos[14].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[14].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[14].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[14].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[14].caption == "" ? "display:none;" : (todos[14].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[14].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(14)} />
+                    <TodoCard cardStyle={todos[15].visible ? "" : "display:none;"} done={todos[15].done} title={todos[15].title} caption={todos[15].caption} note={todos[15].note} badgeLabel={todos[15].badgeLabel} accentStyle={todos[15].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[15].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[15].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[15].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[15].caption == "" ? "display:none;" : (todos[15].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[15].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(15)} />
                 </div>
             </TabPanel>
             <TabPanel style={active == 1 ? "" : "display:none;"}>
                 <div class="todo-list">
-                    <TodoCard visible={todos[0].visible && todos[0].today && !todos[0].done} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} badgeTone={todos[0].badgeTone} onToggle={() => toggleTodo(0)} />
-                    <TodoCard visible={todos[1].visible && todos[1].today && !todos[1].done} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} badgeTone={todos[1].badgeTone} onToggle={() => toggleTodo(1)} />
-                    <TodoCard visible={todos[2].visible && todos[2].today && !todos[2].done} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} badgeTone={todos[2].badgeTone} onToggle={() => toggleTodo(2)} />
-                    <TodoCard visible={todos[3].visible && todos[3].today && !todos[3].done} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} badgeTone={todos[3].badgeTone} onToggle={() => toggleTodo(3)} />
-                    <TodoCard visible={todos[4].visible && todos[4].today && !todos[4].done} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} badgeTone={todos[4].badgeTone} onToggle={() => toggleTodo(4)} />
-                    <TodoCard visible={todos[5].visible && todos[5].today && !todos[5].done} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} badgeTone={todos[5].badgeTone} onToggle={() => toggleTodo(5)} />
-                    <TodoCard visible={todos[6].visible && todos[6].today && !todos[6].done} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} badgeTone={todos[6].badgeTone} onToggle={() => toggleTodo(6)} />
-                    <TodoCard visible={todos[7].visible && todos[7].today && !todos[7].done} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} badgeTone={todos[7].badgeTone} onToggle={() => toggleTodo(7)} />
+                    <TodoCard cardStyle={todos[0].visible && todos[0].today && !todos[0].done ? "" : "display:none;"} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} accentStyle={todos[0].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[0].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[0].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[0].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[0].caption == "" ? "display:none;" : (todos[0].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[0].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(0)} />
+                    <TodoCard cardStyle={todos[1].visible && todos[1].today && !todos[1].done ? "" : "display:none;"} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} accentStyle={todos[1].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[1].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[1].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[1].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[1].caption == "" ? "display:none;" : (todos[1].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[1].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(1)} />
+                    <TodoCard cardStyle={todos[2].visible && todos[2].today && !todos[2].done ? "" : "display:none;"} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} accentStyle={todos[2].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[2].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[2].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[2].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[2].caption == "" ? "display:none;" : (todos[2].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[2].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(2)} />
+                    <TodoCard cardStyle={todos[3].visible && todos[3].today && !todos[3].done ? "" : "display:none;"} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} accentStyle={todos[3].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[3].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[3].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[3].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[3].caption == "" ? "display:none;" : (todos[3].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[3].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(3)} />
+                    <TodoCard cardStyle={todos[4].visible && todos[4].today && !todos[4].done ? "" : "display:none;"} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} accentStyle={todos[4].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[4].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[4].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[4].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[4].caption == "" ? "display:none;" : (todos[4].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[4].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(4)} />
+                    <TodoCard cardStyle={todos[5].visible && todos[5].today && !todos[5].done ? "" : "display:none;"} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} accentStyle={todos[5].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[5].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[5].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[5].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[5].caption == "" ? "display:none;" : (todos[5].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[5].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(5)} />
+                    <TodoCard cardStyle={todos[6].visible && todos[6].today && !todos[6].done ? "" : "display:none;"} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} accentStyle={todos[6].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[6].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[6].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[6].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[6].caption == "" ? "display:none;" : (todos[6].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[6].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(6)} />
+                    <TodoCard cardStyle={todos[7].visible && todos[7].today && !todos[7].done ? "" : "display:none;"} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} accentStyle={todos[7].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[7].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[7].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[7].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[7].caption == "" ? "display:none;" : (todos[7].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[7].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(7)} />
+                    <TodoCard cardStyle={todos[8].visible && todos[8].today && !todos[8].done ? "" : "display:none;"} done={todos[8].done} title={todos[8].title} caption={todos[8].caption} note={todos[8].note} badgeLabel={todos[8].badgeLabel} accentStyle={todos[8].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[8].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[8].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[8].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[8].caption == "" ? "display:none;" : (todos[8].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[8].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(8)} />
+                    <TodoCard cardStyle={todos[9].visible && todos[9].today && !todos[9].done ? "" : "display:none;"} done={todos[9].done} title={todos[9].title} caption={todos[9].caption} note={todos[9].note} badgeLabel={todos[9].badgeLabel} accentStyle={todos[9].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[9].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[9].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[9].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[9].caption == "" ? "display:none;" : (todos[9].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[9].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(9)} />
+                    <TodoCard cardStyle={todos[10].visible && todos[10].today && !todos[10].done ? "" : "display:none;"} done={todos[10].done} title={todos[10].title} caption={todos[10].caption} note={todos[10].note} badgeLabel={todos[10].badgeLabel} accentStyle={todos[10].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[10].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[10].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[10].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[10].caption == "" ? "display:none;" : (todos[10].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[10].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(10)} />
+                    <TodoCard cardStyle={todos[11].visible && todos[11].today && !todos[11].done ? "" : "display:none;"} done={todos[11].done} title={todos[11].title} caption={todos[11].caption} note={todos[11].note} badgeLabel={todos[11].badgeLabel} accentStyle={todos[11].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[11].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[11].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[11].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[11].caption == "" ? "display:none;" : (todos[11].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[11].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(11)} />
+                    <TodoCard cardStyle={todos[12].visible && todos[12].today && !todos[12].done ? "" : "display:none;"} done={todos[12].done} title={todos[12].title} caption={todos[12].caption} note={todos[12].note} badgeLabel={todos[12].badgeLabel} accentStyle={todos[12].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[12].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[12].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[12].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[12].caption == "" ? "display:none;" : (todos[12].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[12].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(12)} />
+                    <TodoCard cardStyle={todos[13].visible && todos[13].today && !todos[13].done ? "" : "display:none;"} done={todos[13].done} title={todos[13].title} caption={todos[13].caption} note={todos[13].note} badgeLabel={todos[13].badgeLabel} accentStyle={todos[13].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[13].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[13].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[13].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[13].caption == "" ? "display:none;" : (todos[13].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[13].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(13)} />
+                    <TodoCard cardStyle={todos[14].visible && todos[14].today && !todos[14].done ? "" : "display:none;"} done={todos[14].done} title={todos[14].title} caption={todos[14].caption} note={todos[14].note} badgeLabel={todos[14].badgeLabel} accentStyle={todos[14].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[14].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[14].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[14].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[14].caption == "" ? "display:none;" : (todos[14].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[14].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(14)} />
+                    <TodoCard cardStyle={todos[15].visible && todos[15].today && !todos[15].done ? "" : "display:none;"} done={todos[15].done} title={todos[15].title} caption={todos[15].caption} note={todos[15].note} badgeLabel={todos[15].badgeLabel} accentStyle={todos[15].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[15].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[15].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[15].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[15].caption == "" ? "display:none;" : (todos[15].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[15].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(15)} />
                 </div>
             </TabPanel>
             <TabPanel style={active == 2 ? "" : "display:none;"}>
                 <div class="todo-list">
-                    <TodoCard visible={todos[0].visible && todos[0].done} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} badgeTone={todos[0].badgeTone} onToggle={() => toggleTodo(0)} />
-                    <TodoCard visible={todos[1].visible && todos[1].done} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} badgeTone={todos[1].badgeTone} onToggle={() => toggleTodo(1)} />
-                    <TodoCard visible={todos[2].visible && todos[2].done} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} badgeTone={todos[2].badgeTone} onToggle={() => toggleTodo(2)} />
-                    <TodoCard visible={todos[3].visible && todos[3].done} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} badgeTone={todos[3].badgeTone} onToggle={() => toggleTodo(3)} />
-                    <TodoCard visible={todos[4].visible && todos[4].done} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} badgeTone={todos[4].badgeTone} onToggle={() => toggleTodo(4)} />
-                    <TodoCard visible={todos[5].visible && todos[5].done} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} badgeTone={todos[5].badgeTone} onToggle={() => toggleTodo(5)} />
-                    <TodoCard visible={todos[6].visible && todos[6].done} done={todos[6].done} title={todos[6].title} caption={todos[6].caption} note={todos[6].note} badgeLabel={todos[6].badgeLabel} badgeTone={todos[6].badgeTone} onToggle={() => toggleTodo(6)} />
-                    <TodoCard visible={todos[7].visible && todos[7].done} done={todos[7].done} title={todos[7].title} caption={todos[7].caption} note={todos[7].note} badgeLabel={todos[7].badgeLabel} badgeTone={todos[7].badgeTone} onToggle={() => toggleTodo(7)} />
+                    <TodoCard visible={todos[0].visible && todos[0].done} done={todos[0].done} title={todos[0].title} caption={todos[0].caption} note={todos[0].note} badgeLabel={todos[0].badgeLabel} accentStyle={todos[0].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[0].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[0].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[0].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[0].caption == "" ? "display:none;" : (todos[0].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[0].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(0)} />
+                    <TodoCard visible={todos[1].visible && todos[1].done} done={todos[1].done} title={todos[1].title} caption={todos[1].caption} note={todos[1].note} badgeLabel={todos[1].badgeLabel} accentStyle={todos[1].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[1].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[1].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[1].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[1].caption == "" ? "display:none;" : (todos[1].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[1].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(1)} />
+                    <TodoCard visible={todos[2].visible && todos[2].done} done={todos[2].done} title={todos[2].title} caption={todos[2].caption} note={todos[2].note} badgeLabel={todos[2].badgeLabel} accentStyle={todos[2].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[2].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[2].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[2].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[2].caption == "" ? "display:none;" : (todos[2].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[2].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(2)} />
+                    <TodoCard visible={todos[3].visible && todos[3].done} done={todos[3].done} title={todos[3].title} caption={todos[3].caption} note={todos[3].note} badgeLabel={todos[3].badgeLabel} accentStyle={todos[3].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[3].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[3].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[3].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[3].caption == "" ? "display:none;" : (todos[3].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[3].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(3)} />
+                    <TodoCard visible={todos[4].visible && todos[4].done} done={todos[4].done} title={todos[4].title} caption={todos[4].caption} note={todos[4].note} badgeLabel={todos[4].badgeLabel} accentStyle={todos[4].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[4].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[4].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[4].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[4].caption == "" ? "display:none;" : (todos[4].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[4].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(4)} />
+                    <TodoCard visible={todos[5].visible && todos[5].done} done={todos[5].done} title={todos[5].title} caption={todos[5].caption} note={todos[5].note} badgeLabel={todos[5].badgeLabel} accentStyle={todos[5].badgeTone == "accent" ? "" : "display:none;"} successStyle={todos[5].badgeTone == "success" ? "" : "display:none;"} chipAccentStyle={todos[5].badgeTone == "chipAccent" ? "" : "display:none;"} plainStyle={todos[5].badgeTone == "plain" ? "" : "display:none;"} captionStyle={todos[5].caption == "" ? "display:none;" : (todos[5].done ? "text-decoration:line-through;opacity:0.5;" : "")} noteStyle={todos[5].done ? "text-decoration:line-through;opacity:0.5;" : ""} onToggle={() => toggleTodo(5)} />
                 </div>
             </TabPanel>
         </Tabs>
@@ -784,8 +785,8 @@ func DemoTodoPage(page : &mut HtmlPage) {
         .todo-hero p { margin: 0; color: #d8def7; }
         .todo-action-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
         .todo-stack { display: grid; gap: 1rem; }
-        .todo-summary-card { display: grid; gap: 0.4rem; }
-        .todo-capture-card { display: grid; gap: 0.55rem; }
+        .todo-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+        .todo-capture-card { border-radius: 22px; background: var(--chx-surface); }
         .todo-capture-row { display: grid; grid-template-columns: 1fr auto; gap: 0.75rem; align-items: center; }
         .todo-list { display: grid; gap: 0.8rem; margin-top: 1rem; }
         .todo-item-card { border-radius: 22px; background: var(--chx-surface); }
@@ -798,19 +799,10 @@ func DemoTodoPage(page : &mut HtmlPage) {
             <div class="todo-phone-shell demo-focus">
                 <div class="todo-phone-inner">
                     <div class="todo-topbar">
-                        <a href="demo.html" class="back-link">Back to Demo</a>
+                        <Link href="demo.html" class="back-link">Back to Demo</Link>
                         <BadgeAccent>TaskFlow</BadgeAccent>
                     </div>
-                    <div class="todo-hero">
-                        <div class="todo-action-row"><ChipAccent>Focus mode</ChipAccent><ChipSuccess>In memory</ChipSuccess></div>
-                        <h1>Your day, trimmed to the essentials.</h1>
-                        <p>TaskFlow is a compact todo app demo that uses the same component set, but in a phone UI instead of a landing page shell.</p>
-                        <div class="todo-action-row"><ButtonPrimary>New task</ButtonPrimary><ButtonGhost>Share list</ButtonGhost></div>
-                    </div>
                     <TodoAppShowcase />
-                    <div class="todo-bottom">
-                        <BottomBar><IconButton><Icon>H</Icon></IconButton><IconButton><Icon>L</Icon></IconButton><Fab><Icon>+</Icon>New</Fab><IconButton><Icon>S</Icon></IconButton><IconButton><Icon>U</Icon></IconButton></BottomBar>
-                    </div>
                 </div>
             </div>
         </div>
