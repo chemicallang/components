@@ -20,3 +20,88 @@ func SocialFooter(page : &mut HtmlPage) {
         </footer>
     }
 }
+
+func demo_site_footer_styles(page : &mut HtmlPage) : *char {
+    #css {
+        .demo-site-footer {
+            margin-top: 2rem;
+            padding: 2.2rem;
+            border-radius: 28px;
+            border: 1px solid var(--chx-border);
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.28));
+            box-shadow: var(--chx-shadow-sm);
+            display: grid;
+            gap: 1.2rem;
+        }
+        .demo-site-footer-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: start;
+        }
+        .demo-site-footer-copy {
+            display: grid;
+            gap: 0.45rem;
+        }
+        .demo-site-footer-copy p {
+            margin: 0;
+            color: var(--chx-text-muted);
+            max-width: 620px;
+        }
+        .demo-site-footer-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .demo-site-footer-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.85rem;
+        }
+        .demo-site-footer-stat {
+            padding: 0.95rem 1rem;
+            border-radius: 18px;
+            border: 1px solid var(--chx-border);
+            background: rgba(255, 255, 255, 0.52);
+        }
+        .demo-site-footer-stat strong {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 1rem;
+        }
+        .demo-site-footer-note {
+            margin: 0;
+            color: var(--chx-text-muted);
+            font-size: 0.92rem;
+        }
+    }
+    page.append_css_view("""
+        @media (max-width: 960px) {
+            .demo-site-footer-head, .demo-site-footer-meta { grid-template-columns: 1fr; display: grid; }
+        }
+    """);
+    return "";
+}
+
+public #universal DemoSiteFooter(props) {
+    ${demo_site_footer_styles(page)}
+    return <footer class={"demo-site-footer " + props.variant}>
+            <div class="demo-site-footer-head">
+                <div class="demo-site-footer-copy">
+                    <Caption>{props.eyebrow}</Caption>
+                    <H3>{props.title}</H3>
+                    <p>{props.summary}</p>
+                </div>
+                <div class="demo-site-footer-actions">
+                    <ButtonPrimary>{props.ctaPrimary}</ButtonPrimary>
+                    <ButtonGhost>{props.ctaSecondary}</ButtonGhost>
+                </div>
+            </div>
+            <div class="demo-site-footer-meta">
+                <div class="demo-site-footer-stat"><Caption>Using</Caption><strong>Shared components</strong></div>
+                <div class="demo-site-footer-stat"><Caption>Theme scope</Caption><strong>{props.variant}</strong></div>
+                <div class="demo-site-footer-stat"><Caption>Focus</Caption><strong>{props.eyebrow}</strong></div>
+            </div>
+            <p class="demo-site-footer-note">{props.note}</p>
+        </footer>
+}

@@ -256,7 +256,7 @@ func DemoStudioPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: radial-gradient(circle at top right, rgba(255, 122, 89, 0.12), transparent 22%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 2rem; }
         .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 1.4rem; align-items: center; }
         .hero-copy { display: grid; gap: 1rem; }
@@ -272,12 +272,15 @@ func DemoStudioPage(page : &mut HtmlPage) {
         .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
         .project-card { min-height: 220px; display: grid; align-content: end; border-radius: 24px; padding: 1.2rem; color: #fff; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.55)), linear-gradient(135deg, #6d28d9, #fb7185); }
         .project-card.alt { background: linear-gradient(180deg, transparent, rgba(0,0,0,0.45)), linear-gradient(135deg, #fb7185, #f59e0b); }
+        .quote-strip { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 1rem; align-items: stretch; }
+        .quote-panel { padding: 1.4rem; border-radius: 24px; border: 1px solid rgba(37, 22, 70, 0.14); background: rgba(255, 247, 237, 0.72); }
+        .quote-panel blockquote { margin: 0; font-size: 1.35rem; line-height: 1.2; font-weight: 700; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
     }
 
 page.append_css_view("""
     @media (max-width: 960px) {
-        .hero-grid, .section-grid, .project-grid { grid-template-columns: 1fr; }
+        .hero-grid, .section-grid, .project-grid, .quote-strip { grid-template-columns: 1fr; }
         .hero-copy h1 { font-size: 3.2rem; }
     }
 """)
@@ -312,11 +315,15 @@ page.append_css_view("""
                     </div>
                     <div class="section-title"><h2>Recent work</h2><ButtonGhost>All projects</ButtonGhost></div>
                     <div class="project-grid"><div class="project-card"><Caption>Orbit</Caption><H3>Launch identity for an infra team</H3></div><div class="project-card alt"><Caption>Relay</Caption><H3>Editorial landing page for a product narrative shift</H3></div></div>
+                    <div class="quote-strip">
+                        <div class="quote-panel"><Caption>Client note</Caption><blockquote>"Northstar gave us a story the whole product team could actually use."</blockquote></div>
+                        <Paper><Caption>Engagement rhythm</Caption><List style="margin-top:0.8rem;"><ListItem>Week 1: strategy and audience reset</ListItem><ListItem>Week 2: voice, visuals, launch system</ListItem><ListItem>Week 3+: rollout support across site and product</ListItem></List></Paper>
+                    </div>
+                    <DemoSiteFooter variant="demo-aurora" eyebrow="Editorial studio" title="Need a sharper launch surface?" summary="Northstar closes with a studio-style footer instead of the generic product demo footer so the page reads like a real agency site." ctaPrimary="Book an intro" ctaSecondary="Request pricing" note="This footer intentionally keeps the same primitives but changes the tone, copy, and information architecture for a studio client flow." />
                 </div>
             </div>
         </div>
     }
-    SocialFooter(page)
     SetupThemeScript(page)
 }
 
@@ -331,19 +338,21 @@ func DemoClinicPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: linear-gradient(180deg, rgba(20, 184, 166, 0.08), transparent 22%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.4rem; }
         .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 1rem; }
         .hero-copy h1 { margin: 0; font-size: 3.2rem; letter-spacing: -0.04em; }
         .hero-copy p { margin: 0.8rem 0 0 0; color: var(--chx-text-muted); max-width: 640px; }
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
         .content-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem; }
+        .care-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
+        .care-pill { padding: 0.9rem 1rem; border-radius: 18px; border: 1px solid var(--chx-border); background: rgba(255, 255, 255, 0.62); }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
     }
 
 page.append_css_view("""
     @media (max-width: 960px) {
-        .hero-grid, .stats-grid, .content-grid { grid-template-columns: 1fr; }
+        .hero-grid, .stats-grid, .content-grid, .care-strip { grid-template-columns: 1fr; }
     }
 """)
 
@@ -362,6 +371,12 @@ page.append_css_view("""
                         <Paper><Caption>Today</Caption><List style="margin-top:0.8rem;"><ListItem>Walk-in primary care</ListItem><ListItem>Pediatrics until 6 PM</ListItem><ListItem>Telehealth refill checks</ListItem></List></Paper>
                     </div>
                     <AlertSuccess><div><AlertTitle>Care team online</AlertTitle><AlertBody>Average telehealth wait is 12 minutes and lab review slots are open for the evening.</AlertBody></div></AlertSuccess>
+                    <div class="care-strip">
+                        <div class="care-pill"><Caption>Primary care</Caption><Text>Walk-ins open until 5 PM</Text></div>
+                        <div class="care-pill"><Caption>Pediatrics</Caption><Text>Same-day slots available</Text></div>
+                        <div class="care-pill"><Caption>Labs</Caption><Text>Review window starts at 4 PM</Text></div>
+                        <div class="care-pill"><Caption>Telehealth</Caption><Text>Average queue: 12 minutes</Text></div>
+                    </div>
                     <div class="stats-grid">
                         <StatCard><Caption>Clinicians today</Caption><H2>8</H2><ChipSuccess>Staffed</ChipSuccess></StatCard>
                         <StatCard><Caption>Average wait</Caption><H2>12 min</H2><ChipAccent>Low</ChipAccent></StatCard>
@@ -374,11 +389,11 @@ page.append_css_view("""
                         </Paper>
                         <Drawer><H3>Care team</H3><Text>Speak with a clinician, care navigator, or pharmacist depending on what you need next.</Text><Menu><MenuItem href="#">Primary care</MenuItem><MenuItem href="#">Pediatrics</MenuItem><MenuItem href="#">Follow-up review</MenuItem></Menu></Drawer>
                     </div>
+                    <DemoSiteFooter variant="demo-serene" eyebrow="Community clinic" title="Care that ends with clear next steps" summary="Harbor Health now finishes with a clinic-specific footer that feels operational and patient-facing instead of dropping back into the generic Chemical marketing footer." ctaPrimary="Book an appointment" ctaSecondary="Call front desk" note="The footer copy, CTA language, and supporting metadata are tuned for a healthcare service surface rather than a component-library landing page." />
                 </div>
             </div>
         </div>
     }
-    SocialFooter(page)
     SetupThemeScript(page)
 }
 
@@ -393,7 +408,7 @@ func DemoShopPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: radial-gradient(circle at top left, rgba(217, 119, 6, 0.12), transparent 24%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.5rem; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.2rem; align-items: center; }
@@ -408,11 +423,13 @@ func DemoShopPage(page : &mut HtmlPage) {
         .section-title { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
         .section-title h2 { margin: 0; font-size: 2rem; }
         .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .shelf-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
+        .shelf-card { min-height: 140px; padding: 1rem; border-radius: 20px; border: 1px solid var(--chx-border); background: linear-gradient(180deg, rgba(255,255,255,0.58), rgba(239,232,217,0.92)); display: grid; align-content: end; }
     }
 
 page.append_css_view("""
     @media (max-width: 960px) {
-        .hero-grid, .catalog-grid, .story-grid { grid-template-columns: 1fr; }
+        .hero-grid, .catalog-grid, .story-grid, .shelf-strip { grid-template-columns: 1fr; }
         .hero-copy h1 { font-size: 3rem; }
     }
 """)
@@ -441,6 +458,12 @@ page.append_css_view("""
                     </div>
 
                     <div class="section-title"><h2>Featured gear</h2><Text>Compact product cards, quick purchase actions, and catalog surfaces.</Text></div>
+                    <div class="shelf-strip">
+                        <div class="shelf-card"><Caption>Roast notes</Caption><H3>Berry / cacao</H3></div>
+                        <div class="shelf-card"><Caption>Material</Caption><H3>Steel burrs</H3></div>
+                        <div class="shelf-card"><Caption>Field use</Caption><H3>Pack-friendly</H3></div>
+                        <div class="shelf-card"><Caption>Drop window</Caption><H3>Ends Friday</H3></div>
+                    </div>
                     <div class="catalog-grid">
                         <Card style="display:grid;gap:0.9rem;">
                             <div class="product-art"></div>
@@ -472,11 +495,11 @@ page.append_css_view("""
                             <Card style="margin-top:1rem;"><CardBody><Caption>Member price</Caption><H2>$36</H2><Text>Pause or skip any month after the first shipment.</Text></CardBody><CardFooter><ButtonPrimary>Join the drop</ButtonPrimary></CardFooter></Card>
                         </Paper>
                     </div>
+                    <DemoSiteFooter variant="demo-market" eyebrow="Commerce launch" title="The catalog keeps selling after the hero" summary="Field Goods now lands on a merchandising-style footer with commerce language and next-step actions that fit the store rather than the demo site." ctaPrimary="Browse all gear" ctaSecondary="Join the roast drop" note="This makes the shop demo feel less like a themed landing page and more like a compact retail homepage built out of shared primitives." />
                 </div>
             </div>
         </div>
     }
-    SocialFooter(page)
     SetupThemeScript(page)
 }
 
@@ -491,7 +514,7 @@ func DemoRetreatPage(page : &mut HtmlPage) {
 
     #css {
         .site-page { margin-left : 0; margin-right : 0; width : 100%; }
-        .site-shell { padding-top : 64px; background: var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); border-radius: 32px; overflow: hidden; box-shadow: var(--chx-shadow-lg); }
+        .site-shell { padding-top : 64px; background: linear-gradient(180deg, rgba(14, 165, 233, 0.10), transparent 24%), var(--chx-bg); color: var(--chx-text-main); font-family: {"var(--chx-font)"}; border: 1px solid var(--chx-border); overflow: hidden; box-shadow: var(--chx-shadow-lg); }
         .site-inner { padding: 2rem; display: grid; gap: 1.5rem; }
         .back-link { color: var(--chx-text-muted); text-decoration: none; font-weight: 600; }
         .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 1.2rem; align-items: stretch; }
@@ -504,11 +527,13 @@ func DemoRetreatPage(page : &mut HtmlPage) {
         .plan-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 1rem; }
         .itinerary-list { display: grid; gap: 0.8rem; }
         .itinerary-item { padding: 0.95rem 1rem; border-radius: 18px; border: 1px solid var(--chx-border); background: rgba(255,255,255,0.5); }
+        .amenity-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
+        .amenity-card { padding: 1rem; border-radius: 20px; border: 1px solid var(--chx-border); background: rgba(255,255,255,0.52); }
     }
 
 page.append_css_view("""
     @media (max-width: 960px) {
-        .hero-grid, .stats-grid, .plan-grid { grid-template-columns: 1fr; }
+        .hero-grid, .stats-grid, .plan-grid, .amenity-strip { grid-template-columns: 1fr; }
         .hero-copy h1 { font-size: 3rem; }
     }
 """)
@@ -538,6 +563,12 @@ page.append_css_view("""
                         <StatCard><Caption>Travel time</Caption><H2>4 hrs</H2><ChipAccent>Road trip</ChipAccent></StatCard>
                         <StatCard><Caption>Team size</Caption><H2>6-10</H2><Chip>Private group</Chip></StatCard>
                     </div>
+                    <div class="amenity-strip">
+                        <div class="amenity-card"><Caption>Morning</Caption><Text>Open water swim and quiet breakfast</Text></div>
+                        <div class="amenity-card"><Caption>Work block</Caption><Text>Guided planning session with notes</Text></div>
+                        <div class="amenity-card"><Caption>Afternoon</Caption><Text>Beach time or boat trip</Text></div>
+                        <div class="amenity-card"><Caption>Evening</Caption><Text>Family-style dinner under open sky</Text></div>
+                    </div>
 
                     <div class="plan-grid">
                         <Paper>
@@ -556,10 +587,10 @@ page.append_css_view("""
                             <ButtonPrimary>Request a date</ButtonPrimary>
                         </EmptyState>
                     </div>
+                    <DemoSiteFooter variant="demo-escape" eyebrow="Coastal retreat" title="End on a booking moment, not a framework footer" summary="Blueway now closes like a hospitality page with trip-planning language and booking actions, which fits the site better than the shared Chemical footer." ctaPrimary="Reserve a cabin" ctaSecondary="Request itinerary" note="The retreat demo now has its own closing section so it reads like a travel product instead of a themed component showcase." />
                 </div>
             </div>
         </div>
     }
-    SocialFooter(page)
     SetupThemeScript(page)
 }
