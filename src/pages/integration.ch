@@ -1,3 +1,11 @@
+func counter_btn_styles(page : &mut HtmlPage) : *char {
+    return #css {
+        padding: 0.75rem 2rem; border-radius: 12px; border: none; font-weight: 700;
+        background: linear-gradient(135deg, #00d4ff, #9130ff); color: #fff;
+        box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); letter-spacing: 0.05em;
+    }
+}
+
 #react ReactCounter(props) {
     var [count, setCount] = useState(0)
     return (
@@ -5,7 +13,7 @@
             <h3 style={{ color: '#61dafb', marginBottom: '1.5rem' }}>React</h3>
             <button
                 onClick={() => setCount((c) => c + 1)}
-                className={props.className}
+                className={props.class}
                 style={{ cursor: 'pointer', transition: 'all 0.2s' }}
             >
                 Count: {count}
@@ -19,7 +27,7 @@
     return (
         <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h3 style={"color: #673ab8; margin-bottom: 1.5rem"}>Preact</h3>
-            <button onClick={() => setCount((c) => c + 1)} className={props.className}>
+            <button onClick={() => setCount((c) => c + 1)} class={props.class}>
                 Count: {count}
             </button>
         </div>
@@ -31,7 +39,7 @@
     return (
         <div style={{ 'text-align': 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', 'border-radius': '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h3 style={"color: #2c4f7c; margin-bottom: 1.5rem"}>Solid</h3>
-            <button onClick={() => setCount((c) => c + 1)} className={props.className}>
+            <button onClick={() => setCount((c) => c + 1)} class={props.class}>
                 Count: {count()}
             </button>
         </div>
@@ -78,9 +86,27 @@
 #solid SolidUniversalCounter(props) {
     return (
         <div style={{ 'text-align': 'center', padding: '2rem', background: 'rgba(255,255,255,0.03)', 'border-radius': '24px', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <h3 style={"color: #2c4f7c; margin-bottom: 1.5rem"}>Solid</h3>
+            <h3 style={"color: #2c4f7c; margin-bottom: 1.5rem"}>Universal in Solid</h3>
             <UniversalCounterCore class={props.class} />
         </div>
+    )
+}
+
+#universal UniversalReactCounter(props) {
+    return (
+        <ReactCounter class={${counter_btn_styles(page)}} />
+    )
+}
+
+#universal UniversalPreactCounter(props) {
+    return (
+        <PreactCounter class={${counter_btn_styles(page)}} />
+    )
+}
+
+#universal UniversalSolidCounter(props) {
+    return (
+        <SolidCounter class={${counter_btn_styles(page)}} />
     )
 }
 
@@ -95,11 +121,7 @@ func IntegrationPage(page : &mut HtmlPage) {
     GlobalStyles(page)
     GlassHeader(page, "integration")
 
-    var btnStyle = #css {
-        padding: 0.75rem 2rem; border-radius: 12px; border: none; font-weight: 700;
-        background: linear-gradient(135deg, #00d4ff, #9130ff); color: #fff;
-        box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); letter-spacing: 0.05em;
-    }
+    var btnStyle = counter_btn_styles(page)
 
     #css {
         .page-header { padding: 12rem 0 4rem; text-align: center; }
@@ -121,13 +143,13 @@ func IntegrationPage(page : &mut HtmlPage) {
 
             <div class="comp-showcase">
                 <div class="comp-item">
-                    <ReactCounter className={btnStyle} />
+                    <ReactCounter class={btnStyle} />
                 </div>
                 <div class="comp-item">
-                    <PreactCounter className={btnStyle} />
+                    <PreactCounter class={btnStyle} />
                 </div>
                 <div class="comp-item">
-                    <SolidCounter className={btnStyle} />
+                    <SolidCounter class={btnStyle} />
                 </div>
                 <div class="comp-item">
                     <UniversalCounter class={btnStyle} />
@@ -148,6 +170,22 @@ func IntegrationPage(page : &mut HtmlPage) {
                 </div>
                 <div class="comp-item">
                     <SolidUniversalCounter class={btnStyle} />
+                </div>
+            </div>
+
+            <div style="max-width:800px;">
+                <p>You can use other framework components in Universal (local prop passing isn't supported, only global props work)</p>
+            </div>
+
+            <div class="comp-showcase">
+                <div class="comp-item">
+                    <UniversalReactCounter />
+                </div>
+                <div class="comp-item">
+                    <UniversalPreactCounter />
+                </div>
+                <div class="comp-item">
+                    <UniversalSolidCounter />
                 </div>
             </div>
 
