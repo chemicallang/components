@@ -1195,6 +1195,7 @@ func renderDrawer(page : &mut HtmlPage) {
 }
 
 func renderMenu(page : &mut HtmlPage) {
+    dropdownInit(page, "dropdown-demo")
     #html {
         <div class="docs-section" id="docs-menu" data-comp="menu">
             <h1 class="docs-component-title">Menu</h1>
@@ -1203,19 +1204,15 @@ func renderMenu(page : &mut HtmlPage) {
                 <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
                 <tbody>
                     <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Menu items</td></tr>
-                    <tr><td class="docs-prop-name">open</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Open state</td></tr>
                 </tbody>
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <div id="menu-demo" style="position:relative;display:inline-block;">
-                    <Button onclick="toggleMenu()" id="menu-trigger">Open Menu</Button>
-                    <Menu id="menu-dropdown" style="display:none;position:absolute;top:100%;left:0;margin-top:0.5rem;z-index:10;">
-                        <MenuItem>Profile</MenuItem>
-                        <MenuItem>Settings</MenuItem>
-                        <MenuItem>Logout</MenuItem>
-                    </Menu>
-                </div>
+                <Dropdown id="dropdown-demo" trigger="Open Menu">
+                    <DropdownItem>Profile</DropdownItem>
+                    <DropdownItem>Settings</DropdownItem>
+                    <DropdownItem>Logout</DropdownItem>
+                </Dropdown>
             </div>
         </div>
     }
@@ -1293,7 +1290,7 @@ func renderSnackbar(page : &mut HtmlPage) {
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
                 <div id="snackbar-demo" style="position:relative;display:flex;flex-direction:column;gap:1rem;align-items:flex-start;">
-                    <Button onclick="showSnackbar()">Show Snackbar</Button>
+                    <Button id="snackbar-trigger">Show Snackbar</Button>
                     <Snackbar id="snackbar-toast" style="display:none;">Item saved successfully!</Snackbar>
                 </div>
             </div>
@@ -1601,22 +1598,26 @@ func SetupComponentNav(page : &mut HtmlPage) {
                 window.addEventListener('hashchange', function() {
                     showComponent(window.location.hash.slice(1) || 'headings');
                 });
-                window.toggleMenu = function() {
-                    var m = document.getElementById('menu-dropdown');
-                    if (m) m.style.display = m.style.display === 'none' ? '' : 'none';
-                };
-                window.showSnackbar = function() {
-                    var s = document.getElementById('snackbar-toast');
-                    if (s) {
-                        s.style.display = '';
-                        setTimeout(function(){ s.style.display = 'none'; }, 3000);
+                document.addEventListener('DOMContentLoaded', function() {
+                    var menuTrigger = document.getElementById('menu-trigger');
+                    var menuDropdown = document.getElementById('menu-dropdown');
+                    if (menuTrigger && menuDropdown) {
+                        menuTrigger.addEventListener('click', function() {
+                            menuDropdown.style.display = menuDropdown.style.display === 'none' ? '' : 'none';
+                        });
+                        document.addEventListener('click', function(e) {
+                            if (!menuTrigger.contains(e.target) && !menuDropdown.contains(e.target)) {
+                                menuDropdown.style.display = 'none';
+                            }
+                        });
                     }
-                };
-                document.addEventListener('click', function(e) {
-                    var m = document.getElementById('menu-dropdown');
-                    var t = document.getElementById('menu-trigger');
-                    if (m && t && !t.contains(e.target) && !m.contains(e.target)) {
-                        m.style.display = 'none';
+                    var snackbarTrigger = document.getElementById('snackbar-trigger');
+                    var snackbarToast = document.getElementById('snackbar-toast');
+                    if (snackbarTrigger && snackbarToast) {
+                        snackbarTrigger.addEventListener('click', function() {
+                            snackbarToast.style.display = '';
+                            setTimeout(function(){ snackbarToast.style.display = 'none'; }, 3000);
+                        });
                     }
                 });
             }());
