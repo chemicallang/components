@@ -107,6 +107,7 @@ func ComponentsDocPage(page : &mut HtmlPage) {
             color: var(--chx-text-muted);
             margin-bottom: 1rem;
         }
+        .tooltip-demo-wrap:hover > span:last-child { opacity: 1; }
     }
 
     #html {
@@ -114,9 +115,7 @@ func ComponentsDocPage(page : &mut HtmlPage) {
                 <nav class="docs-sidebar">
                     <div class="docs-sidebar-group">
                         <div class="docs-sidebar-group-title">Typography</div>
-                        <a href="#h1" class="docs-sidebar-item active" data-comp="h1">H1</a>
-                        <a href="#h2" class="docs-sidebar-item" data-comp="h2">H2</a>
-                        <a href="#h3" class="docs-sidebar-item" data-comp="h3">H3</a>
+                        <a href="#headings" class="docs-sidebar-item active" data-comp="headings">Headings</a>
                         <a href="#text" class="docs-sidebar-item" data-comp="text">Text</a>
                         <a href="#lead" class="docs-sidebar-item" data-comp="lead">Lead</a>
                         <a href="#caption" class="docs-sidebar-item" data-comp="caption">Caption</a>
@@ -205,25 +204,26 @@ func ComponentsDocPage(page : &mut HtmlPage) {
                     </div>
                 </nav>
                 {"""<main class="docs-main">"""}
-                    <div class="docs-section active" id="docs-h1" data-comp="h1">
-                        <h1 class="docs-component-title">H1</h1>
-                        <p class="docs-component-desc">Top-level heading. Renders an h1 element.</p>
+                    <div class="docs-section active" id="docs-headings" data-comp="headings">
+                        <h1 class="docs-component-title">Headings</h1>
+                        <p class="docs-component-desc">Heading levels 1 through 3 for document structure.</p>
                         <table class="docs-props-table">
                             <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
                             <tbody>
                                 <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Heading text</td></tr>
-                                <tr><td class="docs-prop-name">class</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">CSS classes</td></tr>
                             </tbody>
                         </table>
                         <div class="docs-demo-box">
                             <div class="docs-demo-label">Live Demo</div>
                             <H1>Heading Level 1</H1>
+                            <div style="height:0.6rem"></div>
+                            <H2>Heading Level 2</H2>
+                            <div style="height:0.6rem"></div>
+                            <H3>Heading Level 3</H3>
                         </div>
                     </div>
     }
-
-    renderH2(page)
-    renderH3(page)
+    
     renderText(page)
     renderLead(page)
     renderCaption(page)
@@ -290,46 +290,6 @@ func ComponentsDocPage(page : &mut HtmlPage) {
     SocialFooter(page)
     SetupThemeScript(page)
 }
-func renderH2(page : &mut HtmlPage) {
-    #html {
-        <div class="docs-section" id="docs-h2" data-comp="h2">
-            <h1 class="docs-component-title">H2</h1>
-            <p class="docs-component-desc">Second-level heading. Renders an h2 element.</p>
-            <table class="docs-props-table">
-                <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-                <tbody>
-                    <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Heading text</td></tr>
-                    <tr><td class="docs-prop-name">class</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">CSS classes</td></tr>
-                </tbody>
-            </table>
-            <div class="docs-demo-box">
-                <div class="docs-demo-label">Live Demo</div>
-                <H2>Heading Level 2</H2>
-            </div>
-        </div>
-    }
-}
-
-func renderH3(page : &mut HtmlPage) {
-    #html {
-        <div class="docs-section" id="docs-h3" data-comp="h3">
-            <h1 class="docs-component-title">H3</h1>
-            <p class="docs-component-desc">Third-level heading. Renders an h3 element.</p>
-            <table class="docs-props-table">
-                <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-                <tbody>
-                    <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Heading text</td></tr>
-                    <tr><td class="docs-prop-name">class</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">CSS classes</td></tr>
-                </tbody>
-            </table>
-            <div class="docs-demo-box">
-                <div class="docs-demo-label">Live Demo</div>
-                <H3>Heading Level 3</H3>
-            </div>
-        </div>
-    }
-}
-
 func renderText(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-text" data-comp="text">
@@ -607,7 +567,7 @@ func renderIconButton(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <IconButton label="settings">&gt;</IconButton>
+                <IconButton aria-label="settings">&gt;</IconButton>
             </div>
         </div>
     }
@@ -1001,17 +961,44 @@ func renderTabs(page : &mut HtmlPage) {
                 <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
                 <tbody>
                     <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Tab and panel elements</td></tr>
-                    <tr><td class="docs-prop-name">activeTab</td><td class="docs-prop-type">int</td><td class="docs-prop-default">0</td><td class="docs-prop-desc">Active tab index</td></tr>
                 </tbody>
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Tabs>
-                    <Tab label="Tab 1">Panel 1</Tab>
-                    <Tab label="Tab 2">Panel 2</Tab>
-                </Tabs>
+                <div id="tabs-demo">
+                    <TabList>
+                        <Tab data-tab="0" style="background:var(--chx-primary);color:var(--chx-primary-fg);">Tab 1</Tab>
+                        <Tab data-tab="1">Tab 2</Tab>
+                        <Tab data-tab="2">Tab 3</Tab>
+                    </TabList>
+                    <TabPanel data-panel="0">Content for Tab 1 — this panel is visible when Tab 1 is active.</TabPanel>
+                    <TabPanel data-panel="1" style="display:none">Content for Tab 2 — this panel is visible when Tab 2 is active.</TabPanel>
+                    <TabPanel data-panel="2" style="display:none">Content for Tab 3 — this panel is visible when Tab 3 is active.</TabPanel>
+                </div>
             </div>
         </div>
+    }
+    #html {
+        <script>{"""
+            (function(){
+                var root = document.getElementById('tabs-demo');
+                if(!root)return;
+                var btns = root.querySelectorAll('[data-tab]');
+                var panels = root.querySelectorAll('[data-panel]');
+                btns.forEach(function(b, i){
+                    b.addEventListener('click', function(){
+                        btns.forEach(function(x){
+                            x.style.background = '';
+                            x.style.color = '';
+                        });
+                        panels.forEach(function(p){ p.style.display = 'none'; });
+                        b.style.background = 'var(--chx-primary)';
+                        b.style.color = 'var(--chx-primary-fg)';
+                        if(panels[i]) panels[i].style.display = '';
+                    });
+                });
+            })();
+        """}</script>
     }
 }
 
@@ -1030,7 +1017,13 @@ func renderPagination(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Pagination current="1" total="5" />
+                <Pagination>
+                    <PageItem href="#">1</PageItem>
+                    <PageItemActive href="#">2</PageItemActive>
+                    <PageItem href="#">3</PageItem>
+                    <PageItem href="#">4</PageItem>
+                    <PageItem href="#">5</PageItem>
+                </Pagination>
             </div>
         </div>
     }
@@ -1162,9 +1155,13 @@ func renderAppBar(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <div style="position:relative;height:64px;border:1px solid var(--chx-border);border-radius:8px;overflow:hidden;">
-                    <AppBar title="Application" />
-                </div>
+                <AppBar>
+                    <span style="font-weight:700;font-size:1.05rem;">Application</span>
+                    <span style="display:flex;gap:0.75rem;">
+                        <ButtonSm>Home</ButtonSm>
+                        <ButtonSm>Settings</ButtonSm>
+                    </span>
+                </AppBar>
             </div>
         </div>
     }
@@ -1185,7 +1182,13 @@ func renderDrawer(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Drawer open="false">Drawer content</Drawer>
+                <Drawer>
+                    <span style="font-weight:700;padding:0.35rem 0.65rem;font-size:1rem;">Navigation</span>
+                    <MenuItem href="#">Dashboard</MenuItem>
+                    <MenuItem href="#">Orders</MenuItem>
+                    <MenuItem href="#">Customers</MenuItem>
+                    <MenuItem href="#">Settings</MenuItem>
+                </Drawer>
             </div>
         </div>
     }
@@ -1205,11 +1208,12 @@ func renderMenu(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <div style="position:relative;display:inline-block;">
-                    <Menu open="true">
+                <div id="menu-demo" style="position:relative;display:inline-block;">
+                    <Button onclick="toggleMenu()" id="menu-trigger">Open Menu</Button>
+                    <Menu id="menu-dropdown" style="display:none;position:absolute;top:100%;left:0;margin-top:0.5rem;z-index:10;">
                         <MenuItem>Profile</MenuItem>
                         <MenuItem>Settings</MenuItem>
-                        <MenuItem divider>Logout</MenuItem>
+                        <MenuItem>Logout</MenuItem>
                     </Menu>
                 </div>
             </div>
@@ -1233,7 +1237,7 @@ func renderPopover(page : &mut HtmlPage) {
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
                 <div style="position:relative;display:inline-block;">
-                    <Popover open="true" position="bottom">Popover content</Popover>
+                    <Popover>Popover content placed below the trigger area.</Popover>
                 </div>
             </div>
         </div>
@@ -1288,7 +1292,10 @@ func renderSnackbar(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Snackbar>Item saved successfully!</Snackbar>
+                <div id="snackbar-demo" style="position:relative;display:flex;flex-direction:column;gap:1rem;align-items:flex-start;">
+                    <Button onclick="showSnackbar()">Show Snackbar</Button>
+                    <Snackbar id="snackbar-toast" style="display:none;">Item saved successfully!</Snackbar>
+                </div>
             </div>
         </div>
     }
@@ -1309,7 +1316,10 @@ func renderTooltip(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Tooltip text="This is a tooltip"><Button>Hover me</Button></Tooltip>
+                <div style="position:relative;display:inline-block;" class="tooltip-demo-wrap">
+                    <Button>Hover me</Button>
+                    <span style="position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:0.5rem;padding:0.45rem 0.65rem;border-radius:10px;border:1px solid var(--chx-border);background:var(--chx-surface-2);color:var(--chx-text-main);font-size:0.82rem;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.18s ease;">This is a tooltip</span>
+                </div>
             </div>
         </div>
     }
@@ -1522,7 +1532,7 @@ func renderKbd(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd>
+                <span style="display:inline-flex;align-items:center;gap:0.3rem;"><Kbd>Ctrl</Kbd><span style="color:var(--chx-text-muted);font-size:0.9rem;">+</span><Kbd>C</Kbd></span>
             </div>
         </div>
     }
@@ -1573,7 +1583,7 @@ func SetupComponentNav(page : &mut HtmlPage) {
             (function() {
                 var sections = document.querySelectorAll('.docs-section');
                 var sidebarItems = document.querySelectorAll('.docs-sidebar-item');
-                var currentHash = window.location.hash.slice(1) || 'h1';
+                var currentHash = window.location.hash.slice(1) || 'headings';
                 function showComponent(id) {
                     sections.forEach(function(s) { s.classList.remove('active'); });
                     sidebarItems.forEach(function(s) { s.classList.remove('active'); });
@@ -1589,7 +1599,25 @@ func SetupComponentNav(page : &mut HtmlPage) {
                     });
                 });
                 window.addEventListener('hashchange', function() {
-                    showComponent(window.location.hash.slice(1) || 'h1');
+                    showComponent(window.location.hash.slice(1) || 'headings');
+                });
+                window.toggleMenu = function() {
+                    var m = document.getElementById('menu-dropdown');
+                    if (m) m.style.display = m.style.display === 'none' ? '' : 'none';
+                };
+                window.showSnackbar = function() {
+                    var s = document.getElementById('snackbar-toast');
+                    if (s) {
+                        s.style.display = '';
+                        setTimeout(function(){ s.style.display = 'none'; }, 3000);
+                    }
+                };
+                document.addEventListener('click', function(e) {
+                    var m = document.getElementById('menu-dropdown');
+                    var t = document.getElementById('menu-trigger');
+                    if (m && t && !t.contains(e.target) && !m.contains(e.target)) {
+                        m.style.display = 'none';
+                    }
                 });
             }());
         """}</script>
