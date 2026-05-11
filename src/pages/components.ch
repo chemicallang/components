@@ -16,6 +16,10 @@ func ComponentsDocPage(page : &mut HtmlPage) {
             overflow-y: auto;
             position: fixed; top: 64px; left: 0; bottom: 0;
         }
+        .docs-sidebar::-webkit-scrollbar { width: 6px; }
+        .docs-sidebar::-webkit-scrollbar-track { background: transparent; }
+        .docs-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+        .docs-sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
         .docs-sidebar-group { margin-bottom: 1.25rem; }
         .docs-sidebar-group-title {
             padding: 0.4rem 1.25rem;
@@ -462,7 +466,7 @@ func renderButtonPrimary(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Button variant="primary">Primary Button</Button>
+                <ButtonPrimary>Primary Button</ButtonPrimary>
             </div>
         </div>
     }
@@ -482,7 +486,7 @@ func renderButtonGhost(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Button variant="ghost">Ghost Button</Button>
+                <ButtonGhost>Ghost Button</ButtonGhost>
             </div>
         </div>
     }
@@ -502,7 +506,7 @@ func renderButtonOutline(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Button variant="outline">Outline Button</Button>
+                <ButtonOutline>Outline Button</ButtonOutline>
             </div>
         </div>
     }
@@ -522,7 +526,7 @@ func renderButtonDanger(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Button variant="danger">Danger Button</Button>
+                <ButtonDanger>Danger Button</ButtonDanger>
             </div>
         </div>
     }
@@ -542,7 +546,7 @@ func renderButtonSuccess(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Button variant="success">Success Button</Button>
+                <ButtonSuccess>Success Button</ButtonSuccess>
             </div>
         </div>
     }
@@ -562,7 +566,7 @@ func renderButtonSm(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Button size="sm">Small Button</Button>
+                <ButtonSm>Small Button</ButtonSm>
             </div>
         </div>
     }
@@ -582,7 +586,7 @@ func renderButtonLg(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Button size="lg">Large Button</Button>
+                <ButtonLg>Large Button</ButtonLg>
             </div>
         </div>
     }
@@ -708,7 +712,7 @@ func renderInputFilled(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Input variant="filled" placeholder="Filled input..." />
+                <InputFilled placeholder="Filled input..." />
             </div>
         </div>
     }
@@ -728,7 +732,7 @@ func renderInputSuccess(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Input state="success" placeholder="Success input..." />
+                <InputSuccess placeholder="Success input..." />
             </div>
         </div>
     }
@@ -748,7 +752,7 @@ func renderInputError(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Input state="error" placeholder="Error input..." />
+                <InputError placeholder="Error input..." />
             </div>
         </div>
     }
@@ -768,7 +772,7 @@ func renderInputGhost(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Input variant="ghost" placeholder="Ghost input..." />
+                <InputGhost placeholder="Ghost input..." />
             </div>
         </div>
     }
@@ -788,7 +792,7 @@ func renderInputSm(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Input size="sm" placeholder="Small input..." />
+                <InputSm placeholder="Small input..." />
             </div>
         </div>
     }
@@ -808,7 +812,7 @@ func renderInputLg(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Input size="lg" placeholder="Large input..." />
+                <InputLg placeholder="Large input..." />
             </div>
         </div>
     }
@@ -829,7 +833,7 @@ func renderInputDisabled(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Input disabled placeholder="Disabled input..." />
+                <InputDisabled placeholder="Disabled input..." />
             </div>
         </div>
     }
@@ -1245,14 +1249,24 @@ func renderDialog(page : &mut HtmlPage) {
                 <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
                 <tbody>
                     <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Dialog content</td></tr>
-                    <tr><td class="docs-prop-name">open</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Open state</td></tr>
-                    <tr><td class="docs-prop-name">title</td><td class="docs-prop-type">*char</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Dialog title</td></tr>
                 </tbody>
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
                 <div style="position:relative;height:200px;border:1px solid var(--chx-border);border-radius:8px;overflow:hidden;">
-                    <Dialog open="true" title="Dialog Title">This is a dialog with some content.</Dialog>
+                    <Dialog style="position:absolute;">
+                        <DialogBackdrop />
+                        <DialogContent>
+                            <DialogHeader>
+                                <span style="font-weight:700;">Dialog Title</span>
+                            </DialogHeader>
+                            <p style="margin:0;color:var(--chx-text-main);">This is a dialog with some content.</p>
+                            <DialogActions>
+                                <Button>Cancel</Button>
+                                <ButtonPrimary>Confirm</ButtonPrimary>
+                            </DialogActions>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </div>
         </div>
@@ -1384,7 +1398,7 @@ func renderAlertAccent(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Alert variant="accent">This is an accent alert with left border.</Alert>
+                <AlertAccent>This is an accent alert with left border.</AlertAccent>
             </div>
         </div>
     }
@@ -1405,7 +1419,7 @@ func renderAlertSuccess(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Alert variant="success">Operation completed successfully!</Alert>
+                <AlertSuccess>Operation completed successfully!</AlertSuccess>
             </div>
         </div>
     }
@@ -1426,7 +1440,7 @@ func renderAlertError(page : &mut HtmlPage) {
             </table>
             <div class="docs-demo-box">
                 <div class="docs-demo-label">Live Demo</div>
-                <Alert variant="error">Something went wrong. Please try again.</Alert>
+                <AlertError>Something went wrong. Please try again.</AlertError>
             </div>
         </div>
     }
