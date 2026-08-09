@@ -15,12 +15,6 @@ public func main() : int {
     ComponentsDocPage(&mut compPage)
     compPage.writeToDirectory("output", "components", "", "chx-default dark")
 
-    // 4. Integration Page
-    var integration = HtmlPage()
-    IntegrationPage(&mut integration)
-    integration.writeToDirectory("output", "integration", "", "chx-default dark")
-    // printf("%s\n", integration.toString().data());
-
     // 5. Demo Index
     var demo = HtmlPage()
     DemoPage(&mut demo)
