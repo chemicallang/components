@@ -64,6 +64,10 @@ func ComponentsDocPage(page : &mut HtmlPage) {
         .nav-links a.active { color: hsl(var(--foreground)); }
         .nav-links a.active::after { background: hsl(var(--foreground)); }
         .logo { color: hsl(var(--foreground)); }
+        /* NativeSelect option dark mode fix */
+        select { color-scheme: dark; }
+        select option { background: hsl(var(--background)); color: hsl(var(--foreground)); padding: 0.5rem; }
+        select option:disabled { color: hsl(var(--muted-foreground)); opacity: 0.6; }
     }
 
     #html {
@@ -185,7 +189,6 @@ func ComponentsDocPage(page : &mut HtmlPage) {
     renderStatCardComp(page)
 
     SetupComponentNav(page)
-    SetupInteractiveDemos(page)
     SocialFooter(page)
 
     #html {
@@ -261,7 +264,7 @@ func renderText(page : &mut HtmlPage) {
                 <h2>As Element</h2>
                 <p class="docs-subsection-desc">Render as <CodeText>p</CodeText>, <CodeText>span</CodeText>, or <CodeText>div</CodeText> using the <CodeText>as</CodeText> prop.</p>
                 <div class="docs-demo-box">
-                    <div class="docs-demo-grid">
+                    <div class="docs-demo-row" style="gap:1.5rem;">
                         <Text>Default paragraph</Text>
                         <Text as="span">Rendered as span</Text>
                         <Text as="div">Rendered as div</Text>
@@ -823,7 +826,7 @@ func renderDialogComp(page : &mut HtmlPage) {
                 <h2>Basic</h2>
                 <p class="docs-subsection-desc">Click the button below to open a dialog. Press <CodeText>Escape</CodeText> or click the backdrop to close.</p>
                 <div class="docs-demo-box">
-                    <button id="dialog-demo-open" class="rBORTI7" data-variant="default" type="button">Open Dialog</button>
+                    <BasicDialogDemo />
                 </div>
                 <div class="docs-hint" style="margin-top:0.75rem;">Dialog traps focus inside and makes the background inert.</div>
             </div>
@@ -831,47 +834,34 @@ func renderDialogComp(page : &mut HtmlPage) {
                 <h2>Composition</h2>
                 <p class="docs-subsection-desc">Use <CodeText>Dialog</CodeText>, <CodeText>DialogBackdrop</CodeText>, <CodeText>DialogContent</CodeText>, <CodeText>DialogHeader</CodeText>, and <CodeText>DialogActions</CodeText> together.</p>
                 <div class="docs-demo-box">
-                    <div id="dialog-comp-demo">
-                        <Dialog open={false} ariaLabel="Composition demo">
-                            <DialogBackdrop />
-                            <DialogContent>
-                                <DialogHeader><H3>Confirm Action</H3></DialogHeader>
-                                <Text>This is a composition demo. You can customize the content, header, and actions.</Text>
-                                <DialogActions><Button variant="outline">Cancel</Button><Button>Confirm</Button></DialogActions>
-                            </DialogContent>
-                        </Dialog>
-                    </div>
-                    <button id="dialog-comp-open" class="rBORTI7" data-variant="outline" type="button" style="margin-top:1rem;">Open Composition Dialog</button>
+                    <CompositionDialogDemo />
                 </div>
             </div>
             <div class="docs-subsection">
                 <h2>Controlled</h2>
                 <p class="docs-subsection-desc">Use <CodeText>open</CodeText> prop to control visibility from parent state.</p>
                 <div class="docs-demo-box">
-                    <div id="dialog-ctrl-demo">
-                        <Dialog open={false} ariaLabel="Controlled demo">
-                            <DialogBackdrop />
-                            <DialogContent>
-                                <DialogHeader><H3>Controlled Dialog</H3></DialogHeader>
-                                <Text>This dialog's visibility is controlled by JavaScript state.</Text>
-                                <DialogActions><Button>OK</Button></DialogActions>
-                            </DialogContent>
-                        </Dialog>
-                    </div>
-                    <button id="dialog-ctrl-open" class="rBORTI7" data-variant="outline" type="button" style="margin-top:1rem;">Open Controlled Dialog</button>
+                    <ControlledDialogDemo />
                 </div>
             </div>
             <div class="docs-subsection">
                 <h2>Custom Width</h2>
                 <p class="docs-subsection-desc">Set width via inline style on <CodeText>DialogContent</CodeText>.</p>
                 <div class="docs-demo-box">
-                    <button id="dialog-wide-open" class="rBORTI7" data-variant="ghost" type="button">Open Wide Dialog</button>
+                    <WideDialogDemo />
                 </div>
             </div>
             <div class="docs-subsection">
-                <h2>Composition</h2>
+                <h2>Custom Close Button</h2>
+                <p class="docs-subsection-desc">Add an explicit close button inside <CodeText>DialogActions</CodeText>.</p>
                 <div class="docs-demo-box">
-                    <pre style="font-size:0.85rem;color:hsl(var(--muted-foreground));margin:0;"><CodeText>{`<Dialog open={open}>
+                    <CloseButtonDialogDemo />
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Example Code</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-code-block">{`<Dialog open={open}>
     <DialogBackdrop onClick={close} />
     <DialogContent>
         <DialogHeader>
@@ -882,7 +872,7 @@ func renderDialogComp(page : &mut HtmlPage) {
             <Button onClick={close}>Close</Button>
         </DialogActions>
     </DialogContent>
-</Dialog>`}</CodeText></pre>
+</Dialog>`}</div>
                 </div>
             </div>
             <hr class="docs-divider" />
@@ -911,7 +901,7 @@ func renderSheetComp(page : &mut HtmlPage) {
                 <h2>Right (Default)</h2>
                 <p class="docs-subsection-desc">Sheet slides in from the right edge by default. Click the button to open.</p>
                 <div class="docs-demo-box">
-                    <button class="rBORTI7" data-variant="default" type="button" data-sheet-side="right">Open Right Sheet</button>
+                    <SheetSideDemo side="right" label="Open Right Sheet" />
                 </div>
             </div>
             <div class="docs-subsection">
@@ -919,10 +909,10 @@ func renderSheetComp(page : &mut HtmlPage) {
                 <p class="docs-subsection-desc">Use the <CodeText>side</CodeText> prop to choose the edge: left, right, top, or bottom.</p>
                 <div class="docs-demo-box">
                     <div class="docs-demo-row">
-                        <button class="rBORTI7" data-variant="outline" type="button" data-sheet-side="left">Left</button>
-                        <button class="rBORTI7" data-variant="outline" type="button" data-sheet-side="right">Right</button>
-                        <button class="rBORTI7" data-variant="outline" type="button" data-sheet-side="top">Top</button>
-                        <button class="rBORTI7" data-variant="outline" type="button" data-sheet-side="bottom">Bottom</button>
+                        <SheetSideDemo side="left" label="Left" variant="outline" />
+                        <SheetSideDemo side="right" label="Right" variant="outline" />
+                        <SheetSideDemo side="top" label="Top" variant="outline" />
+                        <SheetSideDemo side="bottom" label="Bottom" variant="outline" />
                     </div>
                 </div>
             </div>
@@ -982,7 +972,10 @@ func renderAlertComp(page : &mut HtmlPage) {
                 <h2>Dismissible</h2>
                 <p class="docs-subsection-desc">Use <CodeText>dismissible</CodeText> to add a close button.</p>
                 <div class="docs-demo-box">
-                    <Alert variant="info" dismissible><div><AlertTitle>Dismissible</AlertTitle><AlertDescription>Click X to close this alert.</AlertDescription></div></Alert>
+                    <Alert variant="info" dismissible>
+                        <AlertTitle>Dismissible</AlertTitle>
+                        <AlertDescription>Click the X to close this alert.</AlertDescription>
+                    </Alert>
                 </div>
             </div>
             <hr class="docs-divider" />
@@ -1310,17 +1303,13 @@ func renderPaginationComp(page : &mut HtmlPage) {
 func renderToastComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-toast" data-comp="toast">
-            <h1 class="docs-component-title">Toast</h1>                <p class="docs-component-desc">Notification popup with auto-dismiss, variants, and action buttons.</p>
+            <h1 class="docs-component-title">Toast</h1>
+            <p class="docs-component-desc">Notification popup with auto-dismiss, variants, and action buttons.</p>
             <div class="docs-subsection">
                 <h2>Interactive</h2>
                 <p class="docs-subsection-desc">Click a button to trigger a toast notification. They auto-dismiss after 4 seconds.</p>
                 <div class="docs-demo-box">
-                    <div class="docs-demo-row">
-                        <button class="rBORTI7" data-variant="default" type="button" data-toast-variant="info">Info Toast</button>
-                        <button class="rBORTI7" data-variant="default" type="button" data-toast-variant="success">Success Toast</button>
-                        <button class="rBORTI7" data-variant="default" type="button" data-toast-variant="error">Error Toast</button>
-                        <button class="rBORTI7" data-variant="default" type="button" data-toast-variant="warning">Warning Toast</button>
-                    </div>
+                    <ToastDemo />
                 </div>
             </div>
             <div class="docs-subsection">
@@ -1623,204 +1612,6 @@ func renderStatCardComp(page : &mut HtmlPage) {
             <p class="docs-component-desc">Compact metric display card.</p>
             <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box" style="max-width:380px;"><StatCard><Caption>Revenue</Caption><H2>$12,345</H2><BadgeSuccess>+12%</BadgeSuccess></StatCard></div></div>
         </div>
-    }
-}
-
-func SetupInteractiveDemos(page : &mut HtmlPage) {
-    #html {
-        <script>{"""
-            (function() {
-                // --- Dialog Demo ---
-                var dialogDemoOpen = document.getElementById('dialog-demo-open');
-                if(dialogDemoOpen) {
-                    dialogDemoOpen.addEventListener('click', function() {
-                        var el = document.createElement('div');
-                        el.innerHTML = '<div class="rB3LObS" style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998;"></div>';
-                        var backdrop = el.firstChild;
-                        document.body.appendChild(backdrop);
-                        var dialog = document.createElement('div');
-                        dialog.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:var(--radius);padding:1.5rem;max-width:420px;width:90%;box-shadow:var(--shadow-lg);';
-                        dialog.innerHTML = '<div style="display:grid;gap:0.75rem;"><h3 style="font-size:1.25rem;font-weight:700;margin:0;">Dialog Demo</h3><p style="color:hsl(var(--muted-foreground));margin:0;">This is an interactive dialog. Press Escape or click the backdrop to close.</p><div style="display:flex;gap:0.5rem;justify-content:flex-end;"><button class="rBORTI7" data-variant="outline" type="button" style="cursor:pointer;">Cancel</button><button class="rBORTI7" data-variant="default" type="button" style="cursor:pointer;">Confirm</button></div></div>';
-                        document.body.appendChild(dialog);
-                        dialog.querySelector('[data-variant="outline"]').addEventListener('click', function() { backdrop.remove(); dialog.remove(); });
-                        dialog.querySelector('[data-variant="default"]').addEventListener('click', function() { backdrop.remove(); dialog.remove(); });
-                        backdrop.addEventListener('click', function() { backdrop.remove(); dialog.remove(); });
-                        document.addEventListener('keydown', function handler(e) { if(e.key === 'Escape') { backdrop.remove(); dialog.remove(); document.removeEventListener('keydown', handler); } });
-                    });
-                }
-
-                // --- Sheet Demo ---
-                function openSheet(side) {
-                    var overlay = document.createElement('div');
-                    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998;';
-                    document.body.appendChild(overlay);
-                    var sheet = document.createElement('div');
-                    sheet.style.cssText = 'position:fixed;z-index:9999;background:hsl(var(--background));border:1px solid hsl(var(--border));box-shadow:var(--shadow-lg);padding:1.5rem;display:grid;gap:0.75rem;transition:transform 0.25s ease;';
-                    if(side === 'right') { sheet.style.cssText += 'top:0;right:0;bottom:0;width:320px;transform:translateX(0);'; }
-                    else if(side === 'left') { sheet.style.cssText += 'top:0;left:0;bottom:0;width:320px;transform:translateX(0);'; }
-                    else if(side === 'top') { sheet.style.cssText += 'top:0;left:0;right:0;max-height:50vh;transform:translateY(0);'; }
-                    else { sheet.style.cssText += 'bottom:0;left:0;right:0;max-height:50vh;transform:translateY(0);'; }
-                    sheet.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;"><h3 style="font-size:1.1rem;font-weight:700;margin:0;">Sheet (' + side + ')</h3><button class="rBORTI7" data-variant="ghost" data-size="icon" type="button" style="cursor:pointer;font-size:1.25rem;border:none;background:transparent;">×</button></div><p style="color:hsl(var(--muted-foreground));margin:0;">This sheet slides in from the <strong>' + side + '</strong> edge. Click the overlay or press Escape to close.</p>';
-                    document.body.appendChild(sheet);
-                    function close() { overlay.remove(); sheet.remove(); }
-                    overlay.addEventListener('click', close);
-                    sheet.querySelector('button').addEventListener('click', close);
-                    document.addEventListener('keydown', function handler(e) { if(e.key === 'Escape') { close(); document.removeEventListener('keydown', handler); } });
-                }
-                var sheetBtns = document.querySelectorAll('[data-sheet-side]');
-                for(var i = 0; i < sheetBtns.length; i++) {
-                    sheetBtns[i].addEventListener('click', function() { openSheet(this.getAttribute('data-sheet-side')); });
-                }
-
-                // --- Toast Demo ---
-                function showToast(variant) {
-                    var container = document.getElementById('toast-container');
-                    if(!container) { container = document.createElement('div'); container.id = 'toast-container'; container.style.cssText = 'position:fixed;bottom:1.5rem;right:1.5rem;z-index:10000;display:grid;gap:0.5rem;pointer-events:none;'; document.body.appendChild(container); }
-                    var toast = document.createElement('div');
-                    toast.style.cssText = 'pointer-events:auto;display:grid;grid-template-columns:1fr auto;gap:0.75rem;padding:0.9rem 1rem;border-radius:var(--radius);border:1px solid hsl(var(--border));background:hsl(var(--background));box-shadow:var(--shadow-lg);animation:chx-toast-in 0.25s ease;max-width:380px;';
-                    var colors = { success: 'hsl(142 76% 36%)', error: 'hsl(0 84% 60%)', info: 'hsl(221 83% 53%)', warning: 'hsl(38 92% 50%)' };
-                    var labels = { success: 'Success', error: 'Error', info: 'Info', warning: 'Warning' };
-                    toast.innerHTML = '<div><div style="font-size:0.875rem;font-weight:600;">' + labels[variant] + '</div><div style="font-size:0.8125rem;color:hsl(var(--muted-foreground));">This is a ' + variant + ' toast notification.</div></div><button style="border:none;background:transparent;cursor:pointer;font-size:1rem;color:hsl(var(--muted-foreground));padding:0;align-self:start;">×</button>';
-                    toast.querySelector('button').addEventListener('click', function() { toast.remove(); });
-                    container.appendChild(toast);
-                    setTimeout(function() { if(toast.parentNode) toast.remove(); }, 4000);
-                }
-                var toastBtns = document.querySelectorAll('[data-toast-variant]');
-                for(var j = 0; j < toastBtns.length; j++) {
-                    toastBtns[j].addEventListener('click', function() { showToast(this.getAttribute('data-toast-variant')); });
-                }
-
-                // --- Accordion multi-open toggle ---
-                var multiToggle = document.getElementById('accordion-multi-toggle');
-                if(multiToggle) {
-                    multiToggle.addEventListener('click', function() {
-                        var all = document.querySelectorAll('#accordion-multi-demo details');
-                        var anyOpen = false;
-                        for(var k = 0; k < all.length; k++) { if(all[k].open) anyOpen = true; }
-                        for(var k = 0; k < all.length; k++) { all[k].removeAttribute('open'); }
-                        if(!anyOpen) { for(var k = 0; k < Math.min(2, all.length); k++) { all[k].setAttribute('open', ''); } }
-                    });
-                }
-
-                // --- Progress live value ---
-                var progressSlider = document.getElementById('progress-live-input');
-                var progressDisplay = document.getElementById('progress-live-display');
-                if(progressSlider && progressDisplay) {
-                    progressSlider.addEventListener('input', function() {
-                        var val = this.value;
-                        var bar = progressDisplay.querySelector('progress, [role=progressbar], .rAVR1Te');
-                        if(bar) { bar.setAttribute('value', val); bar.style.setProperty('--progress', val + '%'); }
-                        var label = document.getElementById('progress-live-label');
-                        if(label) label.textContent = val + '%';
-                    });
-                }
-
-                // --- Pagination demo ---
-                var pagDemo = document.getElementById('pagination-demo-page');
-                if(pagDemo) {
-                    var pagBtns = pagDemo.querySelectorAll('button');
-                    for(var p = 0; p < pagBtns.length; p++) {
-                        pagBtns[p].addEventListener('click', function() {
-                            for(var q = 0; q < pagBtns.length; q++) { pagBtns[q].style.background = ''; pagBtns[q].style.color = ''; }
-                            this.style.background = 'hsl(var(--primary))';
-                            this.style.color = 'hsl(var(--primary-foreground))';
-                            var pagLabel = document.getElementById('pagination-demo-label');
-                            if(pagLabel) pagLabel.textContent = 'Page ' + this.textContent;
-                        });
-                    }
-                }
-
-                // --- Toggle interactive ---
-                var toggleGroupBtns = document.querySelectorAll('#togglegroup-interactive-demo button');
-                for(var t = 0; t < toggleGroupBtns.length; t++) {
-                    toggleGroupBtns[t].addEventListener('click', function() {
-                        var isActive = this.getAttribute('data-pressed') === 'true';
-                        this.setAttribute('data-pressed', isActive ? 'false' : 'true');
-                        this.style.background = isActive ? '' : 'hsl(var(--accent))';
-                        this.style.color = isActive ? '' : 'hsl(var(--accent-foreground))';
-                    });
-                }
-
-                // --- RadioGroup interactive ---
-                var rgBtns = document.querySelectorAll('#radiogroup-interactive-demo button');
-                for(var r = 0; r < rgBtns.length; r++) {
-                    rgBtns[r].addEventListener('click', function() {
-                        for(var s = 0; s < rgBtns.length; s++) { rgBtns[s].style.background = ''; rgBtns[s].style.color = ''; rgBtns[s].style.borderColor = ''; }
-                        this.style.background = 'hsl(var(--accent))';
-                        this.style.color = 'hsl(var(--accent-foreground))';
-                        this.style.borderColor = 'hsl(var(--primary))';
-                        var rgLabel = document.getElementById('radiogroup-interactive-label');
-                        if(rgLabel) rgLabel.textContent = 'Selected: ' + this.textContent;
-                    });
-                }
-
-                // --- Checkbox interactive ---
-                var cbBtns = document.querySelectorAll('#checkbox-interactive-demo button');
-                for(var c = 0; c < cbBtns.length; c++) {
-                    cbBtns[c].addEventListener('click', function() {
-                        var checked = this.getAttribute('data-checked') === 'true';
-                        this.setAttribute('data-checked', checked ? 'false' : 'true');
-                        this.style.background = checked ? '' : 'hsl(var(--primary))';
-                        this.style.borderColor = checked ? '' : 'hsl(var(--primary))';
-                        var cbLabel = document.getElementById('checkbox-interactive-label');
-                        if(cbLabel) cbLabel.textContent = 'Checked: ' + (!checked ? this.textContent : 'none');
-                    });
-                }
-
-                // --- Tabs interactive ---
-                var tabsBtns = document.querySelectorAll('#tabs-interactive-demo button[data-tab]');
-                var tabsPanels = document.querySelectorAll('#tabs-interactive-demo [data-tabpanel]');
-                for(var tb = 0; tb < tabsBtns.length; tb++) {
-                    tabsBtns[tb].addEventListener('click', function() {
-                        var target = this.getAttribute('data-tab');
-                        for(var tp = 0; tp < tabsBtns.length; tp++) { tabsBtns[tp].style.background = ''; tabsBtns[tp].style.color = ''; tabsBtns[tp].style.borderBottom = ''; }
-                        for(var tp = 0; tp < tabsPanels.length; tp++) { tabsPanels[tp].style.display = 'none'; }
-                        this.style.background = 'hsl(var(--accent))';
-                        this.style.color = 'hsl(var(--accent-foreground))';
-                        this.style.borderBottom = '2px solid hsl(var(--primary))';
-                        var panel = document.getElementById('tab-panel-' + target);
-                        if(panel) panel.style.display = 'block';
-                    });
-                }
-
-                // --- Select interactive ---
-                var selectTrigger = document.getElementById('select-interactive-trigger');
-                var selectMenu = document.getElementById('select-interactive-menu');
-                var selectValue = document.getElementById('select-interactive-value');
-                if(selectTrigger && selectMenu) {
-                    selectTrigger.addEventListener('click', function() {
-                        var open = selectMenu.style.display === 'grid';
-                        selectMenu.style.display = open ? 'none' : 'grid';
-                        selectTrigger.setAttribute('data-open', open ? 'false' : 'true');
-                    });
-                    var opts = selectMenu.querySelectorAll('button');
-                    for(var so = 0; so < opts.length; so++) {
-                        opts[so].addEventListener('click', function() {
-                            if(selectValue) selectValue.textContent = this.textContent;
-                            selectMenu.style.display = 'none';
-                            selectTrigger.setAttribute('data-open', 'false');
-                        });
-                    }
-                    document.addEventListener('click', function(e) {
-                        if(!selectTrigger.contains(e.target) && !selectMenu.contains(e.target)) {
-                            selectMenu.style.display = 'none';
-                            selectTrigger.setAttribute('data-open', 'false');
-                        }
-                    });
-                }
-
-                // --- Collapsible interactive ---
-                var collBtn = document.getElementById('collapsible-interactive-trigger');
-                var collContent = document.getElementById('collapsible-interactive-content');
-                if(collBtn && collContent) {
-                    collBtn.addEventListener('click', function() {
-                        var open = collContent.style.display !== 'none';
-                        collContent.style.display = open ? 'none' : 'block';
-                        this.setAttribute('data-open', open ? 'false' : 'true');
-                    });
-                }
-            })();
-        """}</script>
     }
 }
 
