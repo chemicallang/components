@@ -861,18 +861,7 @@ func renderDialogComp(page : &mut HtmlPage) {
             <div class="docs-subsection">
                 <h2>Example Code</h2>
                 <div class="docs-demo-box">
-                    <div class="docs-code-block">{`<Dialog open={open}>
-    <DialogBackdrop onClick={close} />
-    <DialogContent>
-        <DialogHeader>
-            <H3>Title</H3>
-        </DialogHeader>
-        <Text>Content</Text>
-        <DialogActions>
-            <Button onClick={close}>Close</Button>
-        </DialogActions>
-    </DialogContent>
-</Dialog>`}</div>
+                    <div class="docs-code-block">{`&lt;Dialog open={open}&gt;\n    &lt;DialogBackdrop onClick={close} /&gt;\n    &lt;DialogContent&gt;\n        &lt;DialogHeader&gt;\n            &lt;H3&gt;Title&lt;/H3&gt;\n        &lt;/DialogHeader&gt;\n        &lt;Text&gt;Content&lt;/Text&gt;\n        &lt;DialogActions&gt;\n            &lt;Button onClick={close}&gt;Close&lt;/Button&gt;\n        &lt;/DialogActions&gt;\n    &lt;/DialogContent&gt;\n&lt;/Dialog&gt;`}</div>
                 </div>
             </div>
             <hr class="docs-divider" />
@@ -1116,40 +1105,63 @@ func renderAccordionComp(page : &mut HtmlPage) {
             <p class="docs-component-desc">A vertically stacked set of interactive headings that each reveal a section of content.</p>
             <div class="docs-subsection">
                 <h2>Basic</h2>
-                <p class="docs-subsection-desc">First item open by default.</p>
+                <p class="docs-subsection-desc">Each <CodeText>AccordionItem</CodeText> manages its own open state via the <CodeText>trigger</CodeText> prop and <CodeText>defaultOpen</CodeText>.</p>
                 <div class="docs-demo-box">
                     <Accordion>
-                        <AccordionItem title="What is Chemical?" subtitle="About the language" defaultOpen={true}>Chemical is a programming language that compiles to C and LLVM IR.</AccordionItem>
-                        <AccordionItem title="Is it fast?" subtitle="Performance">Yes. TinyCC backend compiles in milliseconds.</AccordionItem>
-                        <AccordionItem title="Who uses it?" subtitle="Community">Growing community of developers building web apps.</AccordionItem>
+                        <AccordionItem value="item-1" trigger="Is it accessible?" defaultOpen={true}>
+                            Yes. It adheres to the WAI-ARIA design pattern.
+                        </AccordionItem>
+                        <AccordionItem value="item-2" trigger="What is Chemical?">
+                            Chemical is a programming language that compiles to C and LLVM IR.
+                        </AccordionItem>
+                        <AccordionItem value="item-3" trigger="Is it fast?">
+                            Yes. TinyCC backend compiles in milliseconds.
+                        </AccordionItem>
+                    </Accordion>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Default Open</h2>
+                <p class="docs-subsection-desc">Use <CodeText>defaultOpen</CodeText> to start an item expanded.</p>
+                <div class="docs-demo-box">
+                    <Accordion>
+                        <AccordionItem value="a" trigger="Open by default" defaultOpen={true}>
+                            This content is visible on page load.
+                        </AccordionItem>
+                        <AccordionItem value="b" trigger="Closed by default">
+                            Click the trigger to reveal this.
+                        </AccordionItem>
                     </Accordion>
                 </div>
             </div>
             <div class="docs-subsection">
                 <h2>Multiple Open</h2>
-                <p class="docs-subsection-desc">All items can be open simultaneously.</p>
+                <p class="docs-subsection-desc">Each item manages its own state independently. Multiple items can be open at the same time.</p>
                 <div class="docs-demo-box">
-                    <Accordion>
-                        <AccordionItem title="Item A" defaultOpen={true}>Content A is visible.</AccordionItem>
-                        <AccordionItem title="Item B" defaultOpen={true}>Content B is also visible.</AccordionItem>
-                        <AccordionItem title="Item C">Content C is hidden.</AccordionItem>
+                    <Accordion multiple={true}>
+                        <AccordionItem value="a" trigger="First item" defaultOpen={true}>
+                            Content A is visible.
+                        </AccordionItem>
+                        <AccordionItem value="b" trigger="Second item" defaultOpen={true}>
+                            Content B is also visible.
+                        </AccordionItem>
+                        <AccordionItem value="c" trigger="Third item">
+                            Content C is hidden.
+                        </AccordionItem>
                     </Accordion>
                 </div>
             </div>
             <div class="docs-subsection">
                 <h2>Disabled</h2>
+                <p class="docs-subsection-desc">Use the <CodeText>disabled</CodeText> prop on AccordionItem to disable individual items.</p>
                 <div class="docs-demo-box">
                     <Accordion>
-                        <AccordionItem title="Enabled" defaultOpen={true}>This can be toggled.</AccordionItem>
-                        <AccordionItem title="Disabled" disabled>This cannot be opened.</AccordionItem>
-                    </Accordion>
-                </div>
-            </div>
-            <div class="docs-subsection">
-                <h2>Custom Chevrons</h2>
-                <div class="docs-demo-box">
-                    <Accordion>
-                        <AccordionItem title="Plus/Minus" chevronOpen="-" chevronClosed="+">Custom chevron glyphs.</AccordionItem>
+                        <AccordionItem value="enabled" trigger="Enabled">
+                            This can be toggled.
+                        </AccordionItem>
+                        <AccordionItem value="disabled" trigger="Disabled" disabled={true}>
+                            This cannot be opened.
+                        </AccordionItem>
                     </Accordion>
                 </div>
             </div>
