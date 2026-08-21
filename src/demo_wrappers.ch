@@ -125,6 +125,29 @@ public #universal TableBasicDemo(props) {
     </Table>
 }
 
+public #universal TableWithBadgeDemo(props) {
+    return <Table>
+        <thead><tr><TableHeadCell>User</TableHeadCell><TableHeadCell>Role</TableHeadCell><TableHeadCell>Status</TableHeadCell></tr></thead>
+        <tbody>
+            <tr><TableCell>Alice</TableCell><TableCell>Admin</TableCell><TableCell><Badge variant="success">Active</Badge></TableCell></tr>
+            <tr><TableCell>Bob</TableCell><TableCell>Editor</TableCell><TableCell><Badge variant="warning">Pending</Badge></TableCell></tr>
+            <tr><TableCell>Carol</TableCell><TableCell>Viewer</TableCell><TableCell><Badge variant="info">Invited</Badge></TableCell></tr>
+        </tbody>
+    </Table>
+}
+
+public #universal TableCompactDemo(props) {
+    return <Table>
+        <thead><tr><TableHeadCell>ID</TableHeadCell><TableHeadCell>Name</TableHeadCell><TableHeadCell>Email</TableHeadCell><TableHeadCell>Plan</TableHeadCell></tr></thead>
+        <tbody>
+            <tr><TableCell>1</TableCell><TableCell>Acme Corp</TableCell><TableCell>hi@acme.com</TableCell><TableCell><Badge>Pro</Badge></TableCell></tr>
+            <tr><TableCell>2</TableCell><TableCell>Globex</TableCell><TableCell>info@globex.com</TableCell><TableCell><Badge variant="secondary">Free</Badge></TableCell></tr>
+            <tr><TableCell>3</TableCell><TableCell>Initech</TableCell><TableCell>admin@initech.com</TableCell><TableCell><Badge>Pro</Badge></TableCell></tr>
+            <tr><TableCell>4</TableCell><TableCell>Hooli</TableCell><TableCell>team@hooli.com</TableCell><TableCell><Badge variant="success">Enterprise</Badge></TableCell></tr>
+        </tbody>
+    </Table>
+}
+
 // --- Toast Demo ---
 
 public #universal ToastDemo(props) {

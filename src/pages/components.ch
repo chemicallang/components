@@ -92,6 +92,7 @@ func ComponentsDocPage(page : &mut HtmlPage) {
                     <a href="#nativeselect" class="docs-sidebar-item" data-comp="nativeselect">Native Select</a>
                     <a href="#checkbox" class="docs-sidebar-item" data-comp="checkbox">Checkbox</a>
                     <a href="#radio" class="docs-sidebar-item" data-comp="radio">Radio</a>
+                    <a href="#field" class="docs-sidebar-item" data-comp="field">Field</a>
                     <a href="#switch" class="docs-sidebar-item" data-comp="switch">Switch</a>
                     <a href="#togglegroup" class="docs-sidebar-item" data-comp="togglegroup">Toggle Group</a>
                     <a href="#radiogroup" class="docs-sidebar-item" data-comp="radiogroup">Radio Group</a>
@@ -502,11 +503,7 @@ func renderButtonComp(page : &mut HtmlPage) {
             <h1 class="docs-component-title">Button</h1>
             <p class="docs-component-desc">Displays a button or a component that looks like a button.</p>
 
-            <div class="docs-subsection">
-                <h2>Installation</h2>
-                <p class="docs-subsection-desc">Import the Button component from the components library.</p>
-                <div class="docs-code-block">import components::Button</div>
-            </div>
+
 
             <div class="docs-subsection">
                 <h2>Basic</h2>
@@ -521,7 +518,7 @@ func renderButtonComp(page : &mut HtmlPage) {
                         <Button variant="link">Link</Button>
                     </div>
                 </div>
-                <div class="docs-code-block">{`<Button>Default</Button>\n<Button variant="secondary">Secondary</Button>\n<Button variant="destructive">Destructive</Button>`}</div>
+                <div class="docs-code-block">{`&lt;Button&gt;Default&lt;/Button&gt;\n&lt;Button variant="secondary"&gt;Secondary&lt;/Button&gt;\n&lt;Button variant="destructive"&gt;Destructive&lt;/Button&gt;`}</div>
             </div>
 
             <div class="docs-subsection">
@@ -634,11 +631,7 @@ func renderInputComp(page : &mut HtmlPage) {
             <h1 class="docs-component-title">Input</h1>
             <p class="docs-component-desc">Text input field with variant, size, and state support.</p>
 
-            <div class="docs-subsection">
-                <h2>Installation</h2>
-                <p class="docs-subsection-desc">Import the Input component from the components library.</p>
-                <div class="docs-code-block">import components::Input</div>
-            </div>
+
 
             <div class="docs-subsection">
                 <h2>Basic</h2>
@@ -922,7 +915,7 @@ func renderFieldComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-field" data-comp="field">
             <h1 class="docs-component-title">Field</h1>
-            <p class="docs-component-desc">Form field wrapper with label, hint, and error text.</p>
+            <p class="docs-component-desc">Form field wrapper with label, hint, and error text for accessible form layouts.</p>
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <div class="docs-demo-box" style="max-width:320px;">
@@ -931,9 +924,36 @@ func renderFieldComp(page : &mut HtmlPage) {
             </div>
             <div class="docs-subsection">
                 <h2>Error State</h2>
+                <p class="docs-subsection-desc">Use <CodeText>FieldError</CodeText> with <CodeText>variant="error"</CodeText> on the Input.</p>
                 <div class="docs-demo-box" style="max-width:320px;">
                     <Field><FieldLabel>Email</FieldLabel><Input variant="error" placeholder="bad@@" /><FieldError>Invalid email address.</FieldError></Field>
                 </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Select</h2>
+                <p class="docs-subsection-desc">Fields wrap any form control — Input, Select, Textarea, Switch, etc.</p>
+                <div class="docs-demo-box" style="max-width:320px;">
+                    <Field><FieldLabel>Country</FieldLabel><Select options={["US", "UK", "DE"]} placeholder="Select country" /><FieldHint>Pick your country.</FieldHint></Field>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Required</h2>
+                <div class="docs-demo-box" style="max-width:320px;">
+                    <Field><FieldLabel>Full Name</FieldLabel><Input placeholder="Jane Doe" /><FieldHint>Required field.</FieldHint></Field>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Component</th><th>Prop</th><th>Type</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">Field</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-desc">Field content (label, input, hint, error)</td></tr>
+                        <tr><td class="docs-prop-name">FieldLabel</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-desc">Label text</td></tr>
+                        <tr><td class="docs-prop-name">FieldHint</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-desc">Helper text below input</td></tr>
+                        <tr><td class="docs-prop-name">FieldError</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-desc">Error message text</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -1078,6 +1098,15 @@ func renderSwitchComp(page : &mut HtmlPage) {
                         <Switch>Default</Switch>
                         <Switch size="lg">Large</Switch>
                     </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>In Settings</h2>
+                <p class="docs-subsection-desc">Switches work naturally in settings panels with labels.</p>
+                <div class="docs-demo-box" style="max-width:320px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid hsl(var(--border));"><Text>Dark Mode</Text><Switch checked /></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid hsl(var(--border));"><Text>Notifications</Text><Switch /></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;"><Text>Auto-save</Text><Switch checked /></div>
                 </div>
             </div>
             <hr class="docs-divider" />
@@ -1276,15 +1305,7 @@ func renderDialogComp(page : &mut HtmlPage) {
             <h1 class="docs-component-title">Dialog</h1>
             <p class="docs-component-desc">A modal overlay with focus trap, inert background, and Escape to close.</p>
 
-            <div class="docs-subsection">
-                <h2>Installation</h2>
-                <p class="docs-subsection-desc">Import Dialog components from the components library.</p>
-                <div class="docs-code-block">import components::Dialog
-import components::DialogBackdrop
-import components::DialogContent
-import components::DialogHeader
-import components::DialogActions</div>
-            </div>
+
 
             <div class="docs-subsection">
                 <h2>Basic</h2>
@@ -1354,9 +1375,24 @@ import components::DialogActions</div>
             </div>
 
             <div class="docs-subsection">
-                <h2>Example Code</h2>
+                <h2>Composition Pattern</h2>
+                <p class="docs-subsection-desc">Combine <CodeText>Dialog</CodeText>, <CodeText>DialogBackdrop</CodeText>, <CodeText>DialogContent</CodeText>, <CodeText>DialogHeader</CodeText>, <CodeText>DialogTitle</CodeText>, <CodeText>DialogDescription</CodeText>, and <CodeText>DialogFooter</CodeText> for full control.</p>
                 <div class="docs-demo-box">
-                    <div class="docs-code-block">{`&lt;Dialog open={open}&gt;\n    &lt;DialogBackdrop onClick={close} /&gt;\n    &lt;DialogContent&gt;\n        &lt;DialogHeader&gt;\n            &lt;H3&gt;Title&lt;/H3&gt;\n        &lt;/DialogHeader&gt;\n        &lt;Text&gt;Content&lt;/Text&gt;\n        &lt;DialogActions&gt;\n            &lt;Button onClick={close}&gt;Close&lt;/Button&gt;\n        &lt;/DialogActions&gt;\n    &lt;/DialogContent&gt;\n&lt;/Dialog&gt;`}</div>
+                    <div class="docs-demo-row">
+                        <Badge variant="info">Dialog</Badge><Text>Controls open state and focus trap</Text>
+                    </div>
+                    <div class="docs-demo-row">
+                        <Badge variant="info">DialogBackdrop</Badge><Text>Click to close overlay</Text>
+                    </div>
+                    <div class="docs-demo-row">
+                        <Badge variant="info">DialogContent</Badge><Text>Modal content container with close button</Text>
+                    </div>
+                    <div class="docs-demo-row">
+                        <Badge variant="info">DialogHeader</Badge><Text>Title + description wrapper</Text>
+                    </div>
+                    <div class="docs-demo-row">
+                        <Badge variant="info">DialogFooter</Badge><Text>Action buttons row</Text>
+                    </div>
                 </div>
             </div>
             <hr class="docs-divider" />
@@ -1974,9 +2010,17 @@ func renderTooltipComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-tooltip" data-comp="tooltip">
             <h1 class="docs-component-title">Tooltip</h1>
-            <p class="docs-component-desc">Hover-triggered informational popup.</p>
+            <p class="docs-component-desc">Hover-triggered informational popup with configurable positioning.</p>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <p class="docs-subsection-desc">Hover over the button to see the tooltip.</p>
+                <div class="docs-demo-box">
+                    <Tooltip label="Edit profile"><Button variant="outline">Hover me</Button></Tooltip>
+                </div>
+            </div>
             <div class="docs-subsection">
                 <h2>Positions</h2>
+                <p class="docs-subsection-desc">Use the <CodeText>position</CodeText> prop to control where the tooltip appears.</p>
                 <div class="docs-demo-box">
                     <div class="docs-demo-row">
                         <Tooltip label="Top tip"><Button variant="outline">Top</Button></Tooltip>
@@ -1986,6 +2030,41 @@ func renderTooltipComp(page : &mut HtmlPage) {
                     </div>
                 </div>
             </div>
+            <div class="docs-subsection">
+                <h2>On Icon Buttons</h2>
+                <p class="docs-subsection-desc">Tooltips are essential for icon-only buttons to convey meaning.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Tooltip label="Add item"><Button variant="ghost"><Icon>+</Icon></Button></Tooltip>
+                        <Tooltip label="Settings"><Button variant="ghost"><Icon>S</Icon></Button></Tooltip>
+                        <Tooltip label="Delete"><Button variant="ghost"><Icon>X</Icon></Button></Tooltip>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>On Badges</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Tooltip label="Active user"><Badge variant="success">Online</Badge></Tooltip>
+                        <Tooltip label="Pending review"><Badge variant="warning">Pending</Badge></Tooltip>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-hint">Tooltip uses <CodeText>TooltipProvider</CodeText>, <CodeText>TooltipTrigger</CodeText>, and <CodeText>TooltipContent</CodeText> for composition.</div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">label</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Tooltip text content</td></tr>
+                        <tr><td class="docs-prop-name">position</td><td class="docs-prop-type">string</td><td class="docs-prop-default">top</td><td class="docs-prop-desc">top | bottom | left | right</td></tr>
+                        <tr><td class="docs-prop-name">delay</td><td class="docs-prop-type">int</td><td class="docs-prop-default">200</td><td class="docs-prop-desc">Hover delay in ms</td></tr>
+                        <tr><td class="docs-prop-name">content</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Alias for label</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Trigger element</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1994,11 +2073,39 @@ func renderTableComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-table" data-comp="table">
             <h1 class="docs-component-title">Table</h1>
-            <p class="docs-component-desc">Data table with header and cell components.</p>
-            <div class="docs-subsection"><h2>Basic</h2>
+            <p class="docs-component-desc">Data table with header, body, and cell components. Tables should be placed inside a <CodeText>#universal</CodeText> component to avoid hydration wrapper issues with table elements.</p>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
                 <div class="docs-demo-box">
                     <TableBasicDemo />
                 </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Badges</h2>
+                <p class="docs-subsection-desc">Combine with <CodeText>Badge</CodeText> for status indicators.</p>
+                <div class="docs-demo-box">
+                    <TableWithBadgeDemo />
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Compact</h2>
+                <p class="docs-subsection-desc">Use smaller padding for dense data display.</p>
+                <div class="docs-demo-box">
+                    <TableCompactDemo />
+                </div>
+            </div>
+            <div class="docs-hint">Wrap tables in a <CodeText>#universal</CodeText> component. The hydration system wraps each component in a span element which can break table element layout.</div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Component</th><th>Prop</th><th>Type</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">Table</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-desc">Table content (thead, tbody)</td></tr>
+                        <tr><td class="docs-prop-name">TableHeadCell</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-desc">Column header content</td></tr>
+                        <tr><td class="docs-prop-name">TableCell</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-desc">Cell content</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -2551,7 +2658,7 @@ func renderAppBarComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-appbar" data-comp="appbar">
             <h1 class="docs-component-title">AppBar</h1>
-            <p class="docs-component-desc">Horizontal navigation bar.</p>
+            <p class="docs-component-desc">Horizontal navigation bar with branding, links, and actions.</p>
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <div class="docs-demo-box">
@@ -2568,6 +2675,30 @@ func renderAppBarComp(page : &mut HtmlPage) {
                             <Button variant="ghost" size="sm">Home</Button>
                             <Button variant="ghost" size="sm">Settings</Button>
                             <Button size="sm">Logout</Button>
+                        </Stack>
+                    </AppBar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Search</h2>
+                <p class="docs-subsection-desc">Include a search input in the app bar.</p>
+                <div class="docs-demo-box">
+                    <AppBar>
+                        <H3>Dashboard</H3>
+                        <Input placeholder="Search..." size="sm" style="max-width:200px;" />
+                        <Button variant="ghost" size="sm">Help</Button>
+                    </AppBar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Badge</h2>
+                <p class="docs-subsection-desc">Add notification badges to app bar actions.</p>
+                <div class="docs-demo-box">
+                    <AppBar>
+                        <H3>App</H3>
+                        <Stack direction="row" gap="sm" align="center">
+                            <Button variant="ghost" size="sm">Inbox <Badge variant="error" size="xs">3</Badge></Button>
+                            <Avatar size="sm">A</Avatar>
                         </Stack>
                     </AppBar>
                 </div>
@@ -2590,7 +2721,7 @@ func renderDrawerComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-drawer" data-comp="drawer">
             <h1 class="docs-component-title">Drawer</h1>
-            <p class="docs-component-desc">Side panel for navigation or settings.</p>
+            <p class="docs-component-desc">Side panel for navigation or settings with header, body, and footer sections.</p>
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <div class="docs-demo-box" style="max-width:300px;">
@@ -2606,6 +2737,7 @@ func renderDrawerComp(page : &mut HtmlPage) {
             </div>
             <div class="docs-subsection">
                 <h2>With Header</h2>
+                <p class="docs-subsection-desc">Use a header section for title and description.</p>
                 <div class="docs-demo-box" style="max-width:300px;">
                     <Drawer>
                         <div style="padding:1rem;border-bottom:1px solid hsl(var(--border));">
@@ -2617,6 +2749,26 @@ func renderDrawerComp(page : &mut HtmlPage) {
                             <MenuItem href="#">Security</MenuItem>
                             <MenuItem href="#">Notifications</MenuItem>
                         </Menu>
+                    </Drawer>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Search</h2>
+                <p class="docs-subsection-desc">Drawer with search and navigation items.</p>
+                <div class="docs-demo-box" style="max-width:300px;">
+                    <Drawer>
+                        <div style="padding:1rem;border-bottom:1px solid hsl(var(--border));">
+                            <Input placeholder="Search..." size="sm" />
+                        </div>
+                        <Menu>
+                            <MenuItem href="#">Dashboard</MenuItem>
+                            <MenuItem href="#">Projects</MenuItem>
+                            <MenuItem href="#">Team</MenuItem>
+                            <MenuItem href="#">Settings</MenuItem>
+                        </Menu>
+                        <div style="margin-top:auto;padding:1rem;border-top:1px solid hsl(var(--border));">
+                            <Button variant="outline" size="sm" style="width:100%;">Sign Out</Button>
+                        </div>
                     </Drawer>
                 </div>
             </div>
@@ -2638,7 +2790,7 @@ func renderPopoverComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-popover" data-comp="popover">
             <h1 class="docs-component-title">Popover</h1>
-            <p class="docs-component-desc">Floating surface for contextual content.</p>
+            <p class="docs-component-desc">Floating surface for contextual content with portal rendering and click-outside-to-close.</p>
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <div class="docs-demo-box" style="max-width:300px;">
@@ -2656,12 +2808,33 @@ func renderPopoverComp(page : &mut HtmlPage) {
                     </Popover>
                 </div>
             </div>
+            <div class="docs-subsection">
+                <h2>With Rich Content</h2>
+                <p class="docs-subsection-desc">Popovers can contain any content — cards, lists, or nested components.</p>
+                <div class="docs-demo-box" style="max-width:300px;">
+                    <Popover>
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+                            <Avatar>A</Avatar>
+                            <div><Text>Alice Smith</Text><Caption>alice@example.com</Caption></div>
+                        </div>
+                        <Separator />
+                        <div style="margin-top:0.5rem;">
+                            <Button variant="ghost" size="sm" style="width:100%;">Profile</Button>
+                            <Button variant="ghost" size="sm" style="width:100%;">Settings</Button>
+                            <Button variant="ghost" size="sm" style="width:100%;">Logout</Button>
+                        </div>
+                    </Popover>
+                </div>
+            </div>
+            <div class="docs-hint">Popover uses <CodeText>PopoverHeader</CodeText>, <CodeText>PopoverTitle</CodeText>, <CodeText>PopoverDescription</CodeText>, and <CodeText>PopoverContent</CodeText> for composition.</div>
             <hr class="docs-divider" />
             <div class="docs-subsection">
                 <h2>API Reference</h2>
                 <table class="docs-props-table">
                     <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
                     <tbody>
+                        <tr><td class="docs-prop-name">trigger</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Trigger label for click mode</td></tr>
+                        <tr><td class="docs-prop-name">side</td><td class="docs-prop-type">string</td><td class="docs-prop-default">bottom</td><td class="docs-prop-desc">top | bottom | left | right</td></tr>
                         <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Popover content</td></tr>
                     </tbody>
                 </table>
@@ -2674,7 +2847,7 @@ func renderSnackbarComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-snackbar" data-comp="snackbar">
             <h1 class="docs-component-title">Snackbar</h1>
-            <p class="docs-component-desc">Inline status notification.</p>
+            <p class="docs-component-desc">Inline status notification with action buttons and variants.</p>
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <div class="docs-demo-box">
@@ -2688,6 +2861,27 @@ func renderSnackbarComp(page : &mut HtmlPage) {
                     <Snackbar>
                         <Text>Message sent.</Text>
                         <Button variant="ghost" size="sm">Undo</Button>
+                    </Snackbar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Error Snackbar</h2>
+                <p class="docs-subsection-desc">Use error styling for failure notifications.</p>
+                <div class="docs-demo-box">
+                    <Snackbar>
+                        <Badge variant="error">Error</Badge>
+                        <Text>Failed to save. Try again.</Text>
+                        <Button variant="ghost" size="sm">Retry</Button>
+                    </Snackbar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Icon</h2>
+                <div class="docs-demo-box">
+                    <Snackbar>
+                        <Icon>check</Icon>
+                        <Text>File uploaded successfully.</Text>
+                        <Button variant="ghost" size="sm">Dismiss</Button>
                     </Snackbar>
                 </div>
             </div>
@@ -2709,7 +2903,7 @@ func renderBottomBarComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-bottombar" data-comp="bottombar">
             <h1 class="docs-component-title">Bottom Bar</h1>
-            <p class="docs-component-desc">Mobile navigation bar for app shells.</p>
+            <p class="docs-component-desc">Mobile navigation bar for app shells with icon buttons and labels.</p>
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <div class="docs-demo-box">
@@ -2728,6 +2922,18 @@ func renderBottomBarComp(page : &mut HtmlPage) {
                     <BottomBar>
                         <div style="text-align:center;"><Icon>H</Icon><Caption>Home</Caption></div>
                         <div style="text-align:center;"><Icon>S</Icon><Caption>Search</Caption></div>
+                        <div style="text-align:center;"><Icon>+</Icon><Caption>New</Caption></div>
+                        <div style="text-align:center;"><Icon>P</Icon><Caption>Profile</Caption></div>
+                    </BottomBar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Badge</h2>
+                <p class="docs-subsection-desc">Add notification badges to bottom bar items.</p>
+                <div class="docs-demo-box">
+                    <BottomBar>
+                        <div style="text-align:center;"><Icon>H</Icon><Caption>Home</Caption></div>
+                        <div style="text-align:center;position:relative;">Notifications<Badge variant="error" size="xs" style="position:absolute;top:-4px;right:-8px;">5</Badge></div>
                         <div style="text-align:center;"><Icon>+</Icon><Caption>New</Caption></div>
                         <div style="text-align:center;"><Icon>P</Icon><Caption>Profile</Caption></div>
                     </BottomBar>
