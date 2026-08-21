@@ -90,7 +90,6 @@ func ComponentsDocPage(page : &mut HtmlPage) {
                     <a href="#textarea" class="docs-sidebar-item" data-comp="textarea">Textarea</a>
                     <a href="#select" class="docs-sidebar-item" data-comp="select">Select</a>
                     <a href="#nativeselect" class="docs-sidebar-item" data-comp="nativeselect">Native Select</a>
-                    <a href="#field" class="docs-sidebar-item" data-comp="field">Field</a>
                     <a href="#checkbox" class="docs-sidebar-item" data-comp="checkbox">Checkbox</a>
                     <a href="#radio" class="docs-sidebar-item" data-comp="radio">Radio</a>
                     <a href="#switch" class="docs-sidebar-item" data-comp="switch">Switch</a>
@@ -130,6 +129,10 @@ func ComponentsDocPage(page : &mut HtmlPage) {
                     <a href="#bottombar" class="docs-sidebar-item" data-comp="bottombar">BottomBar</a>
                     <a href="#empty" class="docs-sidebar-item" data-comp="empty">Empty State</a>
                     <a href="#statcard" class="docs-sidebar-item" data-comp="statcard">Stat Card</a>
+                </div>
+                <div class="docs-sidebar-group">
+                    <div class="docs-sidebar-group-title">Patterns</div>
+                    <a href="#forms" class="docs-sidebar-item" data-comp="forms">Form Patterns</a>
                 </div>
             </nav>
             {"""<main class="docs-main">"""}
@@ -187,6 +190,7 @@ func ComponentsDocPage(page : &mut HtmlPage) {
     renderBottomBarComp(page)
     renderEmptyComp(page)
     renderStatCardComp(page)
+    renderFormPatterns(page)
 
     SetupComponentNav(page)
     SocialFooter(page)
@@ -296,6 +300,27 @@ func renderLead(page : &mut HtmlPage) {
                 <h2>Basic</h2>
                 <div class="docs-demo-box"><Lead>Build beautiful, accessible web applications with Chemical components.</Lead></div>
             </div>
+            <div class="docs-subsection">
+                <h2>As Element</h2>
+                <p class="docs-subsection-desc">Use the <CodeText>as</CodeText> prop to render as different HTML elements.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <Lead as="div">Rendered as div</Lead>
+                        <Lead as="span">Rendered as span</Lead>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">as</td><td class="docs-prop-type">string</td><td class="docs-prop-default">p</td><td class="docs-prop-desc">HTML tag (p, div, span)</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -308,6 +333,39 @@ func renderCaption(page : &mut HtmlPage) {
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <div class="docs-demo-box"><Caption>Last updated 2 minutes ago</Caption></div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Muted</h2>
+                <p class="docs-subsection-desc">Use <CodeText>muted</CodeText> prop for secondary text.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <Caption muted>Default caption</Caption>
+                        <Caption>Muted caption</Caption>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>As Element</h2>
+                <p class="docs-subsection-desc">Render as different HTML elements.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row" style="gap:1.5rem;">
+                        <Caption>Default</Caption>
+                        <Caption as="span">Span</Caption>
+                        <Caption as="div">Div</Caption>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">as</td><td class="docs-prop-type">string</td><td class="docs-prop-default">p</td><td class="docs-prop-desc">HTML tag (p, span, div)</td></tr>
+                        <tr><td class="docs-prop-name">muted</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Muted secondary style</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Content</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -322,6 +380,33 @@ func renderCodeText(page : &mut HtmlPage) {
                 <h2>Basic</h2>
                 <div class="docs-demo-box"><p>Run <CodeText>npm install</CodeText> to get started.</p></div>
             </div>
+            <div class="docs-subsection">
+                <h2>In Paragraph</h2>
+                <p class="docs-subsection-desc">Use <CodeText>CodeText</CodeText> to highlight inline code within text.</p>
+                <div class="docs-demo-box">
+                    <Text>Install the package using <CodeText>npm install chemical-components</CodeText> or <CodeText>yarn add chemical-components</CodeText>.</Text>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>As Element</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row" style="gap:1rem;">
+                        <CodeText>Default (code)</CodeText>
+                        <CodeText as="kbd">keyboard</CodeText>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">as</td><td class="docs-prop-type">string</td><td class="docs-prop-default">code</td><td class="docs-prop-desc">HTML tag (code, kbd)</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -331,8 +416,38 @@ func renderLinkComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-link" data-comp="link">
             <h1 class="docs-component-title">Link</h1>
             <p class="docs-component-desc">Styled anchor link for navigation.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><Link href="#">Click here</Link></div></div>
-            <div class="docs-subsection"><h2>External</h2><div class="docs-demo-box"><Link href="https://github.com" target="_blank">GitHub</Link></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box"><Link href="#">Click here</Link></div>
+            </div>
+            <div class="docs-subsection">
+                <h2>External</h2>
+                <p class="docs-subsection-desc">Use <CodeText>target="_blank"</CodeText> for external links.</p>
+                <div class="docs-demo-box"><Link href="https://github.com" target="_blank">GitHub</Link></div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Variants</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Link href="#" variant="default">Default</Link>
+                        <Link href="#" variant="underline">Underline</Link>
+                        <Link href="#" variant="muted">Muted</Link>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">href</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Link URL</td></tr>
+                        <tr><td class="docs-prop-name">target</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Link target (_blank, _self)</td></tr>
+                        <tr><td class="docs-prop-name">variant</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">default | underline | muted</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Link text</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -348,6 +463,35 @@ func renderBlockquoteComp(page : &mut HtmlPage) {
                     <Blockquote cite="Ada Lovelace">The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves.</Blockquote>
                 </div>
             </div>
+            <div class="docs-subsection">
+                <h2>Without Citation</h2>
+                <p class="docs-subsection-desc">Blockquotes work without the <CodeText>cite</CodeText> attribute.</p>
+                <div class="docs-demo-box">
+                    <Blockquote>The best way to predict the future is to invent it.</Blockquote>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>As Element</h2>
+                <p class="docs-subsection-desc">Render as different elements.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <Blockquote>Default blockquote</Blockquote>
+                        <Blockquote as="div">Div blockquote</Blockquote>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">cite</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Citation source</td></tr>
+                        <tr><td class="docs-prop-name">as</td><td class="docs-prop-type">string</td><td class="docs-prop-default">blockquote</td><td class="docs-prop-desc">HTML tag</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Quote content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -357,6 +501,12 @@ func renderButtonComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-button" data-comp="button">
             <h1 class="docs-component-title">Button</h1>
             <p class="docs-component-desc">Displays a button or a component that looks like a button.</p>
+
+            <div class="docs-subsection">
+                <h2>Installation</h2>
+                <p class="docs-subsection-desc">Import the Button component from the components library.</p>
+                <div class="docs-code-block">import components::Button</div>
+            </div>
 
             <div class="docs-subsection">
                 <h2>Basic</h2>
@@ -371,6 +521,7 @@ func renderButtonComp(page : &mut HtmlPage) {
                         <Button variant="link">Link</Button>
                     </div>
                 </div>
+                <div class="docs-code-block">{`<Button>Default</Button>\n<Button variant="secondary">Secondary</Button>\n<Button variant="destructive">Destructive</Button>`}</div>
             </div>
 
             <div class="docs-subsection">
@@ -413,10 +564,11 @@ func renderButtonComp(page : &mut HtmlPage) {
 
             <div class="docs-subsection">
                 <h2>Loading</h2>
-                <p class="docs-subsection-desc">Use the <CodeText>loading</CodeText> prop to show a loading state.</p>
+                <p class="docs-subsection-desc">Use the <CodeText>loading</CodeText> prop to show a loading state with a spinner.</p>
                 <div class="docs-demo-box">
                     <div class="docs-demo-row">
                         <Button loading>Loading</Button>
+                        <Button variant="outline" loading>Loading...</Button>
                     </div>
                 </div>
             </div>
@@ -429,6 +581,28 @@ func renderButtonComp(page : &mut HtmlPage) {
                         <IconButton><Icon>+</Icon></IconButton>
                         <Fab><Icon>+</Icon> New</Fab>
                         <Fab disabled><Icon>?</Icon> Help</Fab>
+                    </div>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>As Child</h2>
+                <p class="docs-subsection-desc">Use <CodeText>asChild</CodeText> to render as a different element while keeping button styles.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Button asChild><a href="#" style="text-decoration:none;">Link styled as button</a></Button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>Composition</h2>
+                <p class="docs-subsection-desc">Buttons work great with other components for common patterns.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <div class="docs-demo-row"><Button>Save</Button><Button variant="outline">Cancel</Button></div>
+                        <div class="docs-demo-row"><Button variant="destructive">Delete</Button><Button variant="ghost">Cancel</Button></div>
+                        <div class="docs-demo-row"><Button loading>Processing...</Button><Button disabled>Submit</Button></div>
                     </div>
                 </div>
             </div>
@@ -459,6 +633,12 @@ func renderInputComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-input" data-comp="input">
             <h1 class="docs-component-title">Input</h1>
             <p class="docs-component-desc">Text input field with variant, size, and state support.</p>
+
+            <div class="docs-subsection">
+                <h2>Installation</h2>
+                <p class="docs-subsection-desc">Import the Input component from the components library.</p>
+                <div class="docs-code-block">import components::Input</div>
+            </div>
 
             <div class="docs-subsection">
                 <h2>Basic</h2>
@@ -565,9 +745,61 @@ func renderTextareaComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-textarea" data-comp="textarea">
             <h1 class="docs-component-title">Textarea</h1>
             <p class="docs-component-desc">Multi-line text input with variant and size support.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><TextArea placeholder="Type your message..." /></div></div>
-            <div class="docs-subsection"><h2>With Rows</h2><div class="docs-demo-box"><TextArea rows="5" placeholder="5 rows" /></div></div>
-            <div class="docs-subsection"><h2>Disabled</h2><div class="docs-demo-box"><TextArea disabled value="Cannot edit this" /></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <TextArea placeholder="Type your message..." />
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Rows</h2>
+                <p class="docs-subsection-desc">Use <CodeText>rows</CodeText> to set initial height.</p>
+                <div class="docs-demo-box">
+                    <TextArea rows="5" placeholder="5 rows" />
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Disabled</h2>
+                <div class="docs-demo-box">
+                    <TextArea disabled value="Cannot edit this" />
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Label</h2>
+                <p class="docs-subsection-desc">Wrap in <CodeText>Field</CodeText> for label and hint.</p>
+                <div class="docs-demo-box">
+                    <Field>
+                        <FieldLabel>Message</FieldLabel>
+                        <TextArea placeholder="Write your message..." />
+                        <FieldHint>Max 500 characters.</FieldHint>
+                    </Field>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <TextArea size="sm" placeholder="Small" />
+                        <TextArea placeholder="Default" />
+                        <TextArea size="lg" placeholder="Large" />
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">rows</td><td class="docs-prop-type">int</td><td class="docs-prop-default">3</td><td class="docs-prop-desc">Number of visible rows</td></tr>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                        <tr><td class="docs-prop-name">placeholder</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Placeholder text</td></tr>
+                        <tr><td class="docs-prop-name">value</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Textarea value</td></tr>
+                        <tr><td class="docs-prop-name">onChange</td><td class="docs-prop-type">function</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Change handler</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -641,7 +873,47 @@ func renderNativeSelectComp(page : &mut HtmlPage) {
                     </NativeSelect>
                 </div>
             </div>
-            <div class="docs-subsection"><h2>Disabled</h2><div class="docs-demo-box" style="max-width:320px;"><NativeSelect disabled placeholder="Cannot select"><option>Option</option></NativeSelect></div></div>
+            <div class="docs-subsection">
+                <h2>Disabled</h2>
+                <div class="docs-demo-box" style="max-width:320px;">
+                    <NativeSelect disabled placeholder="Cannot select"><option>Option</option></NativeSelect>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <div class="docs-demo-box" style="max-width:320px;">
+                    <div class="docs-demo-grid">
+                        <NativeSelect placeholder="Small">
+                            <option>Option A</option>
+                        </NativeSelect>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Label</h2>
+                <div class="docs-demo-box" style="max-width:320px;">
+                    <Field>
+                        <FieldLabel>Country</FieldLabel>
+                        <NativeSelect placeholder="Select country">
+                            <option value="us">United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="de">Germany</option>
+                        </NativeSelect>
+                    </Field>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">placeholder</td><td class="docs-prop-type">string</td><td class="docs-prop-default">Select...</td><td class="docs-prop-desc">Placeholder text</td></tr>
+                        <tr><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Option elements</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -672,10 +944,52 @@ func renderCheckboxComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-checkbox" data-comp="checkbox">
             <h1 class="docs-component-title">Checkbox</h1>
             <p class="docs-component-desc">Toggle control for boolean values.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><div class="docs-demo-row"><Checkbox>Accept terms</Checkbox></div></div></div>
-            <div class="docs-subsection"><h2>Default Checked</h2><div class="docs-demo-box"><div class="docs-demo-row"><Checkbox checked>Already checked</Checkbox></div></div></div>
-            <div class="docs-subsection"><h2>Disabled</h2><div class="docs-demo-box"><div class="docs-demo-row"><Checkbox disabled>Disabled</Checkbox><Checkbox disabled checked>Disabled checked</Checkbox></div></div></div>
-            <div class="docs-subsection"><h2>Size</h2><div class="docs-demo-box"><div class="docs-demo-row"><Checkbox size="sm">Small</Checkbox><Checkbox>Default</Checkbox><Checkbox size="lg">Large</Checkbox></div></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row"><Checkbox>Accept terms</Checkbox></div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Default Checked</h2>
+                <p class="docs-subsection-desc">Use <CodeText>checked</CodeText> prop for initial state.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row"><Checkbox checked>Already checked</Checkbox></div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Disabled</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Checkbox disabled>Disabled</Checkbox>
+                        <Checkbox disabled checked>Disabled checked</Checkbox>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Checkbox size="sm">Small</Checkbox>
+                        <Checkbox>Default</Checkbox>
+                        <Checkbox size="lg">Large</Checkbox>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">checked</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Initial checked state</td></tr>
+                        <tr><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">onChange</td><td class="docs-prop-type">function</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Change callback</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Label content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -685,9 +999,50 @@ func renderRadioComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-radio" data-comp="radio">
             <h1 class="docs-component-title">Radio</h1>
             <p class="docs-component-desc">Single selection from a set of options.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><div class="docs-demo-row"><Radio name="demo-radio" checked>Option A</Radio><Radio name="demo-radio">Option B</Radio><Radio name="demo-radio">Option C</Radio></div></div></div>
-            <div class="docs-subsection"><h2>Disabled</h2><div class="docs-demo-box"><div class="docs-demo-row"><Radio name="demo-disabled" disabled>Disabled</Radio><Radio name="demo-disabled" disabled checked>Disabled checked</Radio></div></div></div>
-            <div class="docs-subsection"><h2>Size</h2><div class="docs-demo-box"><div class="docs-demo-row"><Radio name="demo-size" size="sm">Small</Radio><Radio name="demo-size" checked>Default</Radio><Radio name="demo-size" size="lg">Large</Radio></div></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Radio name="demo-radio" checked>Option A</Radio>
+                        <Radio name="demo-radio">Option B</Radio>
+                        <Radio name="demo-radio">Option C</Radio>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Disabled</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Radio name="demo-disabled" disabled>Disabled</Radio>
+                        <Radio name="demo-disabled" disabled checked>Disabled checked</Radio>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Radio name="demo-size" size="sm">Small</Radio>
+                        <Radio name="demo-size" checked>Default</Radio>
+                        <Radio name="demo-size" size="lg">Large</Radio>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">name</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Radio group name</td></tr>
+                        <tr><td class="docs-prop-name">checked</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Initial checked state</td></tr>
+                        <tr><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">onChange</td><td class="docs-prop-type">function</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Change callback</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Label content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -697,9 +1052,48 @@ func renderSwitchComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-switch" data-comp="switch">
             <h1 class="docs-component-title">Switch</h1>
             <p class="docs-component-desc">Toggle between two states.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><div class="docs-demo-row"><Switch checked>Airplane Mode</Switch><Switch>Notifications</Switch></div></div></div>
-            <div class="docs-subsection"><h2>Disabled</h2><div class="docs-demo-box"><div class="docs-demo-row"><Switch disabled>Disabled off</Switch><Switch disabled checked>Disabled on</Switch></div></div></div>
-            <div class="docs-subsection"><h2>Size</h2><div class="docs-demo-box"><div class="docs-demo-row"><Switch size="sm">Small</Switch><Switch>Default</Switch><Switch size="lg">Large</Switch></div></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Switch checked>Airplane Mode</Switch>
+                        <Switch>Notifications</Switch>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Disabled</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Switch disabled>Disabled off</Switch>
+                        <Switch disabled checked>Disabled on</Switch>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Switch size="sm">Small</Switch>
+                        <Switch>Default</Switch>
+                        <Switch size="lg">Large</Switch>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">checked</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Initial checked state</td></tr>
+                        <tr><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">onChange</td><td class="docs-prop-type">function</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Change callback</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Label content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -740,6 +1134,37 @@ func renderToggleGroupComp(page : &mut HtmlPage) {
                     </ToggleGroup>
                 </div>
             </div>
+            <div class="docs-subsection">
+                <h2>Variant</h2>
+                <p class="docs-subsection-desc">Use <CodeText>variant</CodeText> prop for different styles.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <ToggleGroup type="single" variant="outline">
+                            <ToggleGroupItem value="a">Outline A</ToggleGroupItem>
+                            <ToggleGroupItem value="b">Outline B</ToggleGroupItem>
+                        </ToggleGroup>
+                        <ToggleGroup type="single" variant="ghost">
+                            <ToggleGroupItem value="a">Ghost A</ToggleGroupItem>
+                            <ToggleGroupItem value="b">Ghost B</ToggleGroupItem>
+                        </ToggleGroup>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">type</td><td class="docs-prop-type">string</td><td class="docs-prop-default">single</td><td class="docs-prop-desc">single | multiple</td></tr>
+                        <tr><td class="docs-prop-name">defaultValue</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Initial value</td></tr>
+                        <tr><td class="docs-prop-name">variant</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">default | outline | ghost</td></tr>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                        <tr><td class="docs-prop-name">onValueChange</td><td class="docs-prop-type">function</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Value change callback</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -778,6 +1203,34 @@ func renderRadioGroupComp(page : &mut HtmlPage) {
                         <RadioGroupItem value="b">Disabled B</RadioGroupItem>
                     </RadioGroup>
                 </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Description</h2>
+                <p class="docs-subsection-desc">Combine with <CodeText>Field</CodeText> for labels and descriptions.</p>
+                <div class="docs-demo-box">
+                    <RadioGroup name="rg-desc" defaultValue="free">
+                        <RadioGroupItem value="free">
+                            <div><Text>Free</Text><Caption>muted</Caption></div>
+                        </RadioGroupItem>
+                        <RadioGroupItem value="pro">
+                            <div><Text>Pro</Text><Caption>Best for teams</Caption></div>
+                        </RadioGroupItem>
+                    </RadioGroup>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">name</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Radio group name</td></tr>
+                        <tr><td class="docs-prop-name">defaultValue</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Initial value</td></tr>
+                        <tr><td class="docs-prop-name">direction</td><td class="docs-prop-type">string</td><td class="docs-prop-default">column</td><td class="docs-prop-desc">column | row</td></tr>
+                        <tr><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                        <tr><td class="docs-prop-name">onValueChange</td><td class="docs-prop-type">function</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Value change callback</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -822,6 +1275,17 @@ func renderDialogComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-dialog" data-comp="dialog">
             <h1 class="docs-component-title">Dialog</h1>
             <p class="docs-component-desc">A modal overlay with focus trap, inert background, and Escape to close.</p>
+
+            <div class="docs-subsection">
+                <h2>Installation</h2>
+                <p class="docs-subsection-desc">Import Dialog components from the components library.</p>
+                <div class="docs-code-block">import components::Dialog
+import components::DialogBackdrop
+import components::DialogContent
+import components::DialogHeader
+import components::DialogActions</div>
+            </div>
+
             <div class="docs-subsection">
                 <h2>Basic</h2>
                 <p class="docs-subsection-desc">Click the button below to open a dialog. Press <CodeText>Escape</CodeText> or click the backdrop to close.</p>
@@ -830,13 +1294,15 @@ func renderDialogComp(page : &mut HtmlPage) {
                 </div>
                 <div class="docs-hint" style="margin-top:0.75rem;">Dialog traps focus inside and makes the background inert.</div>
             </div>
+
             <div class="docs-subsection">
                 <h2>Composition</h2>
-                <p class="docs-subsection-desc">Use <CodeText>Dialog</CodeText>, <CodeText>DialogBackdrop</CodeText>, <CodeText>DialogContent</CodeText>, <CodeText>DialogHeader</CodeText>, and <CodeText>DialogActions</CodeText> together.</p>
+                <p class="docs-subsection-desc">Use <CodeText>Dialog</CodeText>, <CodeText>DialogBackdrop</CodeText>, <CodeText>DialogContent</CodeText>, <CodeText>DialogHeader</CodeText>, and <CodeText>DialogActions</CodeText> together for full control.</p>
                 <div class="docs-demo-box">
                     <CompositionDialogDemo />
                 </div>
             </div>
+
             <div class="docs-subsection">
                 <h2>Controlled</h2>
                 <p class="docs-subsection-desc">Use <CodeText>open</CodeText> prop to control visibility from parent state.</p>
@@ -844,6 +1310,7 @@ func renderDialogComp(page : &mut HtmlPage) {
                     <ControlledDialogDemo />
                 </div>
             </div>
+
             <div class="docs-subsection">
                 <h2>Custom Width</h2>
                 <p class="docs-subsection-desc">Set width via inline style on <CodeText>DialogContent</CodeText>.</p>
@@ -851,6 +1318,7 @@ func renderDialogComp(page : &mut HtmlPage) {
                     <WideDialogDemo />
                 </div>
             </div>
+
             <div class="docs-subsection">
                 <h2>Custom Close Button</h2>
                 <p class="docs-subsection-desc">Add an explicit close button inside <CodeText>DialogActions</CodeText>.</p>
@@ -858,6 +1326,33 @@ func renderDialogComp(page : &mut HtmlPage) {
                     <CloseButtonDialogDemo />
                 </div>
             </div>
+
+            <div class="docs-subsection">
+                <h2>Alert Dialog</h2>
+                <p class="docs-subsection-desc">Use for destructive actions that require confirmation.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Alert variant="warning">
+                            <AlertTitle>Are you sure?</AlertTitle>
+                            <AlertDescription>This action cannot be undone.</AlertDescription>
+                        </Alert>
+                    </div>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>Accessibility</h2>
+                <p class="docs-subsection-desc">Dialog automatically handles accessibility features:</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <div class="docs-demo-row"><Badge variant="info">Focus Trap</Badge><Text>Tab cycles through focusable elements</Text></div>
+                        <div class="docs-demo-row"><Badge variant="info">Escape Key</Badge><Text>Press Escape to close</Text></div>
+                        <div class="docs-demo-row"><Badge variant="info">Inert Background</Badge><Text>Background content is not interactive</Text></div>
+                        <div class="docs-demo-row"><Badge variant="info">ARIA Labels</Badge><Text>Use ariaLabel for screen readers</Text></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="docs-subsection">
                 <h2>Example Code</h2>
                 <div class="docs-demo-box">
@@ -1002,6 +1497,8 @@ func renderBadgeComp(page : &mut HtmlPage) {
                         <Badge variant="warning">Warning</Badge>
                         <Badge variant="info">Info</Badge>
                         <Badge variant="outline">Outline</Badge>
+                        <Badge variant="ghost">Ghost</Badge>
+                        <Badge variant="link">Link</Badge>
                     </div>
                 </div>
             </div>
@@ -1015,6 +1512,29 @@ func renderBadgeComp(page : &mut HtmlPage) {
                         <Badge size="lg">LG</Badge>
                     </div>
                 </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Icon</h2>
+                <p class="docs-subsection-desc">Badges can contain icons for additional context.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Badge variant="success">✓ Active</Badge>
+                        <Badge variant="error">✕ Inactive</Badge>
+                        <Badge variant="warning">⚠ Warning</Badge>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">variant</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">default | secondary | accent | success | error | warning | info | outline | ghost | link</td></tr>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">xs | sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Badge content</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -1040,20 +1560,54 @@ func renderAvatarComp(page : &mut HtmlPage) {
             <div class="docs-subsection">
                 <h2>Bordered</h2>
                 <div class="docs-demo-box">
-                    <div class="docs-demo-row"><Avatar bordered>BD</Avatar><Avatar bordered size="lg">BD</Avatar></div>
+                    <div class="docs-demo-row">
+                        <Avatar bordered>BD</Avatar>
+                        <Avatar bordered size="lg">BD</Avatar>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Status Badge</h2>
+                <p class="docs-subsection-desc">Use <CodeText>AvatarBadge</CodeText> to show online/offline status.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Avatar>A<AvatarBadge /></Avatar>
+                        <Avatar size="lg">B<AvatarBadge /></Avatar>
+                    </div>
                 </div>
             </div>
             <div class="docs-subsection">
                 <h2>Group</h2>
                 <div class="docs-demo-box">
-                    <AvatarGroup><Avatar>A</Avatar><Avatar>B</Avatar><Avatar>C</Avatar></AvatarGroup>
+                    <AvatarGroup>
+                        <Avatar>A</Avatar>
+                        <Avatar>B</Avatar>
+                        <Avatar>C</Avatar>
+                    </AvatarGroup>
                 </div>
             </div>
             <div class="docs-subsection">
                 <h2>More Count</h2>
                 <div class="docs-demo-box">
-                    <div class="docs-demo-row"><Avatar>A</Avatar><Avatar>B</Avatar><AvatarMore count="+5" /></div>
+                    <div class="docs-demo-row">
+                        <Avatar>A</Avatar>
+                        <Avatar>B</Avatar>
+                        <AvatarMore count="+5" />
+                    </div>
                 </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">xs | sm | default | lg | xl</td></tr>
+                        <tr><td class="docs-prop-name">bordered</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Add border</td></tr>
+                        <tr><td class="docs-prop-name">src</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Image URL</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Fallback text</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -1093,6 +1647,34 @@ func renderCardComp(page : &mut HtmlPage) {
                         <Card><CardHeader><CardTitle level={4}>Level 4</CardTitle></CardHeader></Card>
                     </div>
                 </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <p class="docs-subsection-desc">Use <CodeText>size="sm"</CodeText> for compact cards.</p>
+                <div class="docs-demo-box" style="max-width:380px;">
+                    <div class="docs-demo-grid">
+                        <Card size="sm">
+                            <CardHeader><CardTitle>Compact Card</CardTitle></CardHeader>
+                            <CardBody><Text>Smaller padding and spacing.</Text></CardBody>
+                        </Card>
+                        <Card>
+                            <CardHeader><CardTitle>Default Card</CardTitle></CardHeader>
+                            <CardBody><Text>Standard padding and spacing.</Text></CardBody>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Component</th><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">Card</td><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default</td></tr>
+                        <tr><td class="docs-prop-name">Card</td><td class="docs-prop-name">onClick</td><td class="docs-prop-type">function</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Click handler</td></tr>
+                        <tr><td class="docs-prop-name">CardTitle</td><td class="docs-prop-name">level</td><td class="docs-prop-type">int</td><td class="docs-prop-default">3</td><td class="docs-prop-desc">Heading level (2-6)</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -1165,6 +1747,21 @@ func renderAccordionComp(page : &mut HtmlPage) {
                     </Accordion>
                 </div>
             </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Component</th><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">Accordion</td><td class="docs-prop-name">multiple</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Allow multiple items open</td></tr>
+                        <tr><td class="docs-prop-name">Accordion</td><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Accordion items</td></tr>
+                        <tr><td class="docs-prop-name">AccordionItem</td><td class="docs-prop-name">value</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Unique identifier</td></tr>
+                        <tr><td class="docs-prop-name">AccordionItem</td><td class="docs-prop-name">trigger</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Trigger label</td></tr>
+                        <tr><td class="docs-prop-name">AccordionItem</td><td class="docs-prop-name">defaultOpen</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Initially open</td></tr>
+                        <tr><td class="docs-prop-name">AccordionItem</td><td class="docs-prop-name">disabled</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Disabled state</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1181,10 +1778,20 @@ func renderTabsComp(page : &mut HtmlPage) {
                 </div>
             </div>
             <div class="docs-subsection">
-                <h2>With ARIA Label</h2>
-                <p class="docs-subsection-desc">Pass <CodeText>ariaLabel</CodeText> for accessibility.</p>
+                <h2>Variant</h2>
+                <p class="docs-subsection-desc">Use <CodeText>variant</CodeText> for different tab styles: <CodeText>line</CodeText> (default) or <CodeText>pills</CodeText>.</p>
                 <div class="docs-demo-box">
-                    <Tabs tabs={["One", "Two"]} panels={["Panel 1", "Panel 2"]} ariaLabel="Settings tabs" />
+                    <div class="docs-demo-grid">
+                        <Tabs tabs={["Line Tab 1", "Line Tab 2"]} panels={["Line panel 1.", "Line panel 2."]} variant="line" />
+                        <Tabs tabs={["Pill Tab 1", "Pill Tab 2"]} panels={["Pill panel 1.", "Pill panel 2."]} variant="pills" />
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Disabled</h2>
+                <p class="docs-subsection-desc">Use <CodeText>disabledTabs</CodeText> to disable specific tabs by index.</p>
+                <div class="docs-demo-box">
+                    <Tabs tabs={["Active", "Disabled", "Also Active"]} panels={["Active content.", "Disabled content.", "Also active content."]} disabledTabs={[1]} />
                 </div>
             </div>
             <div class="docs-subsection">
@@ -1212,6 +1819,8 @@ func renderTabsComp(page : &mut HtmlPage) {
                         <tr><td class="docs-prop-name">panels</td><td class="docs-prop-type">string[]</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Panel content strings</td></tr>
                         <tr><td class="docs-prop-name">defaultIndex</td><td class="docs-prop-type">int</td><td class="docs-prop-default">0</td><td class="docs-prop-desc">Initially active tab index</td></tr>
                         <tr><td class="docs-prop-name">ariaLabel</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Accessible label</td></tr>
+                        <tr><td class="docs-prop-name">variant</td><td class="docs-prop-type">string</td><td class="docs-prop-default">line</td><td class="docs-prop-desc">line | pills</td></tr>
+                        <tr><td class="docs-prop-name">disabledTabs</td><td class="docs-prop-type">int[]</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Indices of disabled tabs</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -1393,14 +2002,13 @@ func renderTableComp(page : &mut HtmlPage) {
             </div>
         </div>
     }
-}
-
-func renderListComp(page : &mut HtmlPage) {
+}func renderListComp(page : &mut HtmlPage) {
     #html {
         <div class="docs-section" id="docs-list" data-comp="list">
             <h1 class="docs-component-title">List</h1>
             <p class="docs-component-desc">Styled list of items.</p>
-            <div class="docs-subsection"><h2>Basic</h2>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
                 <div class="docs-demo-box" style="max-width:400px;">
                     <List>
                         <ListItem>First item</ListItem>
@@ -1408,6 +2016,26 @@ func renderListComp(page : &mut HtmlPage) {
                         <ListItem>Third item</ListItem>
                     </List>
                 </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Unordered</h2>
+                <div class="docs-demo-box" style="max-width:400px;">
+                    <List type="ul">
+                        <ListItem>Unordered 1</ListItem>
+                        <ListItem>Unordered 2</ListItem>
+                    </List>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">type</td><td class="docs-prop-type">string</td><td class="docs-prop-default">ol</td><td class="docs-prop-desc">ol | ul</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">List items</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }
@@ -1418,8 +2046,44 @@ func renderSeparatorComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-separator" data-comp="separator">
             <h1 class="docs-component-title">Separator</h1>
             <p class="docs-component-desc">Visual divider between content sections.</p>
-            <div class="docs-subsection"><h2>Horizontal</h2><div class="docs-demo-box"><Text>Above</Text><Separator /><Text>Below</Text></div></div>
-            <div class="docs-subsection"><h2>Vertical</h2><div class="docs-demo-box"><div style="display:flex;align-items:center;gap:1rem;height:2rem;"><Text>Left</Text><Separator orientation="vertical" /><Text>Right</Text></div></div></div>
+            <div class="docs-subsection">
+                <h2>Horizontal</h2>
+                <div class="docs-demo-box">
+                    <Text>Above</Text>
+                    <Separator />
+                    <Text>Below</Text>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Vertical</h2>
+                <div class="docs-demo-box">
+                    <div style="display:flex;align-items:center;gap:1rem;height:2rem;">
+                        <Text>Left</Text>
+                        <Separator orientation="vertical" />
+                        <Text>Right</Text>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Styled</h2>
+                <p class="docs-subsection-desc">Customize with CSS classes.</p>
+                <div class="docs-demo-box">
+                    <Text>Above</Text>
+                    <div style="height:2px;background:hsl(var(--primary));margin:0.5rem 0;"></div>
+                    <Text>Below</Text>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">orientation</td><td class="docs-prop-type">string</td><td class="docs-prop-default">horizontal</td><td class="docs-prop-desc">horizontal | vertical</td></tr>
+                        <tr><td class="docs-prop-name">className</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Additional CSS classes</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1429,8 +2093,48 @@ func renderSkeletonComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-skeleton" data-comp="skeleton">
             <h1 class="docs-component-title">Skeleton</h1>
             <p class="docs-component-desc">Loading placeholder with shimmer animation.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><div class="docs-demo-row"><Skeleton width="200px" height="20px" /><Skeleton width="120px" height="20px" /></div></div></div>
-            <div class="docs-subsection"><h2>Circle</h2><div class="docs-demo-box"><div class="docs-demo-row"><Skeleton circle /><Skeleton circle width="3rem" height="3rem" /></div></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Skeleton width="200px" height="20px" />
+                        <Skeleton width="120px" height="20px" />
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Circle</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Skeleton circle />
+                        <Skeleton circle width="3rem" height="3rem" />
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Card Loading</h2>
+                <p class="docs-subsection-desc">Use skeletons to simulate loading content.</p>
+                <div class="docs-demo-box" style="max-width:300px;">
+                    <div class="docs-demo-grid">
+                        <Skeleton width="100%" height="150px" />
+                        <Skeleton width="60%" height="16px" />
+                        <Skeleton width="100%" height="12px" />
+                        <Skeleton width="80%" height="12px" />
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">width</td><td class="docs-prop-type">string</td><td class="docs-prop-default">100%</td><td class="docs-prop-desc">Width (CSS value)</td></tr>
+                        <tr><td class="docs-prop-name">height</td><td class="docs-prop-type">string</td><td class="docs-prop-default">20px</td><td class="docs-prop-desc">Height (CSS value)</td></tr>
+                        <tr><td class="docs-prop-name">circle</td><td class="docs-prop-type">bool</td><td class="docs-prop-default">false</td><td class="docs-prop-desc">Render as circle</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1440,8 +2144,47 @@ func renderSpinnerComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-spinner" data-comp="spinner">
             <h1 class="docs-component-title">Spinner</h1>
             <p class="docs-component-desc">Loading indicator with role=status for accessibility.</p>
-            <div class="docs-subsection"><h2>Size</h2><div class="docs-demo-box"><div class="docs-demo-row"><Spinner size="sm" /><Spinner /><Spinner size="lg" /></div></div></div>
-            <div class="docs-subsection"><h2>With Label</h2><div class="docs-demo-box"><div class="docs-demo-row"><Spinner label="Loading data" /><Spinner size="lg" label="Heavy load" /></div></div></div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Spinner size="sm" />
+                        <Spinner />
+                        <Spinner size="lg" />
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Label</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Spinner label="Loading data" />
+                        <Spinner size="lg" label="Heavy load" />
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Color</h2>
+                <p class="docs-subsection-desc">Use CSS to customize the spinner color.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Spinner />
+                        <Spinner style="border-top-color:hsl(var(--primary));" />
+                        <Spinner style="border-top-color:hsl(var(--destructive));" />
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">label</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Accessible label</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1451,7 +2194,37 @@ func renderKbdComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-kbd" data-comp="kbd">
             <h1 class="docs-component-title">Kbd</h1>
             <p class="docs-component-desc">Keyboard shortcut indicator.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><div class="docs-demo-row"><Kbd>Ctrl</Kbd><Kbd>Shift</Kbd><Kbd>K</Kbd></div></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Kbd>Ctrl</Kbd>
+                        <Kbd>Shift</Kbd>
+                        <Kbd>K</Kbd>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Shortcut Combinations</h2>
+                <p class="docs-subsection-desc">Display keyboard shortcuts with multiple keys.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <div class="docs-demo-row"><Kbd>Ctrl</Kbd><Kbd>C</Kbd><Caption>Copy</Caption></div>
+                        <div class="docs-demo-row"><Kbd>Ctrl</Kbd><Kbd>V</Kbd><Caption>Paste</Caption></div>
+                        <div class="docs-demo-row"><Kbd>Ctrl</Kbd><Kbd>Z</Kbd><Caption>Undo</Caption></div>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Key label</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1461,7 +2234,47 @@ func renderIconComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-icon" data-comp="icon">
             <h1 class="docs-component-title">Icon</h1>
             <p class="docs-component-desc">Styled icon container.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><div class="docs-demo-row"><Icon>+</Icon><Icon>?</Icon><Icon>i</Icon></div></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Icon>+</Icon>
+                        <Icon>?</Icon>
+                        <Icon>i</Icon>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Size</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Icon size="sm">+</Icon>
+                        <Icon>+</Icon>
+                        <Icon size="lg">+</Icon>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>In Button</h2>
+                <p class="docs-subsection-desc">Icons are commonly used inside buttons.</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-row">
+                        <Button variant="outline"><Icon>+</Icon> Add</Button>
+                        <Button variant="ghost"><Icon>×</Icon></Button>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | default | lg</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Icon content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1471,7 +2284,37 @@ func renderDividerComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-divider" data-comp="divider">
             <h1 class="docs-component-title">Divider</h1>
             <p class="docs-component-desc">Horizontal rule divider.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><Text>Above</Text><Divider /><Text>Below</Text></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <Text>Above</Text>
+                    <Divider />
+                    <Text>Below</Text>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Styled</h2>
+                <p class="docs-subsection-desc">Customize with CSS classes.</p>
+                <div class="docs-demo-box">
+                    <Text>Default</Text>
+                    <Divider />
+                    <Text>Styled</Text>
+                    <Divider style="border-color:hsl(var(--primary));" />
+                    <Text>Thick</Text>
+                    <Divider style="border-width:2px;" />
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">className</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Additional CSS classes</td></tr>
+                        <tr><td class="docs-prop-name">style</td><td class="docs-prop-type">string</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Inline styles</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1481,15 +2324,53 @@ func renderBreadcrumbComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-breadcrumbs" data-comp="breadcrumbs">
             <h1 class="docs-component-title">Breadcrumb</h1>
             <p class="docs-component-desc">Navigation breadcrumb trail.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box">
-                <Breadcrumbs>
-                    <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem><BreadcrumbLink href="/docs">Docs</BreadcrumbLink></BreadcrumbItem>
-                    <BreadcrumbSeparator separator="→" />
-                    <BreadcrumbItem><BreadcrumbCurrent>Components</BreadcrumbCurrent></BreadcrumbItem>
-                </Breadcrumbs>
-            </div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <Breadcrumbs>
+                        <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem><BreadcrumbLink href="/docs">Docs</BreadcrumbLink></BreadcrumbItem>
+                        <BreadcrumbSeparator separator="→" />
+                        <BreadcrumbItem><BreadcrumbCurrent>Components</BreadcrumbCurrent></BreadcrumbItem>
+                    </Breadcrumbs>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Icons</h2>
+                <p class="docs-subsection-desc">Add icons to breadcrumb links for visual context.</p>
+                <div class="docs-demo-box">
+                    <Breadcrumbs>
+                        <BreadcrumbItem><BreadcrumbLink href="/">🏠 Home</BreadcrumbLink></BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem><BreadcrumbCurrent>Settings</BreadcrumbCurrent></BreadcrumbItem>
+                    </Breadcrumbs>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Collapsed</h2>
+                <p class="docs-subsection-desc">Use <CodeText>BreadcrumbEllipsis</CodeText> for long trails.</p>
+                <div class="docs-demo-box">
+                    <Breadcrumbs>
+                        <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem><BreadcrumbEllipsis /></BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem><BreadcrumbCurrent>Current</BreadcrumbCurrent></BreadcrumbItem>
+                    </Breadcrumbs>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">separator</td><td class="docs-prop-type">string</td><td class="docs-prop-default">&#47;</td><td class="docs-prop-desc">Separator character</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Breadcrumb items</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1499,12 +2380,37 @@ func renderContainerComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-container" data-comp="container">
             <h1 class="docs-component-title">Container</h1>
             <p class="docs-component-desc">Centered content wrapper with max-width breakpoints.</p>
-            <div class="docs-subsection"><h2>Sizes</h2><div class="docs-demo-box"><div class="docs-demo-grid">
-                <Container size="sm"><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>sm (40rem)</Text></div></Container>
-                <Container size="md"><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>md (48rem)</Text></div></Container>
-                <Container><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>default (80rem)</Text></div></Container>
-                <Container size="full"><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>full (no max)</Text></div></Container>
-            </div></div></div>
+            <div class="docs-subsection">
+                <h2>Sizes</h2>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <Container size="sm"><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>sm (40rem)</Text></div></Container>
+                        <Container size="md"><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>md (48rem)</Text></div></Container>
+                        <Container><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>default (80rem)</Text></div></Container>
+                        <Container size="full"><div style="padding:0.5rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Text>full (no max)</Text></div></Container>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Centered Content</h2>
+                <p class="docs-subsection-desc">Containers center their content with auto margins.</p>
+                <div class="docs-demo-box">
+                    <Container size="md" style="background:hsl(var(--muted));border-radius:8px;padding:2rem;">
+                        <Text>This content is centered and has a max-width.</Text>
+                    </Container>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">size</td><td class="docs-prop-type">string</td><td class="docs-prop-default">default</td><td class="docs-prop-desc">sm | md | default | full</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1514,12 +2420,44 @@ func renderStackComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-stack" data-comp="stack">
             <h1 class="docs-component-title">Stack</h1>
             <p class="docs-component-desc">Flexbox layout primitive with direction, gap, and alignment.</p>
-            <div class="docs-subsection"><h2>Direction</h2><div class="docs-demo-box">
-                <Stack direction="row" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Badge>A</Badge><Badge>B</Badge><Badge>C</Badge></Stack>
-            </div></div>
-            <div class="docs-subsection"><h2>Justify Between</h2><div class="docs-demo-box">
-                <Stack direction="row" justify="between" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;"><Badge>Left</Badge><Badge>Right</Badge></Stack>
-            </div></div>
+            <div class="docs-subsection">
+                <h2>Direction</h2>
+                <div class="docs-demo-box">
+                    <Stack direction="row" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;">
+                        <Badge>A</Badge><Badge>B</Badge><Badge>C</Badge>
+                    </Stack>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Justify Between</h2>
+                <div class="docs-demo-box">
+                    <Stack direction="row" justify="between" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;">
+                        <Badge>Left</Badge><Badge>Right</Badge>
+                    </Stack>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Vertical Stack</h2>
+                <div class="docs-demo-box">
+                    <Stack gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;max-width:200px;">
+                        <Badge>First</Badge><Badge>Second</Badge><Badge>Third</Badge>
+                    </Stack>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">direction</td><td class="docs-prop-type">string</td><td class="docs-prop-default">column</td><td class="docs-prop-desc">row | column</td></tr>
+                        <tr><td class="docs-prop-name">gap</td><td class="docs-prop-type">string</td><td class="docs-prop-default">md</td><td class="docs-prop-desc">sm | md | lg</td></tr>
+                        <tr><td class="docs-prop-name">justify</td><td class="docs-prop-type">string</td><td class="docs-prop-default">start</td><td class="docs-prop-desc">start | center | end | between</td></tr>
+                        <tr><td class="docs-prop-name">align</td><td class="docs-prop-type">string</td><td class="docs-prop-default">stretch</td><td class="docs-prop-desc">start | center | end | stretch</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1529,13 +2467,48 @@ func renderGridComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-grid" data-comp="grid">
             <h1 class="docs-component-title">Grid</h1>
             <p class="docs-component-desc">CSS Grid layout primitive.</p>
-            <div class="docs-subsection"><h2>Columns</h2><div class="docs-demo-box">
-                <Grid cols="3" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;">
-                    <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>1</Text></div>
-                    <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>2</Text></div>
-                    <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>3</Text></div>
-                </Grid>
-            </div></div>
+            <div class="docs-subsection">
+                <h2>Columns</h2>
+                <div class="docs-demo-box">
+                    <Grid cols="3" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;">
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>1</Text></div>
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>2</Text></div>
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>3</Text></div>
+                    </Grid>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>2 Columns</h2>
+                <div class="docs-demo-box">
+                    <Grid cols="2" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;">
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>A</Text></div>
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>B</Text></div>
+                    </Grid>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>4 Columns</h2>
+                <div class="docs-demo-box">
+                    <Grid cols="4" gap="sm" style="padding:1rem;border:1px dashed hsl(var(--border));border-radius:8px;">
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>1</Text></div>
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>2</Text></div>
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>3</Text></div>
+                        <div style="padding:0.5rem;background:hsl(var(--muted));border-radius:8px;text-align:center;"><Text>4</Text></div>
+                    </Grid>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">cols</td><td class="docs-prop-type">string</td><td class="docs-prop-default">1</td><td class="docs-prop-desc">Number of columns (1-6)</td></tr>
+                        <tr><td class="docs-prop-name">gap</td><td class="docs-prop-type">string</td><td class="docs-prop-default">md</td><td class="docs-prop-desc">sm | md | lg</td></tr>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Grid items</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1545,7 +2518,31 @@ func renderPaperComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-paper" data-comp="paper">
             <h1 class="docs-component-title">Paper</h1>
             <p class="docs-component-desc">Elevated surface container with border and shadow.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box" style="max-width:380px;"><Paper><Text>Paper content with border and shadow.</Text></Paper></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box" style="max-width:380px;">
+                    <Paper><Text>Paper content with border and shadow.</Text></Paper>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Header</h2>
+                <div class="docs-demo-box" style="max-width:380px;">
+                    <Paper>
+                        <H3>Paper Title</H3>
+                        <Text>Paper with header and body content.</Text>
+                    </Paper>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1555,7 +2552,36 @@ func renderAppBarComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-appbar" data-comp="appbar">
             <h1 class="docs-component-title">AppBar</h1>
             <p class="docs-component-desc">Horizontal navigation bar.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><AppBar><H3>My App</H3><Button variant="outline" size="sm">Menu</Button></AppBar></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <AppBar><H3>My App</H3><Button variant="outline" size="sm">Menu</Button></AppBar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Navigation</h2>
+                <p class="docs-subsection-desc">Combine with navigation links and actions.</p>
+                <div class="docs-demo-box">
+                    <AppBar>
+                        <H3>Dashboard</H3>
+                        <Stack direction="row" gap="sm">
+                            <Button variant="ghost" size="sm">Home</Button>
+                            <Button variant="ghost" size="sm">Settings</Button>
+                            <Button size="sm">Logout</Button>
+                        </Stack>
+                    </AppBar>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">AppBar content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1565,7 +2591,45 @@ func renderDrawerComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-drawer" data-comp="drawer">
             <h1 class="docs-component-title">Drawer</h1>
             <p class="docs-component-desc">Side panel for navigation or settings.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box" style="max-width:300px;"><Drawer><H3>Drawer</H3><Text>Side panel content.</Text><Menu><MenuItem href="#">Item 1</MenuItem><MenuItem href="#">Item 2</MenuItem></Menu></Drawer></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box" style="max-width:300px;">
+                    <Drawer>
+                        <H3>Drawer</H3>
+                        <Text>Side panel content.</Text>
+                        <Menu>
+                            <MenuItem href="#">Item 1</MenuItem>
+                            <MenuItem href="#">Item 2</MenuItem>
+                        </Menu>
+                    </Drawer>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Header</h2>
+                <div class="docs-demo-box" style="max-width:300px;">
+                    <Drawer>
+                        <div style="padding:1rem;border-bottom:1px solid hsl(var(--border));">
+                            <H4>Settings</H4>
+                            <Caption>Manage your account</Caption>
+                        </div>
+                        <Menu>
+                            <MenuItem href="#">Profile</MenuItem>
+                            <MenuItem href="#">Security</MenuItem>
+                            <MenuItem href="#">Notifications</MenuItem>
+                        </Menu>
+                    </Drawer>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Drawer content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1575,7 +2639,33 @@ func renderPopoverComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-popover" data-comp="popover">
             <h1 class="docs-component-title">Popover</h1>
             <p class="docs-component-desc">Floating surface for contextual content.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box" style="max-width:300px;"><Popover><Caption>Popover</Caption><Text>Contextual content here.</Text></Popover></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box" style="max-width:300px;">
+                    <Popover><Caption>Popover</Caption><Text>Contextual content here.</Text></Popover>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Form</h2>
+                <p class="docs-subsection-desc">Popovers work well for forms and inputs.</p>
+                <div class="docs-demo-box" style="max-width:300px;">
+                    <Popover>
+                        <H3>Settings</H3>
+                        <Input placeholder="Search..." />
+                        <Button size="sm" style="margin-top:0.5rem;">Save</Button>
+                    </Popover>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Popover content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1585,7 +2675,32 @@ func renderSnackbarComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-snackbar" data-comp="snackbar">
             <h1 class="docs-component-title">Snackbar</h1>
             <p class="docs-component-desc">Inline status notification.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><Snackbar><BadgeSuccess>Saved</BadgeSuccess><Text>Changes written to disk.</Text></Snackbar></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <Snackbar><BadgeSuccess>Saved</BadgeSuccess><Text>Changes written to disk.</Text></Snackbar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Action</h2>
+                <p class="docs-subsection-desc">Add action buttons for user interaction.</p>
+                <div class="docs-demo-box">
+                    <Snackbar>
+                        <Text>Message sent.</Text>
+                        <Button variant="ghost" size="sm">Undo</Button>
+                    </Snackbar>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Snackbar content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1595,7 +2710,39 @@ func renderBottomBarComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-bottombar" data-comp="bottombar">
             <h1 class="docs-component-title">Bottom Bar</h1>
             <p class="docs-component-desc">Mobile navigation bar for app shells.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><BottomBar><IconButton><Icon>H</Icon></IconButton><IconButton><Icon>S</Icon></IconButton><Fab><Icon>+</Icon>New</Fab><IconButton><Icon>P</Icon></IconButton></BottomBar></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <BottomBar>
+                        <IconButton><Icon>H</Icon></IconButton>
+                        <IconButton><Icon>S</Icon></IconButton>
+                        <Fab><Icon>+</Icon>New</Fab>
+                        <IconButton><Icon>P</Icon></IconButton>
+                    </BottomBar>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Labels</h2>
+                <p class="docs-subsection-desc">Add text labels below icons for clarity.</p>
+                <div class="docs-demo-box">
+                    <BottomBar>
+                        <div style="text-align:center;"><Icon>H</Icon><Caption>Home</Caption></div>
+                        <div style="text-align:center;"><Icon>S</Icon><Caption>Search</Caption></div>
+                        <div style="text-align:center;"><Icon>+</Icon><Caption>New</Caption></div>
+                        <div style="text-align:center;"><Icon>P</Icon><Caption>Profile</Caption></div>
+                    </BottomBar>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Bottom bar items</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1605,7 +2752,47 @@ func renderEmptyComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-empty" data-comp="empty">
             <h1 class="docs-component-title">Empty State</h1>
             <p class="docs-component-desc">Placeholder when no data is available.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box"><EmptyState><H3>No results</H3><Text>Try adjusting your search filters.</Text><Button>Clear filters</Button></EmptyState></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box">
+                    <EmptyState>
+                        <H3>No results</H3>
+                        <Text>Try adjusting your search filters.</Text>
+                        <Button>Clear filters</Button>
+                    </EmptyState>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Icon</h2>
+                <p class="docs-subsection-desc">Add an icon for visual context.</p>
+                <div class="docs-demo-box">
+                    <EmptyState>
+                        <Icon size="lg">📭</Icon>
+                        <H3>Inbox empty</H3>
+                        <Text>No messages yet. Start a conversation!</Text>
+                    </EmptyState>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>With Action</h2>
+                <div class="docs-demo-box">
+                    <EmptyState>
+                        <H3>No projects</H3>
+                        <Text>Create your first project to get started.</Text>
+                        <Button variant="success">Create Project</Button>
+                    </EmptyState>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Empty state content</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     }
 }
@@ -1615,7 +2802,216 @@ func renderStatCardComp(page : &mut HtmlPage) {
         <div class="docs-section" id="docs-statcard" data-comp="statcard">
             <h1 class="docs-component-title">Stat Card</h1>
             <p class="docs-component-desc">Compact metric display card.</p>
-            <div class="docs-subsection"><h2>Basic</h2><div class="docs-demo-box" style="max-width:380px;"><StatCard><Caption>Revenue</Caption><H2>$12,345</H2><BadgeSuccess>+12%</BadgeSuccess></StatCard></div></div>
+            <div class="docs-subsection">
+                <h2>Basic</h2>
+                <div class="docs-demo-box" style="max-width:380px;">
+                    <StatCard>
+                        <Caption>Revenue</Caption>
+                        <H2>$12,345</H2>
+                        <BadgeSuccess>+12%</BadgeSuccess>
+                    </StatCard>
+                </div>
+            </div>
+            <div class="docs-subsection">
+                <h2>Variants</h2>
+                <p class="docs-subsection-desc">Different stat types for various metrics.</p>
+                <div class="docs-demo-box" style="max-width:380px;">
+                    <div class="docs-demo-grid">
+                        <StatCard>
+                            <Caption>Users</Caption>
+                            <H2>1,234</H2>
+                            <Badge variant="info">+8%</Badge>
+                        </StatCard>
+                        <StatCard>
+                            <Caption>Orders</Caption>
+                            <H2>567</H2>
+                            <Badge variant="warning">-3%</Badge>
+                        </StatCard>
+                    </div>
+                </div>
+            </div>
+            <hr class="docs-divider" />
+            <div class="docs-subsection">
+                <h2>API Reference</h2>
+                <table class="docs-props-table">
+                    <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td class="docs-prop-name">children</td><td class="docs-prop-type">any</td><td class="docs-prop-default">-</td><td class="docs-prop-desc">Stat content</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
+
+func renderFormPatterns(page : &mut HtmlPage) {
+    #html {
+        <div class="docs-section" id="docs-forms" data-comp="forms">
+            <h1 class="docs-component-title">Form Patterns</h1>
+            <p class="docs-component-desc">Complete form examples showing how components work together.</p>
+
+            <div class="docs-subsection">
+                <h2>Login Form</h2>
+                <p class="docs-subsection-desc">A complete login form using Input, Button, and Field components.</p>
+                <div class="docs-demo-box" style="max-width:380px;">
+                    <Card>
+                        <CardHeader><CardTitle>Login</CardTitle></CardHeader>
+                        <CardBody>
+                            <Field>
+                                <FieldLabel>Email</FieldLabel>
+                                <Input type="email" placeholder="you@example.com" />
+                            </Field>
+                            <Field>
+                                <FieldLabel>Password</FieldLabel>
+                                <Input type="password" placeholder="Enter password" />
+                                <FieldHint>Must be at least 8 characters</FieldHint>
+                            </Field>
+                        </CardBody>
+                        <CardFooter>
+                            <Button variant="outline" style="flex:1;">Cancel</Button>
+                            <Button style="flex:1;">Login</Button>
+                        </CardFooter>
+                    </Card>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>Registration Form</h2>
+                <p class="docs-subsection-desc">A registration form with validation states and multiple input types.</p>
+                <div class="docs-demo-box" style="max-width:400px;">
+                    <Card>
+                        <CardHeader><CardTitle>Create Account</CardTitle></CardHeader>
+                        <CardBody>
+                            <Field>
+                                <FieldLabel>Full Name</FieldLabel>
+                                <Input placeholder="John Doe" />
+                            </Field>
+                            <Field>
+                                <FieldLabel>Email</FieldLabel>
+                                <Input type="email" placeholder="john@example.com" />
+                            </Field>
+                            <Field>
+                                <FieldLabel>Password</FieldLabel>
+                                <Input type="password" placeholder="Min 8 characters" />
+                            </Field>
+                            <Field>
+                                <FieldLabel>Confirm Password</FieldLabel>
+                                <Input type="password" placeholder="Repeat password" />
+                            </Field>
+                            <div style="margin-top:0.5rem;">
+                                <Checkbox>Accept terms and conditions</Checkbox>
+                            </div>
+                        </CardBody>
+                        <CardFooter>
+                            <Button style="width:100%;">Create Account</Button>
+                        </CardFooter>
+                    </Card>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>Settings Form</h2>
+                <p class="docs-subsection-desc">A settings form using Switch, Select, and other controls.</p>
+                <div class="docs-demo-box" style="max-width:400px;">
+                    <Card>
+                        <CardHeader><CardTitle>Settings</CardTitle></CardHeader>
+                        <CardBody>
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid hsl(var(--border));">
+                                <Text>Dark Mode</Text>
+                                <Switch checked />
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid hsl(var(--border));">
+                                <Text>Notifications</Text>
+                                <Switch />
+                            </div>
+                            <div style="padding:0.5rem 0;">
+                                <Field>
+                                    <FieldLabel>Language</FieldLabel>
+                                    <Select options={["English", "Spanish", "French", "German"]} placeholder="Select language" />
+                                </Field>
+                            </div>
+                            <div style="padding:0.5rem 0;">
+                                <Field>
+                                    <FieldLabel>Theme</FieldLabel>
+                                    <RadioGroup name="theme" defaultValue="dark" direction="row">
+                                        <RadioGroupItem value="light">Light</RadioGroupItem>
+                                        <RadioGroupItem value="dark">Dark</RadioGroupItem>
+                                        <RadioGroupItem value="system">System</RadioGroupItem>
+                                    </RadioGroup>
+                                </Field>
+                            </div>
+                        </CardBody>
+                        <CardFooter>
+                            <Button variant="outline">Cancel</Button>
+                            <Button>Save Changes</Button>
+                        </CardFooter>
+                    </Card>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>Feedback Form</h2>
+                <p class="docs-subsection-desc">A feedback form with textarea and rating.</p>
+                <div class="docs-demo-box" style="max-width:400px;">
+                    <Card>
+                        <CardHeader><CardTitle>Send Feedback</CardTitle></CardHeader>
+                        <CardBody>
+                            <Field>
+                                <FieldLabel>Rating</FieldLabel>
+                                <RadioGroup name="rating" defaultValue="5" direction="row">
+                                    <RadioGroupItem value="5">5</RadioGroupItem>
+                                    <RadioGroupItem value="4">4</RadioGroupItem>
+                                    <RadioGroupItem value="3">3</RadioGroupItem>
+                                    <RadioGroupItem value="2">2</RadioGroupItem>
+                                    <RadioGroupItem value="1">1</RadioGroupItem>
+                                </RadioGroup>
+                            </Field>
+                            <Field>
+                                <FieldLabel>Comments</FieldLabel>
+                                <TextArea rows="4" placeholder="Tell us what you think..." />
+                            </Field>
+                        </CardBody>
+                        <CardFooter>
+                            <Button variant="outline">Cancel</Button>
+                            <Button>Submit</Button>
+                        </CardFooter>
+                    </Card>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>Search Form</h2>
+                <p class="docs-subsection-desc">A search form with input and filters.</p>
+                <div class="docs-demo-box" style="max-width:500px;">
+                    <Card>
+                        <CardBody>
+                            <div style="display:flex;gap:0.75rem;">
+                                <Input placeholder="Search..." style="flex:1;" />
+                                <Button>Search</Button>
+                            </div>
+                            <div style="margin-top:1rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+                                <Badge variant="outline">All</Badge>
+                                <Badge>Articles</Badge>
+                                <Badge>Users</Badge>
+                                <Badge>Tags</Badge>
+                            </div>
+                        </CardBody>
+                    </Card>
+                </div>
+            </div>
+
+            <div class="docs-subsection">
+                <h2>Composition Guide</h2>
+                <p class="docs-subsection-desc">Common patterns for combining form components:</p>
+                <div class="docs-demo-box">
+                    <div class="docs-demo-grid">
+                        <div class="docs-demo-row"><Badge variant="info">Field</Badge><Text>Wraps Input with label, hint, and error</Text></div>
+                        <div class="docs-demo-row"><Badge variant="info">Card</Badge><Text>Groups related form controls</Text></div>
+                        <div class="docs-demo-row"><Badge variant="info">Stack</Badge><Text>Controls vertical spacing between fields</Text></div>
+                        <div class="docs-demo-row"><Badge variant="info">Grid</Badge><Text>Arranges fields in columns</Text></div>
+                    </div>
+                </div>
+            </div>
         </div>
     }
 }
