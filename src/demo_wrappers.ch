@@ -106,6 +106,25 @@ public #universal SheetSideDemo(props) {
     </div>
 }
 
+// --- Table Demo ---
+// Table components (Table, TableHeadCell, TableCell) must be used inside
+// a universal component's JSX, NOT directly in #html blocks. When used in
+// #html, html_cbi wraps each universal component in a <span> hydration
+// boundary, which breaks table layout (<span> inside <tr> is invalid HTML).
+// When used inside another universal component, universal_cbi handles them
+// without span wrappers — the parent component owns the hydration boundary.
+
+public #universal TableBasicDemo(props) {
+    return <Table>
+        <thead><tr><TableHeadCell>Name</TableHeadCell><TableHeadCell>Status</TableHeadCell><TableHeadCell>Score</TableHeadCell></tr></thead>
+        <tbody>
+            <tr><TableCell>Alpha</TableCell><TableCell>Active</TableCell><TableCell>95</TableCell></tr>
+            <tr><TableCell>Beta</TableCell><TableCell>Pending</TableCell><TableCell>82</TableCell></tr>
+            <tr><TableCell>Gamma</TableCell><TableCell>Inactive</TableCell><TableCell>71</TableCell></tr>
+        </tbody>
+    </Table>
+}
+
 // --- Toast Demo ---
 
 public #universal ToastDemo(props) {

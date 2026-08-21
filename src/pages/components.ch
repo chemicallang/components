@@ -1388,14 +1388,7 @@ func renderTableComp(page : &mut HtmlPage) {
             <p class="docs-component-desc">Data table with header and cell components.</p>
             <div class="docs-subsection"><h2>Basic</h2>
                 <div class="docs-demo-box">
-                    <Table>
-                        <thead><tr><TableHeadCell>Name</TableHeadCell><TableHeadCell>Status</TableHeadCell><TableHeadCell>Score</TableHeadCell></tr></thead>
-                        <tbody>
-                            <tr><TableCell>Alpha</TableCell><TableCell>Active</TableCell><TableCell>95</TableCell></tr>
-                            <tr><TableCell>Beta</TableCell><TableCell>Pending</TableCell><TableCell>82</TableCell></tr>
-                            <tr><TableCell>Gamma</TableCell><TableCell>Inactive</TableCell><TableCell>71</TableCell></tr>
-                        </tbody>
-                    </Table>
+                    <TableBasicDemo />
                 </div>
             </div>
         </div>
