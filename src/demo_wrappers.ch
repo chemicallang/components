@@ -9,15 +9,12 @@ public #universal BasicDialogDemo(props) {
     return <div>
         <Button onClick={() => { isOpen = true }}>Open Dialog</Button>
         <Dialog open={isOpen} onClose={() => { isOpen = false }} ariaLabel="Basic dialog demo">
-            <DialogBackdrop />
-            <DialogContent>
-                <DialogHeader><H3>Dialog Demo</H3></DialogHeader>
-                <Text>This is an interactive dialog. Press Escape or click the backdrop to close.</Text>
-                <DialogActions>
-                    <Button variant="outline" onClick={() => { isOpen = false }}>Cancel</Button>
-                    <Button onClick={() => { isOpen = false }}>Confirm</Button>
-                </DialogActions>
-            </DialogContent>
+            <DialogHeader><H3>Dialog Demo</H3></DialogHeader>
+            <Text>This is an interactive dialog. Press Escape or click the backdrop to close.</Text>
+            <DialogActions>
+                <Button variant="outline" onClick={() => { isOpen = false }}>Cancel</Button>
+                <Button onClick={() => { isOpen = false }}>Confirm</Button>
+            </DialogActions>
         </Dialog>
     </div>
 }
@@ -27,15 +24,12 @@ public #universal CompositionDialogDemo(props) {
     return <div>
         <Button variant="outline" onClick={() => { isOpen = true }}>Open Composition Dialog</Button>
         <Dialog open={isOpen} onClose={() => { isOpen = false }} ariaLabel="Composition demo">
-            <DialogBackdrop />
-            <DialogContent>
-                <DialogHeader><H3>Confirm Action</H3></DialogHeader>
-                <Text>This is a composition demo. You can customize the content, header, and actions.</Text>
-                <DialogActions>
-                    <Button variant="outline" onClick={() => { isOpen = false }}>Cancel</Button>
-                    <Button onClick={() => { isOpen = false }}>Confirm</Button>
-                </DialogActions>
-            </DialogContent>
+            <DialogHeader><H3>Confirm Action</H3></DialogHeader>
+            <Text>This is a composition demo. You can customize the content, header, and actions.</Text>
+            <DialogActions>
+                <Button variant="outline" onClick={() => { isOpen = false }}>Cancel</Button>
+                <Button onClick={() => { isOpen = false }}>Confirm</Button>
+            </DialogActions>
         </Dialog>
     </div>
 }
@@ -45,14 +39,11 @@ public #universal ControlledDialogDemo(props) {
     return <div>
         <Button variant="outline" onClick={() => { isOpen = true }}>Open Controlled Dialog</Button>
         <Dialog open={isOpen} onClose={() => { isOpen = false }} ariaLabel="Controlled demo">
-            <DialogBackdrop />
-            <DialogContent>
-                <DialogHeader><H3>Controlled Dialog</H3></DialogHeader>
-                <Text>This dialog's visibility is controlled by JavaScript state.</Text>
-                <DialogActions>
-                    <Button onClick={() => { isOpen = false }}>OK</Button>
-                </DialogActions>
-            </DialogContent>
+            <DialogHeader><H3>Controlled Dialog</H3></DialogHeader>
+            <Text>This dialog's visibility is controlled by JavaScript state.</Text>
+            <DialogActions>
+                <Button onClick={() => { isOpen = false }}>OK</Button>
+            </DialogActions>
         </Dialog>
     </div>
 }
@@ -61,15 +52,12 @@ public #universal WideDialogDemo(props) {
     state isOpen = false
     return <div>
         <Button variant="ghost" onClick={() => { isOpen = true }}>Open Wide Dialog</Button>
-        <Dialog open={isOpen} onClose={() => { isOpen = false }} ariaLabel="Wide dialog demo">
-            <DialogBackdrop />
-            <DialogContent style="max-width:600px;">
-                <DialogHeader><H3>Wide Dialog</H3></DialogHeader>
-                <Text>This dialog has a custom width of 600px set via inline style on DialogContent.</Text>
-                <DialogActions>
-                    <Button variant="outline" onClick={() => { isOpen = false }}>Close</Button>
-                </DialogActions>
-            </DialogContent>
+        <Dialog open={isOpen} onClose={() => { isOpen = false }} ariaLabel="Wide dialog demo" contentStyle="max-width:600px;">
+            <DialogHeader><H3>Wide Dialog</H3></DialogHeader>
+            <Text>This dialog has a custom width of 600px set via inline style on DialogContent.</Text>
+            <DialogActions>
+                <Button variant="outline" onClick={() => { isOpen = false }}>Close</Button>
+            </DialogActions>
         </Dialog>
     </div>
 }
@@ -78,15 +66,12 @@ public #universal CloseButtonDialogDemo(props) {
     state isOpen = false
     return <div>
         <Button variant="outline" onClick={() => { isOpen = true }}>Open with Close Button</Button>
-        <Dialog open={isOpen} onClose={() => { isOpen = false }} ariaLabel="Close button demo">
-            <DialogBackdrop />
-            <DialogContent>
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <DialogHeader><H3>Dialog with Close</H3></DialogHeader>
-                    <button type="button" onClick={() => { isOpen = false }} style="border:none;background:transparent;cursor:pointer;font-size:1.25rem;color:hsl(var(--muted-foreground));padding:0;line-height:1;">&times;</button>
-                </div>
-                <Text>This dialog has an explicit close button in the header.</Text>
-            </DialogContent>
+        <Dialog open={isOpen} onClose={() => { isOpen = false }} ariaLabel="Close button demo" showCloseButton={false}>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <DialogHeader><H3>Dialog with Close</H3></DialogHeader>
+                <button type="button" onClick={() => { isOpen = false }} style="border:none;background:transparent;cursor:pointer;font-size:1.25rem;color:hsl(var(--muted-foreground));padding:0;line-height:1;">&times;</button>
+            </div>
+            <Text>This dialog has an explicit close button in the header.</Text>
         </Dialog>
     </div>
 }

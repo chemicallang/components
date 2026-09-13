@@ -1136,10 +1136,10 @@ func renderToggleGroupComp(page : &mut HtmlPage) {
                 <h2>Single</h2>
                 <p class="docs-subsection-desc">Only one item can be pressed at a time.</p>
                 <div class="docs-demo-box">
-                    <ToggleGroup type="single" defaultValue="bold">
-                        <ToggleGroupItem value="bold"><b>B</b></ToggleGroupItem>
-                        <ToggleGroupItem value="italic"><i>I</i></ToggleGroupItem>
-                        <ToggleGroupItem value="underline"><u>U</u></ToggleGroupItem>
+                    <ToggleGroup name="single" type="single" defaultValue="bold">
+                        <ToggleGroupItem name="single" value="bold"><b>B</b></ToggleGroupItem>
+                        <ToggleGroupItem name="single" value="italic"><i>I</i></ToggleGroupItem>
+                        <ToggleGroupItem name="single" value="underline"><u>U</u></ToggleGroupItem>
                     </ToggleGroup>
                 </div>
             </div>
@@ -1147,19 +1147,19 @@ func renderToggleGroupComp(page : &mut HtmlPage) {
                 <h2>Multiple</h2>
                 <p class="docs-subsection-desc">Multiple items can be pressed simultaneously.</p>
                 <div class="docs-demo-box">
-                    <ToggleGroup type="multiple" defaultValue="bold">
-                        <ToggleGroupItem value="bold"><b>B</b></ToggleGroupItem>
-                        <ToggleGroupItem value="italic"><i>I</i></ToggleGroupItem>
-                        <ToggleGroupItem value="underline"><u>U</u></ToggleGroupItem>
+                    <ToggleGroup name="multi" type="multiple" defaultValue={["bold"]}>
+                        <ToggleGroupItem name="multi" value="bold"><b>B</b></ToggleGroupItem>
+                        <ToggleGroupItem name="multi" value="italic"><i>I</i></ToggleGroupItem>
+                        <ToggleGroupItem name="multi" value="underline"><u>U</u></ToggleGroupItem>
                     </ToggleGroup>
                 </div>
             </div>
             <div class="docs-subsection">
                 <h2>Disabled</h2>
                 <div class="docs-demo-box">
-                    <ToggleGroup type="single" disabled defaultValue="bold">
-                        <ToggleGroupItem value="bold"><b>B</b></ToggleGroupItem>
-                        <ToggleGroupItem value="italic"><i>I</i></ToggleGroupItem>
+                    <ToggleGroup name="disabled" type="single" disabled defaultValue="bold">
+                        <ToggleGroupItem name="disabled" value="bold"><b>B</b></ToggleGroupItem>
+                        <ToggleGroupItem name="disabled" value="italic"><i>I</i></ToggleGroupItem>
                     </ToggleGroup>
                 </div>
             </div>
@@ -1168,13 +1168,13 @@ func renderToggleGroupComp(page : &mut HtmlPage) {
                 <p class="docs-subsection-desc">Use <CodeText>variant</CodeText> prop for different styles.</p>
                 <div class="docs-demo-box">
                     <div class="docs-demo-grid">
-                        <ToggleGroup type="single" variant="outline">
-                            <ToggleGroupItem value="a">Outline A</ToggleGroupItem>
-                            <ToggleGroupItem value="b">Outline B</ToggleGroupItem>
+                        <ToggleGroup name="outline" type="single" variant="outline">
+                            <ToggleGroupItem name="outline" value="a">Outline A</ToggleGroupItem>
+                            <ToggleGroupItem name="outline" value="b">Outline B</ToggleGroupItem>
                         </ToggleGroup>
-                        <ToggleGroup type="single" variant="ghost">
-                            <ToggleGroupItem value="a">Ghost A</ToggleGroupItem>
-                            <ToggleGroupItem value="b">Ghost B</ToggleGroupItem>
+                        <ToggleGroup name="ghost" type="single" variant="ghost">
+                            <ToggleGroupItem name="ghost" value="a">Ghost A</ToggleGroupItem>
+                            <ToggleGroupItem name="ghost" value="b">Ghost B</ToggleGroupItem>
                         </ToggleGroup>
                     </div>
                 </div>
@@ -1658,8 +1658,7 @@ func renderCardComp(page : &mut HtmlPage) {
                 <h2>Basic</h2>
                 <div class="docs-demo-box" style="max-width:380px;">
                     <Card>
-                        <CardHeader><CardTitle>Create project</CardTitle><BadgeAccent>New</BadgeAccent></CardHeader>
-                        <CardDescription>Deploy your new project in one-click.</CardDescription>
+                        <CardHeader><CardTitle>Create project</CardTitle><CardDescription>Deploy your new project in one-click.</CardDescription><BadgeAccent>New</BadgeAccent></CardHeader>
                         <CardBody><Input placeholder="Project name" /></CardBody>
                         <CardFooter><Button variant="outline">Cancel</Button><Button>Create</Button></CardFooter>
                     </Card>
