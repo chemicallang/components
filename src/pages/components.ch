@@ -2436,7 +2436,7 @@ func renderBreadcrumbComp(page : &mut HtmlPage) {
                     <Breadcrumbs>
                         <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
                         <BreadcrumbSeparator />
-                        <BreadcrumbItem><BreadcrumbLink href="/docs">Docs</BreadcrumbLink></BreadcrumbItem>
+                        <BreadcrumbItem><BreadcrumbLink href="components.html">Docs</BreadcrumbLink></BreadcrumbItem>
                         <BreadcrumbSeparator separator="→" />
                         <BreadcrumbItem><BreadcrumbCurrent>Components</BreadcrumbCurrent></BreadcrumbItem>
                     </Breadcrumbs>
