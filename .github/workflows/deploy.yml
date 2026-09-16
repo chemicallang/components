@@ -1,5 +1,5 @@
 # .github/workflows/deploy.yml
-name: Publish Components Demos to GitHub Pages
+name: Publish Components Docs to GitHub Pages
 
 permissions:
   contents: read    # for checkout
@@ -35,7 +35,7 @@ jobs:
         shell: bash
         run: chemical chemical.mod -o components.exe
 
-      - name: Generate demo site
+      - name: Generate site
         shell: bash
         run: ./components.exe
 
